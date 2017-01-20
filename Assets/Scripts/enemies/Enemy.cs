@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
 	private Vector3 speedVector;
 
+	public bool IsDead {get { return dying; }}
+
 	private bool dying;
 	private bool dead;
 
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour
 	private List<KeyNote> currentChord = new List<KeyNote>();
 	private List<KeyNote> killerChord = new List<KeyNote>();
 
-	private void Activate()
+	private void Awake()
 	{
 		speedVector = new Vector3(0, speed, 0);
 	}
