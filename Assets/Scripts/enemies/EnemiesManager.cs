@@ -6,6 +6,15 @@ using System.Collections.Generic;
 public class EnemiesManager: MonoBehaviour
 {
 	[SerializeField]
+	private float minEnemySpawnPositionX;
+
+	[SerializeField]
+	private float maxEnemySpawnPositionX;
+
+	[SerializeField]
+	private float spawnEnemyPositionY;
+
+	[SerializeField]
 	private EnemiesFactory enemiesFactory;
 
 	private float timePassed = 0f;
@@ -19,8 +28,14 @@ public class EnemiesManager: MonoBehaviour
 
 		if(spawnResult.HasSpawned)
 		{
+			HandleEnemyCreation(spawnResult.SpawnedEnemy);
 			Debug.Log("enemy spawned");
 		}
+	}
+
+	private void HandleEnemyCreation(Enemy spawnedEnemy)
+	{
+		spawnedEnemy.transform.position = new Vector2();
 	}
 
 	public void Update()
