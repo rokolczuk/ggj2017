@@ -4,3 +4,5 @@ Temp/
 ggj17.CSharp.Editor.csproj
 ggj17.CSharp.csproj
 ggj17.sln
+obj/Debug/Assembly-CSharp.dll
+obj/Debug/Assembly-CSharp.dll.mdb
