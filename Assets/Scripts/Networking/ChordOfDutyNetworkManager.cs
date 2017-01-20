@@ -11,7 +11,7 @@ public class ServerAddedPlayer
 	public GameObject Player { get; private set; }
 }
 
-public class SpaceKingsNetworkManager : NetworkManager
+public class ChordOfDutyNetworkManager : NetworkManager
 {
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
 	{
