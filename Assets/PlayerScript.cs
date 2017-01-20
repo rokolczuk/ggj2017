@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SelectedKeyChanged
 {
@@ -14,7 +15,7 @@ public class SelectedKeyChanged
 	}
 }
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : NetworkBehaviour
 {
 	public GameObject keyRayCast;
 
@@ -50,6 +51,9 @@ public class PlayerScript : MonoBehaviour
 
 	private void checkForKey()
 	{
+        if (!isServer)
+            return;
+
 		RaycastHit2D[] raycastHit = Physics2D.RaycastAll(transform.position, keyRayCast.transform.localPosition);
 
 		bool newKey = false;
