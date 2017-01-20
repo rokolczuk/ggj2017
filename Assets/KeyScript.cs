@@ -26,48 +26,41 @@ public class KeyState
 
 public class KeyScript : MonoBehaviour
 {
-	public GameObject keyRayCast;
-
 	private SpriteRenderer spriteRenderer;
 
 	[SerializeField]
 	private KeyState keyState;
 
-	private bool activated = false;
-
+	[SerializeField]
+	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
+	
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
 	}
-
+	
 	private void Update()
 	{
-		Debug.DrawRay(transform.position, keyRayCast.transform.localPosition);
-
-		checkForPlayer();
 		renderKeyState();
 	}
 
-	private void checkForPlayer()
+	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
 	{
-		RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, keyRayCast.transform.localPosition);
-		if (raycastHit.collider != null)
+		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this)
 		{
-			if (raycastHit.collider.CompareTag("Player"))
-			{
-				activated = true;
-				raycastHit.collider.GetComponent<PlayerScript>().setActiveKey(this);
-			}
+			//shut up
+			playersOnKey.Remove(selectedKey.playerScript);	
 		}
-		else
+		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this)
 		{
-			activated = false;
+			playersOnKey.Add(selectedKey.playerScript);
 		}
 	}
-
+	
 	private void renderKeyState()
 	{
-		if (activated)
+		if (playersOnKey.Count > 0)
 		{
 			spriteRenderer.color = keyState.activedColor;
 		}
