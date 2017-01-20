@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelloWorld : MonoBehaviour {
+public class EnemiesFactory : MonoBehaviour 
+{
+	[SerializeField]
+	private EnemySpawnProperties[] enemies;
 
 	// Use this for initialization
-	void Awake () {
-
-		Debug.Log("hello world");
+	void Start () 
+	{
 	}
-	
+		
 	// Update is called once per frame
 	void Update () {
 		
