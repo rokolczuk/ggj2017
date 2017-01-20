@@ -6,25 +6,69 @@ using UnityEngine;
 public class Enemy : MonoBehaviour 
 {
 	[SerializeField]
-	private Vector3 speed;
+	private float speed;
 
-	private List<Note> currentChord = new List<Note>();
+	[SerializeField]
+	private float timeToKill;
 
-	private List<Note> killerChord = new List<Note>();
+	private bool dying;
+	private bool dead;
 
-	public void AddActiveNote(Note n)
+	private float dyingTime;
+
+	private List<KeyNote> currentChord = new List<KeyNote>();
+	private List<KeyNote> killerChord = new List<KeyNote>();
+
+
+	public void AddActiveNote(KeyNote n)
 	{
 		currentChord.Add(n);
-		CheckKillCondition();
+		dying = hasKillerChord();
 	}
 
-	public void RemoveActiveNote(Note n)
+	public void RemoveActiveNote(KeyNote n)
 	{
 		currentChord.Add(n);
+		dying = hasKillerChord();
+
+		if(!dying)
+		{
+			dyingTime = 0;
+		}
 	}
 
-	private void CheckKillCondition()
+	private bool hasKillerChord()
 	{
-		
+		if(currentChord.Count != killerChord.Count)
+		{
+			return false;
+		}
+
+		for(int i = 0; i < killerChord.Count; i++)
+		{
+			if(!currentChord.Contains(killerChord[i]))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private void Update()
+	{
+		if(dying)
+		{
+			dyingTime+= Time.deltaTime;
+
+			if(dyingTime > timeToKill)
+			{
+				if(!dead)
+				{
+					dead = true;
+					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
+				}
+			}
+		}
 	}
 }

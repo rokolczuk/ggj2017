@@ -1,1 +1,17 @@
-﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj" />
+﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="ggj2017.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/enemies/Enemy.cs">
+    <Files>
+      <File FileName="Assets/Scripts/enemies/Enemy.cs" Line="28" Column="3" />
+      <File FileName="Assets/Scripts/enemies/EnemiesFactory.cs" Line="12" Column="3" />
+      <File FileName="Assets/Scripts/enemies/EnemySpawnProperties.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/shared/EventDispatcher.cs" Line="28" Column="3" />
+      <File FileName="Assets/Scripts/enemies/events/EnemyDiedEvent.cs" Line="8" Column="22" />
+      <File FileName="Assets/Scripts/sound/Note.cs" Line="2" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

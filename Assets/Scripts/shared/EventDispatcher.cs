@@ -33,4 +33,14 @@ public static class EventDispatcher {
 		else
 			eventMappings.Add(typeof(TEvent), new List<Delegate> { eventHandler });
 	}
+
+	public static void RemoveEventListener<TEvent>(EventHandler<TEvent> eventHandler)
+	{
+		List<Delegate> eventHandlers;
+
+		if (eventMappings.TryGetValue(typeof(TEvent), out eventHandlers))
+		{
+			eventHandlers.Remove(eventHandler);
+		}
+	}
 }
