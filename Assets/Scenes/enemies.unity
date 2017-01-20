@@ -221,6 +221,7 @@ MonoBehaviour:
   minEnemySpawnPositionX: -6
   maxEnemySpawnPositionX: 6
   spawnEnemyPositionY: 6
+  enemyDiePositionY: -6
   enemiesFactory: {fileID: 2073797362}
 --- !u!4 &2073797364
 Transform:
