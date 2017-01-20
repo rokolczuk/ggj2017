@@ -42,13 +42,15 @@ public class KeyScript : MonoBehaviour
 
 	private void Update()
 	{
+		Debug.DrawRay(transform.position, keyRayCast.transform.localPosition);
+
 		checkForPlayer();
 		renderKeyState();
 	}
 
 	private void checkForPlayer()
 	{
-		RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, keyRayCast.transform.position);
+		RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, keyRayCast.transform.localPosition);
 		if (raycastHit.collider != null)
 		{
 			if (raycastHit.collider.CompareTag("Player"))
@@ -56,6 +58,10 @@ public class KeyScript : MonoBehaviour
 				activated = true;
 				raycastHit.collider.GetComponent<PlayerScript>().setActiveKey(this);
 			}
+		}
+		else
+		{
+			activated = false;
 		}
 	}
 
