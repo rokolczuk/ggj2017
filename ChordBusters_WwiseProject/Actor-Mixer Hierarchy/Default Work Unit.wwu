@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B6DE1F33-C2EB-4C7F-A472-4EB290BE0DB0}" SchemaVersion="75">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{B6DE1F33-C2EB-4C7F-A472-4EB290BE0DB0}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="C1_Synth" ID="{B4C01139-D159-43AA-A5C7-F92D3519CB90}" ShortID="458125418" Type="SoundFX">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{992D4EB6-C302-4F4B-A9B0-54E15277FB88}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{356B5BF8-720A-4291-A813-B37805F0073C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="C1_Synth" ID="{578D3DE2-F3C5-4803-A649-BF17C782522F}" ShortID="455858680">
+							<Language>SFX</Language>
+							<AudioFile>C1_Synth.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="C1_Synth" ID="{578D3DE2-F3C5-4803-A649-BF17C782522F}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

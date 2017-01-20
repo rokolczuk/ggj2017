@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1256202815	Play			\Default Work Unit\Play	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	455858680	C1_Synth	Y:\Projects\ChordBusters\ChordBusters_WwiseProject\.cache\Mac\SFX\C1_Synth_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\C1_Synth		2822544
+
