@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class ServerAddedPlayer : IGameEvent
+public class ServerAddedPlayer
 {
 	public ServerAddedPlayer(GameObject player)
 	{
@@ -13,18 +13,11 @@ public class ServerAddedPlayer : IGameEvent
 
 public class SpaceKingsNetworkManager : NetworkManager
 {
-	private EventDispatcher eventDispatcher;
-
-	public void Awake()
-	{
-		eventDispatcher = FindObjectOfType<EventDispatcher>();
-	}
-
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
 	{
 		GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
-		eventDispatcher.Dispatch(new ServerAddedPlayer(player));
+		EventDispatcher.Dispatch(new ServerAddedPlayer(player));
 	}
 }
