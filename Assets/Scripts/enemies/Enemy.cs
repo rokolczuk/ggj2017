@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private float timeToKill;
 
+	private Vector3 speedVector;
+
 	private bool dying;
 	private bool dead;
 
@@ -19,6 +21,10 @@ public class Enemy : MonoBehaviour
 	private List<KeyNote> currentChord = new List<KeyNote>();
 	private List<KeyNote> killerChord = new List<KeyNote>();
 
+	private void Activate()
+	{
+		speedVector = new Vector3(0, speed, 0);
+	}
 
 	public void AddActiveNote(KeyNote n)
 	{
@@ -57,11 +63,13 @@ public class Enemy : MonoBehaviour
 
 	private void Update()
 	{
+		transform.position += speedVector;
+
 		if(dying)
 		{
 			dyingTime+= Time.deltaTime;
 
-			if(dyingTime > timeToKill)
+			if(dyingTime >= timeToKill)
 			{
 				if(!dead)
 				{

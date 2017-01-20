@@ -5,5 +5,7 @@ using UnityEngine;
 public class EnemySpawnProperties 
 {
 	public float minSpawnTime;
+	[Range(0f, 1f)]
+	public float spawnProbability;
 	public GameObject prefab;
 }
