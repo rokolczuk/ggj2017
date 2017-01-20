@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [Serializable]
 public enum KeyNote
@@ -24,7 +25,7 @@ public class KeyState
 	public Color deactivatedColor;
 }
 
-public class KeyScript : MonoBehaviour
+public class KeyScript : NetworkBehaviour
 {
 	private SpriteRenderer spriteRenderer;
 
@@ -33,7 +34,10 @@ public class KeyScript : MonoBehaviour
 
 	[SerializeField]
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
-	
+
+    [SyncVar]
+    bool active;
+
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -49,26 +53,22 @@ public class KeyScript : MonoBehaviour
 	{
 		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this)
 		{
-			//shut up
-			playersOnKey.Remove(selectedKey.playerScript);	
+			playersOnKey.Remove(selectedKey.playerScript);
+
+            if (playersOnKey.Count == 0)
+                active = false;
 		}
 		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this)
 		{
 			playersOnKey.Add(selectedKey.playerScript);
+            active = true;
 		}
 	}
-	
-	private void renderKeyState()
-	{
-		if (playersOnKey.Count > 0)
-		{
-			spriteRenderer.color = keyState.activedColor;
-		}
-		else
-		{
-			spriteRenderer.color = keyState.deactivatedColor;
-		}
-	}
+
+    private void renderKeyState()
+    {
+        spriteRenderer.color = active ? keyState.activedColor : keyState.deactivatedColor;
+    }
 
 	public void fireKey()
 	{
