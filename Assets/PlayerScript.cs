@@ -13,6 +13,14 @@ public class PlayerScript : MonoBehaviour
 		{
 			move(input*Vector3.right);
 		}
+
+		if (Input.GetButtonDown("Jump"))
+		{
+			if (keyScript != null)
+			{
+				keyScript.fireKey();
+			}
+		}
 	}
 
 	public void setActiveKey(KeyScript kScript)

@@ -76,4 +76,9 @@ public class KeyScript : MonoBehaviour
 			spriteRenderer.color = keyState.deactivatedColor;
 		}
 	}
+
+	public void fireKey()
+	{
+		print("StR8 fYr");
+	}
 }
