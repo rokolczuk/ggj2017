@@ -23,17 +23,17 @@ public class AudioGun : MonoBehaviour
 
     public void activateGun(KeyNoteData data, PlayerScript playerScript)
     {
-        //if (active && activator == playerScript)
-        //    return;
+        if (active && activator == playerScript)
+            return;
 
-        //if (active && activator != playerScript)
-        //    audioManager.stopLaser(currentNote.synthSound);
+        if (active && activator != playerScript)
+            audioManager.stopLaser(currentNote.synthSound);
 
         this.activator = playerScript;
         this.active = true;
         this.currentNote = data;
 
-        audioManager.playLaser(currentNote.synthSound, SfxOrigin.LocalPlayer /*do this later*/);
+        audioManager.playLaser(currentNote.synthSound, playerScript.hasAuthority ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
 		laserGun.gameObject.SetActive(true);
         laserGun.SetTarget(playerScript.Mouse.transform);
     }
@@ -75,7 +75,7 @@ public class AudioGun : MonoBehaviour
             enemy = hit.collider.GetComponent<Enemy>();
 			enemy.AddActiveNote(currentNote.keyNote, laserGun);
 
-			laserGun.SetTarget (enemy.transform);
+			//laserGun.SetTarget (enemy.transform);
 		} 
 		else if (enemy != null)
 		{
