@@ -56,29 +56,31 @@ public class AudioGun : MonoBehaviour
         if (!active)
         {
             return;
-        }
+        }			
 
-        /*
-        if (mouseButtonPressed)
+		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		var dir = Vector3.forward;
+
+		Debug.DrawRay (raycastOrigin, dir);
+
+		RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector3.forward, 1000f, Layers.GetLayerMask(Layers.Enemies));
+
+        if (hit.collider != null)
         {
-            Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
-            Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
+            enemy = hit.collider.GetComponent<Enemy>();
+			enemy.AddActiveNote(currentNote.keyNote, laserGun);
 
-            if (hit.collider != null)
-            {
-                //TODO replace this with motherfucking lazers
-                Debug.DrawLine(transform.position, hit.point);
+			laserGun.SetTarget (enemy.transform);
+		} 
+		else if (enemy != null)
+		{
+			enemy.RemoveActiveNote(currentNote.keyNote);
+			enemy = null;
+		}
 
-                enemy = hit.collider.GetComponent<Enemy>();
-                enemy.AddActiveNote(currentNote.keyNote);
-            }
-            else if (enemy != null)
-            {
-                enemy.RemoveActiveNote(currentNote.keyNote);
-                enemy = null;
-            }
+		if(hit.collider == null)
+        {
+			laserGun.SetTarget (null);
         }
-        */
-    }
+	}
 }

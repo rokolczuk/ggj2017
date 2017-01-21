@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private AudioClip dieSoundEffect;
 
+	[SerializeField]
+	private Animation deathAnimation;
+
+
 	private Material enemyMaterial;
 
 
@@ -28,14 +32,18 @@ public class Enemy : MonoBehaviour
 	private const int maxParticleEmission = 60;
 
 	public bool IsDead {get { return dead; }}
+	public bool IsDeathAnimationCompleted {get { return !deathAnimationPlaying; }}
 
 	private bool dying;
 	private bool dead;
+	private bool deathAnimationPlaying;
 
 	private float dyingTime;
 
 	private Chord currentChord = new Chord();
 	private Chord killerChord;
+
+	private LaserGun trackingGun;
 
 	public void SetKillerChord(Chord chord)
 	{
@@ -50,13 +58,21 @@ public class Enemy : MonoBehaviour
 		enemyMaterial = spriteRenderer.material;
 	}
 
-	public void AddActiveNote(KeyNote n)
+	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{
 		if(!currentChord.notesInChord.Contains(n))
 		{
 			currentChord.notesInChord.Add(n);
+			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
 			dying = hasKillerChord();
 			particles.gameObject.SetActive(dying);
+		}
+		this.trackingGun = trackingGun;
+	}
+
+	public void clean(){
+		if (trackingGun != null) {
+			trackingGun.clearTransform ();
 		}
 	}
 
@@ -91,14 +107,22 @@ public class Enemy : MonoBehaviour
 
 			if(dyingTime >= timeToKill)
 			{
-				Debug.Log(dyingTime+ " >= " + timeToKill);
 				if(!dead)
 				{
 					dead = true;
+					deathAnimationPlaying = true;
+					deathAnimation.Play();
 					GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
+
 				}
 			}
 		}
+	}
+
+	public void OnDeathAnimationCompleted()
+	{
+		deathAnimationPlaying = false;
+
 	}
 }

@@ -9,11 +9,11 @@ public class KeyManager : MonoBehaviour {
 	[SerializeField]
 	private List<KeyNoteData> KeyNotesConfiguration;
 
-	public KeyNoteData GetKeyData(KeyNote note, int octave)
+	public KeyNoteData GetKeyData(KeyNote note)
 	{
 		for(int i = 0; i < KeyNotesConfiguration.Count; i++)
 		{
-			if(KeyNotesConfiguration[i].keyNote == note && KeyNotesConfiguration[i].octave == octave)
+			if(KeyNotesConfiguration[i].keyNote == note)
 			{
 				return KeyNotesConfiguration[i];
 			}

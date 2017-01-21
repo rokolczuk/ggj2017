@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114580059460516548}
   - component: {fileID: 114921404233281642}
   - component: {fileID: 114368186934644694}
+  - component: {fileID: 111246744889320192}
   m_Layer: 15
   m_Name: SingleKeyNoteChordEnemy
   m_TagString: Untagged
@@ -119,6 +120,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.45
+--- !u!111 &111246744889320192
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081006464297962}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114068366766831226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b5b15b08c274be984be5532510d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: 0000000000000000010000000100000002000000020000000200000003000000030000000400000004000000050000000500000006000000
+  notes: 00000000070000000100000008000000020000000900000010000000030000000a000000040000000b000000050000000c000000060000000d000000
   skins:
   - {fileID: 21300000, guid: 354b351add32e4b97b74aed517b8e42a, type: 3}
   - {fileID: 21300000, guid: a3dd98ae28971489fb3016c994401776, type: 3}
@@ -165,6 +181,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e665c405f2d654c968123cbe9e81df59, type: 3}
   - {fileID: 21300000, guid: 6a342babe6ca5459d9b7213a2b4f13a1, type: 3}
   - {fileID: 21300000, guid: 54f680675a52e4e95ba08a3ea19dc895, type: 3}
+  - {fileID: 21300000, guid: 1d2d185ef0a55413b88f2469ed7d3b34, type: 3}
   - {fileID: 21300000, guid: 9ce26d150e70547a5b5e1f25d7a317bc, type: 3}
   spriteRenderer: {fileID: 212412845514088208}
 --- !u!114 &114580059460516548
@@ -182,7 +199,8 @@ MonoBehaviour:
   timeToKill: 0.85
   spriteRenderer: {fileID: 212412845514088208}
   particles: {fileID: 198336116348165062}
-  dieSoundEffect: {fileID: 8300000, guid: 50e93374b7b6d41ccb641467646707f1, type: 3}
+  dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
+  deathAnimation: {fileID: 111246744889320192}
 --- !u!114 &114921404233281642
 MonoBehaviour:
   m_ObjectHideFlags: 1

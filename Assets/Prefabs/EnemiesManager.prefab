@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de126fd982a644b12824930818e9d56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEnemySpawnPositionX: -6
-  maxEnemySpawnPositionX: 6
-  spawnEnemyPositionY: 6
+  minEnemySpawnPositionX: -12
+  maxEnemySpawnPositionX: 12
+  spawnEnemyPositionY: 12
   enemyDiePositionY: -6
   enemiesFactory: {fileID: 114335617948903610}

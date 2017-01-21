@@ -5,13 +5,14 @@ using UnityEngine;
 public class LaserGun : MonoBehaviour {
 
 	public Color baseColor;
+	LaserMesh[] lasers;
+	Transform mouseTransform;
 
-	void Awake() {	
-		var	begin = transform;
-		var end = FindObjectOfType<TrackMouse> ().gameObject.transform;
-		var lasers = GetComponentsInChildren<LaserMesh> ();
+	void Awake() {
+		mouseTransform = FindObjectOfType<TrackMouse> ().gameObject.transform;
+		lasers = GetComponentsInChildren<LaserMesh> ();
 		foreach (LaserMesh laser in lasers) {
-			laser.SetBeginEnd (begin, end);
+			laser.SetBeginEnd (transform, mouseTransform);
 		}
 
 		KeyScript script = GetComponentInParent<KeyScript> ();
@@ -19,6 +20,23 @@ public class LaserGun : MonoBehaviour {
 			lasers [1].color = script.getKeyData ().activeColor;
 			lasers [2].color = lasers [1].color + new Color (0.1f, 0.1f, 0.1f, 0);
 		}
-	}	
+	}
 
+	public void SetTarget(Transform target){	
+		if (target != null) {
+			foreach (LaserMesh laser in lasers) {
+				laser.SetBeginEnd (transform, target);
+			}
+		} else {
+			foreach (LaserMesh laser in lasers) {
+				laser.SetBeginEnd (transform, mouseTransform);
+			}
+		}
+	}
+
+	public void clearTransform(){
+		foreach (LaserMesh laser in lasers) {
+			laser.SetBeginEnd (transform, mouseTransform);
+		}
+	}
 }
