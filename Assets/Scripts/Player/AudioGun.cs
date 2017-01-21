@@ -81,9 +81,5 @@ public class AudioGun : MonoBehaviour
 			enemy = null;
 		}
 
-		if(hit.collider == null)
-        {
-			laserGun.SetTarget (null);
-        }
 	}
 }
