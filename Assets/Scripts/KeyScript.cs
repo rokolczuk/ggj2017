@@ -64,15 +64,17 @@ public class KeyScript : NetworkBehaviour
 	{
 		playersOnKey.Remove(selectedKey.playerScript);
 
-		unpressed.SetActive(true);
-		pressed.SetActive(false);
+        if (playersOnKey.Count == 0)
+        {
+            unpressed.SetActive(true);
+            pressed.SetActive(false);
+        }
 	}
 
 	private void keyDown(SelectedKeyChanged selectedKey)
 	{
 		playersOnKey.Add(selectedKey.playerScript);
-		audioManager.playPiano(keyState.keyNoteData.pianoSound,
-			selectedKey.IsLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+		audioManager.playPiano(keyState.keyNoteData.pianoSound, selectedKey.IsLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
 
 		pressed.SetActive(true);
 		unpressed.SetActive(false);

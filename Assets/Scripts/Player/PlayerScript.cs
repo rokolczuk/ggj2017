@@ -55,6 +55,12 @@ public class PlayerScript : NetworkBehaviour
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
 
+    [Command]
+    void CmdSetIsPressed(bool value)
+    {
+        IsPressed = value;
+    }
+
 	void Update()
 	{    
         findMouse();
@@ -64,10 +70,16 @@ public class PlayerScript : NetworkBehaviour
 
         if (hasAuthority)
         {
-            IsPressed = Input.GetMouseButton(0);
+            CmdSetIsPressed(Input.GetMouseButton(0));
         }
 	}
-	
+
+    [Command]
+    void CmdSetMouseId(uint id)
+    {
+        MouseId = id;
+    }
+
     void findMouse()
     {
         if (Mouse != null)
@@ -80,7 +92,7 @@ public class PlayerScript : NetworkBehaviour
             if (found != null)
             {
                 Mouse = found.gameObject;
-                MouseId = found.netId.Value;
+                CmdSetMouseId(found.netId.Value);
             }
         }
         else
