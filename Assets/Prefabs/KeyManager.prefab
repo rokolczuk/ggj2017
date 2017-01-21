@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 2
-    keyNoteData: {fileID: 11400000, guid: 811df8ae93ab843e39b51d5199b33706, type: 2}
+    keyNoteData: {fileID: 11400000, guid: f7da302beaa4448f39ebbedb76e3170e, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1706,6 +1706,22 @@ MonoBehaviour:
   - {fileID: 114325773177041872}
   - {fileID: 114730771512948802}
   - {fileID: 114404294193417636}
+  KeyNotesConfiguration:
+  - {fileID: 11400000, guid: b9e600bc61ce64db08800f2d7fe66040, type: 2}
+  - {fileID: 11400000, guid: 162e7ff2a40234609b44ce83c5b0baad, type: 2}
+  - {fileID: 11400000, guid: 58df0d26f8ae74b8a85649cbde63d2e0, type: 2}
+  - {fileID: 11400000, guid: 13723840bfb3e4f43a3ebcc00342481a, type: 2}
+  - {fileID: 11400000, guid: 811df8ae93ab843e39b51d5199b33706, type: 2}
+  - {fileID: 11400000, guid: f7da302beaa4448f39ebbedb76e3170e, type: 2}
+  - {fileID: 11400000, guid: 73ac22d914c9a4f478315ea138ad3bb1, type: 2}
+  - {fileID: 11400000, guid: 3ef4fd54410794b5e851dea850986eb4, type: 2}
+  - {fileID: 11400000, guid: 118757c7ed95b441ca174e121ac4ac1f, type: 2}
+  - {fileID: 11400000, guid: a57196a7ccd15429394b330ba7ce3a1f, type: 2}
+  - {fileID: 11400000, guid: 8d0b05fc292f84ee6975d65119f90e66, type: 2}
+  - {fileID: 11400000, guid: c50340e81b7eb45458b8e717fc88c7a3, type: 2}
+  - {fileID: 11400000, guid: 77ecba32d3b7d427bb3d834668ffa538, type: 2}
+  - {fileID: 11400000, guid: 0a991c2be6f2d4b98b7a1a1ccfc49f03, type: 2}
+  - {fileID: 11400000, guid: f9f65818609b64b449e4db11b0f7544a, type: 2}
 --- !u!114 &114193444521803166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1719,7 +1735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 2
-    keyNoteData: {fileID: 11400000, guid: 3ef4fd54410794b5e851dea850986eb4, type: 2}
+    keyNoteData: {fileID: 11400000, guid: 118757c7ed95b441ca174e121ac4ac1f, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1735,7 +1751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyState:
-    octave: 2
+    octave: 1
     keyNoteData: {fileID: 11400000, guid: 58df0d26f8ae74b8a85649cbde63d2e0, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
@@ -1769,8 +1785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyState:
-    octave: 3
-    keyNoteData: {fileID: 11400000, guid: b9e600bc61ce64db08800f2d7fe66040, type: 2}
+    octave: 2
+    keyNoteData: {fileID: 11400000, guid: 162e7ff2a40234609b44ce83c5b0baad, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1787,7 +1803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 3
-    keyNoteData: {fileID: 11400000, guid: 811df8ae93ab843e39b51d5199b33706, type: 2}
+    keyNoteData: {fileID: 11400000, guid: 73ac22d914c9a4f478315ea138ad3bb1, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1804,7 +1820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 2
-    keyNoteData: {fileID: 11400000, guid: c50340e81b7eb45458b8e717fc88c7a3, type: 2}
+    keyNoteData: {fileID: 11400000, guid: 77ecba32d3b7d427bb3d834668ffa538, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1855,7 +1871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 2
-    keyNoteData: {fileID: 11400000, guid: 0a991c2be6f2d4b98b7a1a1ccfc49f03, type: 2}
+    keyNoteData: {fileID: 11400000, guid: f9f65818609b64b449e4db11b0f7544a, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1872,7 +1888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 2
-    keyNoteData: {fileID: 11400000, guid: a57196a7ccd15429394b330ba7ce3a1f, type: 2}
+    keyNoteData: {fileID: 11400000, guid: 8d0b05fc292f84ee6975d65119f90e66, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1888,8 +1904,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyState:
-    octave: 3
-    keyNoteData: {fileID: 11400000, guid: 58df0d26f8ae74b8a85649cbde63d2e0, type: 2}
+    octave: 2
+    keyNoteData: {fileID: 11400000, guid: 13723840bfb3e4f43a3ebcc00342481a, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
   pressed: {fileID: 0}
@@ -1905,7 +1921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyState:
-    octave: 2
+    octave: 1
     keyNoteData: {fileID: 11400000, guid: b9e600bc61ce64db08800f2d7fe66040, type: 2}
   playersOnKey: []
   unpressed: {fileID: 0}
