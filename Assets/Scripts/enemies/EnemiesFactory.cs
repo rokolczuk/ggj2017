@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public struct EnemySpawnResult
 {
@@ -28,10 +29,14 @@ public class EnemiesFactory : MonoBehaviour
 		{
 			EnemySpawnProperties spawnProperties = configuration.GetEnemySpawnProperties()[i];
 
-			if(spawnProperties.minSpawnTime <= timePassed && Random.Range(0f, 1f) <= spawnProperties.spawnProbability)
+			if(spawnProperties.minSpawnTime <= timePassed && UnityEngine.Random.Range(0f, 1f) <= spawnProperties.spawnProbability)
 			{
 				GameObject enemyGameObject = GameObject.Instantiate(spawnProperties.prefab) as GameObject;
-				return new EnemySpawnResult(true, enemyGameObject.GetComponent<Enemy>());
+				Enemy enemy = enemyGameObject.GetComponent<Enemy>();
+				KeyNote randomNote = (KeyNote)(UnityEngine.Random.Range(0,7));
+				enemy.AddToKillerChord(randomNote);
+				Debug.Log("new enemy with note: " + randomNote);
+				return new EnemySpawnResult(true, enemy);
 			}
 		}
 
