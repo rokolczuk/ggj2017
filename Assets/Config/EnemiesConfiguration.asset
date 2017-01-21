@@ -23,3 +23,10 @@ MonoBehaviour:
     - notesInChord: 04000000
     - notesInChord: 05000000
     - notesInChord: 06000000
+  - minSpawnTime: 10
+    spawnProbability: 0.005
+    prefab: {fileID: 1081006464297962, guid: 3cba93d5f4e884aa4841573eb97bcb04, type: 2}
+    possibleChords:
+    - notesInChord: 0200000004000000
+    - notesInChord: 0300000005000000
+    - notesInChord: 0300000000000000

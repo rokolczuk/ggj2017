@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
 	private float dyingTime;
 
-	private Chord currentChord;
+	private Chord currentChord = new Chord();
 	private Chord killerChord;
 
 	public void SetKillerChord(Chord chord)

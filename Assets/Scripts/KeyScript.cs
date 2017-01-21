@@ -13,7 +13,6 @@ public enum KeyNote
 [Serializable]
 public class KeyState
 {
-	public int octave;
 	public KeyNoteData keyNoteData;
 }
 

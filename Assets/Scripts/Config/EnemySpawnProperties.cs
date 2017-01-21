@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public class Chord 
 {
-	public List<KeyNote> notesInChord;
+	public List<KeyNote> notesInChord = new List<KeyNote>();
 
 	public static bool operator ==(Chord x, Chord y) 
 	{
