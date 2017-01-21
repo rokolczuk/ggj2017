@@ -33,7 +33,7 @@ public class AudioGun : MonoBehaviour
         this.active = true;
         this.currentNote = data;
 
-        audioManager.playLaser(currentNote.synthSound, SfxOrigin.LocalPlayer /*do this later*/);
+        audioManager.playLaser(currentNote.synthSound, playerScript.hasAuthority ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
 		laserGun.gameObject.SetActive(true);
         laserGun.SetTarget(playerScript.Mouse.transform);
     }
@@ -60,7 +60,6 @@ public class AudioGun : MonoBehaviour
         {
             return;
         }
- 
 
 		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		var dir = Vector3.forward;
@@ -74,7 +73,7 @@ public class AudioGun : MonoBehaviour
             enemy = hit.collider.GetComponent<Enemy>();
 			enemy.AddActiveNote(currentNote.keyNote, laserGun);
 
-			laserGun.SetTarget (enemy.transform);
+			//laserGun.SetTarget (enemy.transform);
 		} 
 		else if (enemy != null)
 		{
