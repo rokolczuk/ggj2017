@@ -4,11 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Networking;
 
-public enum SfxOrigin
-{
-    LocalPlayer,
-    RemotePlayer
-}
+
 
 public class AudioGun : NetworkBehaviour
 {
@@ -65,15 +61,6 @@ public class AudioGun : NetworkBehaviour
         if (!active)
         {
             return;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            audioManager.stopLaser(currentNote.synthSound);
         }
 
         /*

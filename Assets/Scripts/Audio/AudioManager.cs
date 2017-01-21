@@ -4,6 +4,12 @@ using UnityEngine;
 using System.Text;
 using System;
 
+public enum SfxOrigin
+{
+    LocalPlayer,
+    RemotePlayer
+}
+
 public class AudioManager : MonoBehaviour {
 	AudioPool pool;
 
