@@ -33,7 +33,7 @@ namespace AssemblyCSharp
 			nextDifficultyIncrease = currentWave + wavesBetweenDifficultyBump;
 			totalDifficultyIncreases = 0;
 			currentTime = timeBetweenWaves;
-			chordFilename = Application.dataPath + "/WaveData/TwoPlayer.txt";
+			chordFilename = "TwoPlayer";
 			preloadChords ();
 		}
 
@@ -51,16 +51,12 @@ namespace AssemblyCSharp
 
 		void preloadChords(){
 			loadedChords = new List<Chord> ();
-			string line = "";
-			StreamReader reader = new StreamReader (chordFilename, System.Text.Encoding.Default);
-			using (reader) {
-				line = reader.ReadLine ();
-				while (line != null) {
-					var chord = convertStringToChord (line);
-					loadedChords.Add (chord);
-					line = reader.ReadLine ();
-				}
-				reader.Close();
+			TextAsset asset = Resources.Load(chordFilename) as TextAsset;
+			List<string> splitLines = asset.text.Split ('\n').ToList();
+			splitLines  = splitLines.Where(s => !string.IsNullOrEmpty(s)).ToList();
+			foreach(var line in splitLines){
+				var chord = convertStringToChord (line);
+				loadedChords.Add (chord);
 			}
 		}
 
