@@ -5,34 +5,33 @@ using System.Linq;
 using AssemblyCSharp;
 using System;
 
-public class AudioPool : MonoBehaviour {
-	public enum TrackName {
-		A1_Synth,
-		A2_Synth,
-		B1_Synth,
-		B2_Synth,
-		C1_Synth,
-		C2_Synth,
-		D1_Synth,
-		D2_Synth,
-		E1_Synth,
-		E2_Synth,
-		F1_Synth,
-		F2_Synth,
-		G1_Synth,
-		G2_Synth,
-		A2_Piano,
-		B2_Piano,
-		C2_Piano,
-		D2_Piano,
-		E2_Piano,
-		F2_Piano,
-		G2_Piano,
-		C0_Bass
-	}
+public enum TrackName {
+	A1_Synth,
+	A2_Synth,
+	B1_Synth,
+	B2_Synth,
+	C1_Synth,
+	C2_Synth,
+	D1_Synth,
+	D2_Synth,
+	E1_Synth,
+	E2_Synth,
+	F1_Synth,
+	F2_Synth,
+	G1_Synth,
+	G2_Synth,
+	A2_Piano,
+	B2_Piano,
+	C2_Piano,
+	D2_Piano,
+	E2_Piano,
+	F2_Piano,
+	G2_Piano,
+	C0_Bass
+}
 
+public class AudioPool : MonoBehaviour {
 	public List<AudioClip> audioClips;
-	public AudioSource source;
 	public int poolSize = 20;
 
 	List<GameObject> pool;
@@ -49,7 +48,7 @@ public class AudioPool : MonoBehaviour {
 		for (int i = 0; i < poolSize; i++) {
 			GameObject obj = new GameObject();
 			obj.AddComponent<AudioSource> ();
-			source = obj.GetComponent<AudioSource> ();
+			AudioSource source = obj.GetComponent<AudioSource> ();
 			source.Stop ();
 			source.playOnAwake = false;
 			source.loop = false;

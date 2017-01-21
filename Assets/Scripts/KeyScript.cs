@@ -45,14 +45,13 @@ public class KeyScript : NetworkBehaviour
 
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
 	{
-		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this)
+		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this) //wtf
 		{
 			playersOnKey.Remove(selectedKey.playerScript);
-
             if (playersOnKey.Count == 0)
                 active = false;
 		}
-		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this)
+		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this) //wtf
 		{
 			playersOnKey.Add(selectedKey.playerScript);
             active = true;
@@ -66,6 +65,8 @@ public class KeyScript : NetworkBehaviour
 
 	public void fireKey()
 	{
-		print("StR8 fYr");
+		print(keyState.keyNote.ToString());
+		AudioManager manager = FindObjectOfType<AudioManager> ();
+		manager.playLaser (keyState.keyNote, keyState.octave);
 	}
 }

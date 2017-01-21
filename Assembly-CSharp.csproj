@@ -46,13 +46,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\KeyScript.cs" />
+     <Compile Include="Assets\GenerateQuad.cs" />
+     <Compile Include="Assets\GenerateQuad1.cs" />
+     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Audio\AudioPool.cs" />
      <Compile Include="Assets\Scripts\Audio\AudioTest.cs" />
      <Compile Include="Assets\Scripts\Audio\AudioTimer.cs" />
      <Compile Include="Assets\Scripts\Config\EnemiesConfiguration.cs" />
-     <Compile Include="Assets\Scripts\Networking\ChordOfDuty.cs" />
+     <Compile Include="Assets\Scripts\KeyScript.cs" />
+     <Compile Include="Assets\Scripts\Networking\ChordOfDutyNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Networking\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Player\AudioGun.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Util\KeyManager.cs" />
+     <Compile Include="Assets\Scripts\Util\Layers.cs" />
      <Compile Include="Assets\Scripts\Util\PrefabManager.cs" />
      <Compile Include="Assets\Scripts\Util\Timer.cs" />
      <Compile Include="Assets\Scripts\enemies\EnemiesFactory.cs" />

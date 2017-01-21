@@ -37,6 +37,10 @@ public class PlayerScript : MonoBehaviour
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
 
+	void handleFiring(){
+		keyScript.fireKey();
+	}
+
 	void Update()
 	{
 		checkForKey();
@@ -47,7 +51,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			if (keyScript != null)
 			{
-				keyScript.fireKey();
+				handleFiring ();
 			}
 		}
 	}
