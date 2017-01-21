@@ -32,11 +32,13 @@ public class KeyScript : NetworkBehaviour
     [SyncVar]
     bool active;
 
+	private AudioManager audioManager;
 	private AudioGun audioGun;
 
 	private void Awake()
 	{
         EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+		audioManager = FindObjectOfType<AudioManager> ();
 		audioGun = gameObject.GetComponent<AudioGun> ();
 	}
 	
@@ -59,6 +61,7 @@ public class KeyScript : NetworkBehaviour
 			pressed.SetActive(true);
 			audioGun.activateGun (true, keyState.keyNoteData);
 			unpressed.SetActive(false);
+			audioManager.playPiano (keyState.keyNoteData.pianoSound);
 		}
 	}
 

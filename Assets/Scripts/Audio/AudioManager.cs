@@ -15,22 +15,29 @@ public class AudioManager : MonoBehaviour {
 	}
 		
 	public void playLaser(AudioClip clip){
-
 		if(!activeSounds.Contains(clip))
 		{
 			pool.playTrack (clip, true);
 			activeSounds.Add(clip);
 		}
+	}
 
+	public void playPiano(AudioClip clip){
+		pool.playTrack (clip, false);
+		activeSounds.Add(clip);
 	}
 
 	public void stopLaser(AudioClip clip){
-
 		if(activeSounds.Contains(clip))
 		{
 			pool.stopTrack (clip);
 			activeSounds.Remove(clip);
 		}
+	}
+
+	public void stopPiano(AudioClip clip){
+		pool.stopTrack (clip);
+		activeSounds.Remove(clip);
 	}
 		
 	// Update is called once per frame
