@@ -17,7 +17,9 @@ public class AudioGun : MonoBehaviour
 		laserGun = GetComponentInChildren<LaserGun> (true);
         audioManager = FindObjectOfType<AudioManager>();
         active = false;
-    }
+
+		laserGun.gameObject.SetActive(false);
+	}
 
     public void activateGun(KeyNoteData data, PlayerScript playerScript)
     {

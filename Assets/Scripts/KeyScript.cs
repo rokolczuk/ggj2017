@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 [Serializable]
 public enum KeyNote
 {
-	A1, B1, C1, D1, E1, F1, G1, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3
+	A1, B1, C1, D1, E1, F1, G1, A2, B2, C2, D2, E2, F2, G2, C3
 }
 
 [Serializable]
@@ -43,25 +43,42 @@ public class KeyScript : NetworkBehaviour
         EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
         audioManager = FindObjectOfType<AudioManager>();
         audioGun = gameObject.GetComponent<AudioGun>();
-    }
+	}
 
-    private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
-    {
-        bool playerWasOnThisKey = playersOnKey.Contains(selectedKey.playerScript);
-        bool playerIsOnThisKey = selectedKey.keyScript == this;
+	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
+	{
+		bool playerWasOnThisKey = playersOnKey.Contains(selectedKey.playerScript);
+		bool playerIsOnThisKey = selectedKey.keyScript == this;
 
-        if (playerWasOnThisKey && !playerIsOnThisKey)
-        {
-            playersOnKey.Remove(selectedKey.playerScript);
-        }
-        else if (!playerWasOnThisKey && playerIsOnThisKey)
-        {
-            playersOnKey.Add(selectedKey.playerScript);
-            audioManager.playPiano(keyState.keyNoteData.pianoSound, selectedKey.IsLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
-        }
-    }
+		if (playerWasOnThisKey && !playerIsOnThisKey)
+		{
+			keyUp(selectedKey);
+		}
+		else if (!playerWasOnThisKey && playerIsOnThisKey)
+		{
+			keyDown(selectedKey);
+		}
+	}
 
-    public void Update()
+	private void keyUp(SelectedKeyChanged selectedKey)
+	{
+		playersOnKey.Remove(selectedKey.playerScript);
+
+		unpressed.SetActive(true);
+		pressed.SetActive(false);
+	}
+
+	private void keyDown(SelectedKeyChanged selectedKey)
+	{
+		playersOnKey.Add(selectedKey.playerScript);
+		audioManager.playPiano(keyState.keyNoteData.pianoSound,
+			selectedKey.IsLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+
+		pressed.SetActive(true);
+		unpressed.SetActive(false);
+	}
+
+	public void Update()
     {
         playersOnKey.RemoveAll(p => p == null);
 
@@ -73,18 +90,14 @@ public class KeyScript : NetworkBehaviour
 
         if (pressingPlayerScript == null)
         {
-            unpressed.SetActive(true);
-            pressed.SetActive(false);
             audioGun.deactivateGun();
         }
         else
         {
             pressingPlayerScriptId = pressingPlayerScript.netId.Value;
-
-            pressed.SetActive(true);
-            unpressed.SetActive(false);
-
-            audioGun.activateGun(getKeyData(), pressingPlayerScript);
+			
+            bool isLocalPlayerActivatingGun = pressingPlayerScript.hasAuthority;
+            audioGun.activateGun(getKeyData(), isLocalPlayerActivatingGun ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
         }
     }
 

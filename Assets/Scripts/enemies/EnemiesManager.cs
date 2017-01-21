@@ -33,7 +33,7 @@ public class EnemiesManager: MonoBehaviour
 
     private void OnGameStarted(GameStartedEvent e)
     {
-        //activated = true;
+        activated = true;
     }
 
     private void SpawnEnemies()
