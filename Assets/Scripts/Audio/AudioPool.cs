@@ -63,8 +63,9 @@ public class AudioPool : MonoBehaviour {
 	}
 
 	void onSoundEnd (AudioSource source, AudioTimer timer){
-		source.Stop ();
-		playingSounds.Remove (timer);
+		if (!source.isPlaying) {
+			playingSounds.Remove (timer);
+		}
 	}
 
 	void trackPlayingSound(AudioSource source){
@@ -72,12 +73,24 @@ public class AudioPool : MonoBehaviour {
 		playingSounds.Add (timer);
 	}
 
-	public void playTrack(TrackName name){
+	public void playTrack(TrackName name, bool looping){
 		AudioSource source = getFreeSource ();
 		int index = (int)name;
 		source.clip = audioClips [index];
+		source.loop = looping;
 		source.Play();
 		trackPlayingSound (source);
+	}
+
+	public void stopTrack(TrackName name){
+		for (int i = 0; i < playingSounds.Count; i++) {
+			var source = playingSounds [i].getAudioSource ();
+			if (source.clip.name == name){
+				source.Stop ();
+				playingSounds.Remove (playingSounds[i]);
+				break;
+			}
+		}
 	}
 
 	void handlePlayingSounds(){
