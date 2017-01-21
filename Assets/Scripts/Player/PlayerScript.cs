@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,7 +22,8 @@ public class SelectedKeyChanged
 
 public class PlayerScript : NetworkBehaviour
 {
-    public GameObject mousePrefab;
+    public GameObject Mouse;
+
     [SerializeField]
     private float MoveTime = 1;
 	private List<KeyScript> KeyArray;
@@ -39,32 +41,21 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public bool IsPressed;
-
    
     void Awake()
 	{
-      
     }
 
     void Start()
     {
-      
-
         KeyArray = KeyManager.Instance.KeyList;
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
 
-    public override void OnStartAuthority()
-    {
-        if (hasAuthority)
-        {
-            var mouse = GameObject.Instantiate(mousePrefab);
-            NetworkServer.Spawn(mouse);
-        }
-    }
-
 	void Update()
 	{
+        findMouse();
+
 		checkForKey();
         MovementChecks();
 
@@ -76,6 +67,17 @@ public class PlayerScript : NetworkBehaviour
         }
 	}
 	
+    void findMouse()
+    {
+        if (Mouse != null)
+            return;
+
+        var mice = FindObjectsOfType<TrackMouse>();
+        var found = mice.FirstOrDefault(m => m.hasAuthority);
+        if (found != null)
+            Mouse = found.gameObject;
+    }
+
     private void MovementChecks()
     {
 		if (!hasAuthority)
