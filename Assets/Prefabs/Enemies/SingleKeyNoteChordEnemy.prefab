@@ -199,7 +199,7 @@ MonoBehaviour:
   timeToKill: 0.85
   spriteRenderer: {fileID: 212412845514088208}
   particles: {fileID: 198336116348165062}
-  dieSoundEffect: {fileID: 8300000, guid: 50e93374b7b6d41ccb641467646707f1, type: 3}
+  dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
   deathAnimation: {fileID: 111246744889320192}
 --- !u!114 &114921404233281642
 MonoBehaviour:
