@@ -179,9 +179,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f004baabddc02a48ab7a657afed0a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePrefab: {fileID: 1708556413699632, guid: f487f7c6d849744e1a85c14d911a9910,
+    type: 2}
   MoveTime: 0.1
   PlayerKeyPositionOffset: {x: -0.15, y: 1, z: -5}
   keyRayCast: {fileID: 1254262917968896}
+  IsPressed: 0
+  MouseX: 0
+  MouseY: 0
 --- !u!212 &212985700449043222
 SpriteRenderer:
   m_ObjectHideFlags: 1

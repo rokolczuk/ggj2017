@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,6 +9,8 @@ public class SelectedKeyChanged
 	public PlayerScript playerScript;
 	public KeyScript keyScript;
     public bool IsLocalPlayer;
+
+
 
 	public SelectedKeyChanged(PlayerScript playerScript, KeyScript keyScript, bool localPlayer)
 	{
@@ -19,6 +22,11 @@ public class SelectedKeyChanged
 
 public class PlayerScript : NetworkBehaviour
 {
+    public GameObject Mouse;
+
+    [SyncVar]
+    public uint MouseId;
+
     [SerializeField]
     private float MoveTime = 1;
 	private List<KeyScript> KeyArray;
@@ -36,7 +44,7 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public bool IsPressed;
-
+   
     void Awake()
 	{
     }
@@ -48,15 +56,44 @@ public class PlayerScript : NetworkBehaviour
     }
 
 	void Update()
-	{
+	{    
+        findMouse();
+
 		checkForKey();
         MovementChecks();
 
         if (hasAuthority)
+        {
             IsPressed = Input.GetMouseButton(0);
-		       
+        }
 	}
 	
+    void findMouse()
+    {
+        if (Mouse != null)
+            return;
+
+        if (hasAuthority)
+        {
+            var mice = FindObjectsOfType<TrackMouse>();
+            var found = mice.FirstOrDefault(m => m.hasAuthority);
+            if (found != null)
+            {
+                Mouse = found.gameObject;
+                MouseId = found.netId.Value;
+            }
+        }
+        else
+        {
+            var mice = FindObjectsOfType<TrackMouse>();
+            var found = mice.FirstOrDefault(m => m.netId.Value == MouseId);
+            if (found != null)
+            {
+                Mouse = found.gameObject;
+            }
+        }
+    }
+
     private void MovementChecks()
     {
 		if (!hasAuthority)
