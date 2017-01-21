@@ -19,28 +19,25 @@ public class KeyState
 
 public class KeyScript : NetworkBehaviour
 {
-	private SpriteRenderer spriteRenderer;
-
 	[SerializeField]
 	private KeyState keyState;
 
 	[SerializeField]
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
 
+    [SerializeField]
+    private GameObject unpressed;
+    [SerializeField]
+    private GameObject pressed;
+
     [SyncVar]
     bool active;
 
 	private void Awake()
 	{
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+        EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
 	}
 	
-	private void Update()
-	{
-		renderKeyState();
-	}
-
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
 	{
 		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this) //wtf
@@ -56,8 +53,18 @@ public class KeyScript : NetworkBehaviour
 		}
 	}
 
-    private void renderKeyState()
+    public void Update()
     {
+        if (active)
+        {
+            pressed.SetActive(true);
+            unpressed.SetActive(false);
+        }
+        else
+        {
+            pressed.SetActive(false);
+            unpressed.SetActive(true);
+        }
     }
 
 	public KeyNoteData getKeyData(){
