@@ -33,9 +33,8 @@ public class EnemiesFactory : MonoBehaviour
 			{
 				GameObject enemyGameObject = GameObject.Instantiate(spawnProperties.prefab) as GameObject;
 				Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-				KeyNote randomNote = (KeyNote)(UnityEngine.Random.Range(0,7));
-				enemy.AddToKillerChord(randomNote);
-				Debug.Log("new enemy with note: " + randomNote);
+				Chord chord = spawnProperties.possibleChords[UnityEngine.Random.Range(0,spawnProperties.possibleChords.Count)];
+				enemy.SetKillerChord(chord);
 				return new EnemySpawnResult(true, enemy);
 			}
 		}

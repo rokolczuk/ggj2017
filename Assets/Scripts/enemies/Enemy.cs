@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private float timeToKill;
 
+	[SerializeField]
+	private SpriteRenderer spriteRenderer;
+
 	private Vector3 speedVector;
 
 	public bool IsDead {get { return dying; }}
@@ -20,12 +23,18 @@ public class Enemy : MonoBehaviour
 
 	private float dyingTime;
 
-	private List<KeyNote> currentChord = new List<KeyNote>();
-	private List<KeyNote> killerChord = new List<KeyNote>();
+	private Chord currentChord;
+	private Chord killerChord;
 
-	public void AddToKillerChord(KeyNote keyNote)
+	public void SetKillerChord(Chord chord)
 	{
-		killerChord.Add(keyNote);
+		killerChord = chord;
+		UpdateColor();
+	}
+
+	private void UpdateColor()
+	{
+		spriteRenderer.color = KeyManager.Instance.GetKeyData(killerChord.notesInChord[0]).activeColor;
 	}
 
 	private void Awake()
@@ -35,9 +44,9 @@ public class Enemy : MonoBehaviour
 
 	public void AddActiveNote(KeyNote n)
 	{
-		if(!currentChord.Contains(n))
+		if(!currentChord.notesInChord.Contains(n))
 		{
-			currentChord.Add(n);
+			currentChord.notesInChord.Add(n);
 			dying = hasKillerChord();
 			Debug.Log("Enemy add note: " + n);
 		}
@@ -45,9 +54,9 @@ public class Enemy : MonoBehaviour
 
 	public void RemoveActiveNote(KeyNote n)
 	{
-		if(currentChord.Contains(n))
+		if(currentChord.notesInChord.Contains(n))
 		{
-			currentChord.Remove(n);
+			currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
 
 			if(!dying)
@@ -61,23 +70,7 @@ public class Enemy : MonoBehaviour
 
 	private bool hasKillerChord()
 	{
-		if(currentChord.Count != killerChord.Count)
-		{
-			return false;
-		}
-
-		for(int i = 0; i < killerChord.Count; i++)
-		{
-			if(!currentChord.Contains(killerChord[i]))
-			{
-				return false;
-			}
-		}
-
-		Debug.Log("Enemy killer chord matched: " + currentChord);
-
-
-		return true;
+		return currentChord == killerChord;
 	}
 
 	private void Update()

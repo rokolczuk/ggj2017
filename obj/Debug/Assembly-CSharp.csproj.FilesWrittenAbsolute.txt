@@ -36,3 +36,7 @@
 /Users/kurt/Projects/ChordBusters/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/kurt/Projects/ChordBusters/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/kurt/Projects/ChordBusters/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/andrzej.korolczuk/Desktop/Work/ggj2017/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/andrzej.korolczuk/Desktop/Work/ggj2017/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/andrzej.korolczuk/Desktop/Work/ggj2017/obj/Debug/Assembly-CSharp.dll
+/Users/andrzej.korolczuk/Desktop/Work/ggj2017/obj/Debug/Assembly-CSharp.dll.mdb

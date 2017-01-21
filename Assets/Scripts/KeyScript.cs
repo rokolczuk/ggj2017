@@ -58,7 +58,6 @@ public class KeyScript : NetworkBehaviour
 
     private void renderKeyState()
     {
-		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
     }
 
 	public void fireKey()
