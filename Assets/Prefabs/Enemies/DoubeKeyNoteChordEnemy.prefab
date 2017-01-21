@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114580059460516548}
   - component: {fileID: 114842052031425856}
   - component: {fileID: 114621336937894964}
+  - component: {fileID: 114663965732811410}
+  - component: {fileID: 111348444464780694}
   m_Layer: 15
   m_Name: DoubeKeyNoteChordEnemy
   m_TagString: Untagged
@@ -87,6 +89,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!111 &111348444464780694
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081006464297962}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114580059460516548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +118,9 @@ MonoBehaviour:
   speed: -0.02
   timeToKill: 3
   spriteRenderer: {fileID: 212412845514088208}
+  particles: {fileID: 0}
+  dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
+  deathAnimation: {fileID: 111348444464780694}
 --- !u!114 &114621336937894964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,6 +141,20 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114663965732811410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081006464297962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f160bfaf940a84aa8b0da8ca7cd43e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notes: 
+  skins: []
+  spriteRenderer: {fileID: 0}
 --- !u!114 &114842052031425856
 MonoBehaviour:
   m_ObjectHideFlags: 1
