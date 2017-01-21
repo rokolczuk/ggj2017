@@ -31,12 +31,18 @@ public class AudioGun : MonoBehaviour
 		{
 			Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
 			Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection, 30f, 1 << 15);
+			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection, 1000f, 1 << 15);
+
 
 			if(hit.collider != null)
 			{
 				Debug.DrawLine(transform.position, hit.point);
 			}
 		}
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1f);
 	}
 }
