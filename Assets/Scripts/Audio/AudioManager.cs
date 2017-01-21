@@ -17,13 +17,13 @@ public class AudioManager : MonoBehaviour {
 	public void playLaser(AudioClip clip){
 		if(!activeSounds.Contains(clip))
 		{
-			pool.playTrack (clip, true);
+			pool.playTrack (clip, true, 1.0f);
 			activeSounds.Add(clip);
 		}
 	}
 
 	public void playPiano(AudioClip clip){
-		pool.playTrack (clip, false);
+		pool.playTrack (clip, false, 0.5f);
 		activeSounds.Add(clip);
 	}
 

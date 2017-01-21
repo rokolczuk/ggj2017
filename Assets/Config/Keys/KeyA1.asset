@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeColor: {r: 0, g: 1, b: 0.003921569, a: 1}
   keyNote: 0
-  pianoSound: {fileID: 8300000, guid: 7d41a2d70c0e640dfa0344b9e5044cae, type: 3}
+  pianoSound: {fileID: 8300000, guid: d7991bed8c0494a5a870cc6c96811c6c, type: 3}
   synthSound: {fileID: 8300000, guid: ff10525b6fc33470aa9e0fb90c0fab00, type: 3}
   octave: 1
