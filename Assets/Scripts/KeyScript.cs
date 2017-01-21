@@ -27,18 +27,17 @@ public class KeyScript : NetworkBehaviour
 	[SerializeField]
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
 
+    [SerializeField]
+    private SpriteRenderer unpressed;
+    [SerializeField]
+    private SpriteRenderer pressed;
+
     [SyncVar]
     bool active;
 
 	private void Awake()
 	{
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
-	}
-	
-	private void Update()
-	{
-		renderKeyState();
 	}
 
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
@@ -57,13 +56,24 @@ public class KeyScript : NetworkBehaviour
 		}
 	}
 
-    private void renderKeyState()
+    public void Update()
     {
-		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
+        //TEMP CODE FOR TESTING WHAT IT LOOKS LIKE
+        if (active)
+        {
+            pressed.gameObject.SetActive(true);
+            unpressed.gameObject.SetActive(false);
+        }
+        else
+        {
+            pressed.gameObject.SetActive(false);
+            unpressed.gameObject.SetActive(true);
+        }
     }
 
 	public void fireKey()
 	{
 		print("StR8 fYr");
+        
 	}
 }
