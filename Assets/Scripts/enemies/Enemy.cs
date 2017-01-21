@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private ParticleSystem particles;
 
+	[SerializeField]
+	private AudioClip dieSoundEffect;
+
 	private Material enemyMaterial;
 
 
@@ -64,11 +67,6 @@ public class Enemy : MonoBehaviour
 			currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
 			particles.gameObject.SetActive(dying);
-
-			if(!dying)
-			{
-				dyingTime = 0;
-			}
 		}
 	}
 
@@ -97,6 +95,7 @@ public class Enemy : MonoBehaviour
 				if(!dead)
 				{
 					dead = true;
+					GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
 				}
 			}

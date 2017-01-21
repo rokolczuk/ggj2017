@@ -16,12 +16,14 @@ public class AudioGun : NetworkBehaviour
 
     private AudioManager audioManager;
     private Enemy enemy;
+	private LaserGun laserGun;
 
     SfxOrigin activator;
     private bool active;
 
     private void Awake()
     {
+		laserGun = GetComponentInChildren<LaserGun> (true);
         audioManager = FindObjectOfType<AudioManager>();
         active = false;
     }
@@ -39,6 +41,7 @@ public class AudioGun : NetworkBehaviour
         this.currentNote = data;
 
         audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+		laserGun.gameObject.SetActive (true);
     }
 
     public void deactivateGun()
@@ -48,6 +51,7 @@ public class AudioGun : NetworkBehaviour
 
         active = false;
         audioManager.stopLaser(currentNote.synthSound);
+		laserGun.gameObject.SetActive (false);
 
         if (enemy != null)
         {
