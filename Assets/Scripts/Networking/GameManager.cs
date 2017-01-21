@@ -25,7 +25,8 @@ public class GameManager : NetworkBehaviour
 
 	private void OnServerAddedPlayer(ServerAddedPlayer eventData)
 	{
-		PlayerScript player = prefabManager.Instantiate<PlayerScript>();
-		NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
+		//DUNT
+		//PlayerScript player = prefabManager.Instantiate<PlayerScript>();
+		//NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
 	}
 }
