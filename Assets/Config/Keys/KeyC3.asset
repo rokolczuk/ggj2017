@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: KeyC3
   m_EditorClassIdentifier: 
   activeColor: {r: 0.99215686, g: 0.003921569, b: 0.4, a: 1}
-  keyNote: 2
+  keyNote: 16
   pianoSound: {fileID: 8300000, guid: 6fc0d60a1690a4eca92aea666946bdf2, type: 3}
   synthSound: {fileID: 8300000, guid: e7cb76df7ff0d4fec8ad89fd07f6e67d, type: 3}
   octave: 3
