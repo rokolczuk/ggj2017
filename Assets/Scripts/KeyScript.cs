@@ -47,7 +47,6 @@ public class KeyScript : NetworkBehaviour
 
     private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
     {
-        return;
         bool playerWasOnThisKey = playersOnKey.Contains(selectedKey.playerScript);
         bool playerIsOnThisKey = selectedKey.keyScript == this;
 
@@ -64,7 +63,6 @@ public class KeyScript : NetworkBehaviour
 
     public void Update()
     {
-        return;
         var pressingPlayerScript = playersOnKey.FirstOrDefault(p => p.netId.Value == pressingPlayerScriptId);
         if (pressingPlayerScript == null || !pressingPlayerScript.IsPressed)
         {

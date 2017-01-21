@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
-
-
-public class AudioGun : NetworkBehaviour
+public class AudioGun : MonoBehaviour
 {
     private KeyNoteData currentNote;
 
@@ -36,7 +31,7 @@ public class AudioGun : NetworkBehaviour
         this.active = true;
         this.currentNote = data;
 
-        audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+        audioManager.playLaser(currentNote.synthSound, origin);
 		laserGun.gameObject.SetActive (true);
     }
 
