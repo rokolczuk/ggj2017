@@ -27,19 +27,22 @@ public class PlayerScript : NetworkBehaviour
 
 		checkForKey();
 
-		float input = Input.GetAxis("Horizontal");
-		if (input != 0)
-		{
-			move(input*Vector3.right);
-		}
+        if (hasAuthority)
+        {
+            float input = Input.GetAxis("Horizontal");
+            if (input != 0)
+            {
+                move(input * Vector3.right);
+            }
 
-		if (Input.GetButtonDown("Jump"))
-		{
-			if (keyScript != null)
-			{
-				keyScript.fireKey();
-			}
-		}
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (keyScript != null)
+                {
+                    keyScript.fireKey();
+                }
+            }
+        }
 	}
 	
 	private void move(Vector3 direction)
