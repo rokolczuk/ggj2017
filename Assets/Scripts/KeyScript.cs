@@ -26,15 +26,16 @@ public class KeyScript : NetworkBehaviour
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
 
     [SerializeField]
-    private GameObject pressed;
-    [SerializeField]
     private GameObject unpressed;
+    [SerializeField]
+    private GameObject pressed;
 
     [SyncVar]
     bool active;
 
 	private void Awake()
 	{
+        EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
 	}
 	
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
