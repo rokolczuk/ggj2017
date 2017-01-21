@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114580059460516548}
   - component: {fileID: 114921404233281642}
   - component: {fileID: 114368186934644694}
+  - component: {fileID: 111246744889320192}
   m_Layer: 15
   m_Name: SingleKeyNoteChordEnemy
   m_TagString: Untagged
@@ -119,6 +120,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.45
+--- !u!111 &111246744889320192
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081006464297962}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 78085967e224149bea6ee9ce2cf15722, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114068366766831226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +199,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 212412845514088208}
   particles: {fileID: 198336116348165062}
   dieSoundEffect: {fileID: 8300000, guid: 50e93374b7b6d41ccb641467646707f1, type: 3}
+  deathAnimation: {fileID: 111246744889320192}
 --- !u!114 &114921404233281642
 MonoBehaviour:
   m_ObjectHideFlags: 1

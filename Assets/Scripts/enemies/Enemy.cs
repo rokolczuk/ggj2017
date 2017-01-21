@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private AudioClip dieSoundEffect;
 
+	[SerializeField]
+	private Animation deathAnimation;
+
+
 	private Material enemyMaterial;
 
 
@@ -28,9 +32,11 @@ public class Enemy : MonoBehaviour
 	private const int maxParticleEmission = 60;
 
 	public bool IsDead {get { return dead; }}
+	public bool IsDeathAnimationCompleted {get { return !deathAnimationPlaying; }}
 
 	private bool dying;
 	private bool dead;
+	private bool deathAnimationPlaying;
 
 	private float dyingTime;
 
@@ -91,14 +97,22 @@ public class Enemy : MonoBehaviour
 
 			if(dyingTime >= timeToKill)
 			{
-				Debug.Log(dyingTime+ " >= " + timeToKill);
 				if(!dead)
 				{
 					dead = true;
+					deathAnimationPlaying = true;
+					deathAnimation.Play();
 					GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
+
 				}
 			}
 		}
+	}
+
+	public void OnDeathAnimationCompleted()
+	{
+		deathAnimationPlaying = false;
+
 	}
 }
