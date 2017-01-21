@@ -33,6 +33,12 @@ public class AudioGun : MonoBehaviour
 	public void deactivateGun(bool active){
 		this.active = active;
 		audioManager.stopLaser (currentNote.synthSound);
+
+		if(enemy != null)
+		{
+			enemy.RemoveActiveNote(currentNote.keyNote);
+			enemy = null;
+		}
 	}
 
 	public void toggleMouseDown(){
