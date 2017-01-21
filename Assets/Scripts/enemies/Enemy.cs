@@ -28,9 +28,6 @@ public class Enemy : MonoBehaviour
 
 	private List<Material> enemyMaterials = new List<Material>(); 
 
-
-
-
 	private Vector3 speedVector;
 
 	private const int maxParticleEmission = 60;
@@ -102,7 +99,11 @@ public class Enemy : MonoBehaviour
 		{
 			currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
-			particles.gameObject.SetActive(dying);
+
+			if(particles != null)
+			{
+				particles.gameObject.SetActive(dying);
+			}
 		}
 	}
 
@@ -127,7 +128,7 @@ public class Enemy : MonoBehaviour
 			}
 
 			var em = particles.emission;
-			em .rateOverTime = dyingProgress * maxParticleEmission;
+			em.rateOverTime = dyingProgress * maxParticleEmission;
 
 			if(dyingTime >= timeToKill)
 			{
@@ -136,8 +137,16 @@ public class Enemy : MonoBehaviour
 					dead = true;
 					deathAnimationPlaying = true;
 					deathAnimation.Play();
+
 					GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
+
+					particles.transform.SetParent(transform.parent, true);
+					em.rateOverTime = 0;
+
+					EventDispatcher.Dispatch(new ParticlesDetachedEvent(particles));
+					particles = null;
+					enabled = false;
 
 				}
 			}

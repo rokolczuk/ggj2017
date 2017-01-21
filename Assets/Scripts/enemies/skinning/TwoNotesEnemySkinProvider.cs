@@ -12,6 +12,9 @@ public class TwoNotesEnemySkinProvider : EnemySkinProvider {
 	private List<Sprite> noteLetterSkins;
 
 	[SerializeField]
+	private List<Sprite> noteHintsSkins;
+
+	[SerializeField]
 	private SpriteRenderer firstNoteLetterSpriteRenderer;
 
 	[SerializeField]
@@ -23,6 +26,18 @@ public class TwoNotesEnemySkinProvider : EnemySkinProvider {
 	[SerializeField]
 	private SpriteRenderer secondNoteBackgroundSpriteRenderer;
 
+	[SerializeField]
+	private SpriteRenderer firstNoteHintSpriteRenderer;
+
+	[SerializeField]
+	private SpriteRenderer secondNoteHintSpriteRenderer;
+
+	[SerializeField]
+	private SpriteRenderer firstNoteTrailSpriteRenderer;
+
+	[SerializeField]
+	private SpriteRenderer secondNoteTrailSpriteRenderer;
+
 
 	public override void SetSkin(Chord killerChord)
 	{
@@ -32,18 +47,27 @@ public class TwoNotesEnemySkinProvider : EnemySkinProvider {
 		KeyNote firstKeyNote = killerChord.notesInChord[0];
 		KeyNote secondKeyNote = killerChord.notesInChord[1];
 
-		int firstNoteSkinIndex = notes.IndexOf(firstKeyNote);
-		int secondNoteSkinIndex = notes.IndexOf(secondKeyNote);
-
-		KeyManager keyManager = GameObject.FindObjectOfType<KeyManager>();
+		KeyManager keyManager = GameManager.FindObjectOfType<KeyManager>();
 
 		Color firstNoteColor = keyManager.GetKeyData(firstKeyNote).activeColor;
 		Color secondNoteColor = keyManager.GetKeyData(secondKeyNote).activeColor;
 
+		int firstNoteSkinIndex = notes.IndexOf(firstKeyNote);
+		int secondNoteSkinIndex = notes.IndexOf(secondKeyNote);
+
 		firstNoteLetterSpriteRenderer.sprite = noteLetterSkins[firstNoteSkinIndex];
 		secondNoteLetterSpriteRenderer.sprite = noteLetterSkins[secondNoteSkinIndex];
 
-		firstNoteBackgroundSpriteRenderer.color = firstNoteColor;
-		secondNoteBackgroundSpriteRenderer.color = secondNoteColor;
+		firstNoteBackgroundSpriteRenderer.material.SetColor("_Color", firstNoteColor);
+		secondNoteBackgroundSpriteRenderer.material.SetColor("_Color", secondNoteColor);
+
+		firstNoteHintSpriteRenderer.sprite = noteHintsSkins[firstNoteSkinIndex];
+		secondNoteHintSpriteRenderer.sprite = noteHintsSkins[secondNoteSkinIndex];
+
+		firstNoteHintSpriteRenderer.material.SetColor("_Color", firstNoteColor);
+		secondNoteHintSpriteRenderer.material.SetColor("_Color", secondNoteColor);
+
+		firstNoteTrailSpriteRenderer.material.SetColor("_Color", firstNoteColor);
+		secondNoteTrailSpriteRenderer.material.SetColor("_Color", secondNoteColor);
 	}
 }

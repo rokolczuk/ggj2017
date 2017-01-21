@@ -22,6 +22,9 @@ public class GameManager : NetworkBehaviour
 		PlayerScript player = prefabManager.Instantiate<PlayerScript>();
 		NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
 
+        TrackMouse mouse = prefabManager.Instantiate<TrackMouse>();
+        NetworkServer.SpawnWithClientAuthority(mouse.gameObject, eventData.Player);
+
         if (!gameStarted)
             startButton.SetActive(true);
 	}
