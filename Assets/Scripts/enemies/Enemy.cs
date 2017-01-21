@@ -14,7 +14,15 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private SpriteRenderer spriteRenderer;
 
+	[SerializeField]
+	private ParticleSystem particles;
+
+	private Material enemyMaterial;
+
+
 	private Vector3 speedVector;
+
+	private const int maxParticleEmission = 60;
 
 	public bool IsDead {get { return dead; }}
 
@@ -29,17 +37,14 @@ public class Enemy : MonoBehaviour
 	public void SetKillerChord(Chord chord)
 	{
 		killerChord = chord;
-		UpdateColor();
-	}
+		GetComponent<EnemySkinProvider>().SetSkin(chord);
 
-	private void UpdateColor()
-	{
-		spriteRenderer.color = KeyManager.Instance.GetKeyData(killerChord.notesInChord[0]).activeColor;
 	}
-
+		
 	private void Awake()
 	{
 		speedVector = new Vector3(0, speed, 0);
+		enemyMaterial = spriteRenderer.material;
 	}
 
 	public void AddActiveNote(KeyNote n)
@@ -48,6 +53,7 @@ public class Enemy : MonoBehaviour
 		{
 			currentChord.notesInChord.Add(n);
 			dying = hasKillerChord();
+			particles.gameObject.SetActive(dying);
 		}
 	}
 
@@ -57,6 +63,7 @@ public class Enemy : MonoBehaviour
 		{
 			currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
+			particles.gameObject.SetActive(dying);
 
 			if(!dying)
 			{
@@ -74,9 +81,15 @@ public class Enemy : MonoBehaviour
 	{
 		transform.position += speedVector;
 
+
 		if(dying)
 		{
 			dyingTime+= Time.deltaTime;
+			float dyingProgress = dyingTime / timeToKill;
+			enemyMaterial.SetFloat("_Whiteness", dyingProgress); 
+
+			var em = particles.emission;
+			em .rateOverTime = dyingProgress * maxParticleEmission;
 
 			if(dyingTime >= timeToKill)
 			{
