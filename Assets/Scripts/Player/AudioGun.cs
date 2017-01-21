@@ -79,7 +79,7 @@ public class AudioGun : NetworkBehaviour
         if (hit.collider != null)
         {
             enemy = hit.collider.GetComponent<Enemy>();
-			enemy.AddActiveNote(currentNote.keyNote);
+			enemy.AddActiveNote(currentNote.keyNote, laserGun);
 
 			laserGun.SetTarget (enemy.transform);
 		} 

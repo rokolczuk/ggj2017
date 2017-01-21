@@ -75,6 +75,7 @@ public class EnemiesManager: MonoBehaviour
 			{
 				Enemy enemy = activeEnemies[i];
 				activeEnemies.Remove(enemy);
+				enemy.clean ();
 				NetworkServer.Destroy(enemy.gameObject);
 			}
 		}
