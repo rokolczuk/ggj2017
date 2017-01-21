@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 		{
 			currentChord.notesInChord.Add(n);
 			dying = hasKillerChord();
-			Debug.Log("Enemy add note: " + n);
+			Debug.Log("Enemy add note: " + n + "killer cord is: " + killerChord.ToString() + " dying= " + dying) ;
 		}
 	}
 
@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
 
 			if(dyingTime >= timeToKill)
 			{
+				Debug.Log(dyingTime+ " >= " + timeToKill);
 				if(!dead)
 				{
 					dead = true;

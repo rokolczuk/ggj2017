@@ -30,6 +30,22 @@ public class Chord
 	{
 		return !(x == y);
 	}
+
+	public string ToString()
+	{
+		string str = string.Empty;
+
+		for(int i = 0; i < notesInChord.Count; i++)
+		{
+			str+=notesInChord[i];
+
+			if(i + 1 < notesInChord.Count)
+			{
+				str += ",";
+			}
+		}
+		return str;
+	}
 }
 
 [Serializable]
