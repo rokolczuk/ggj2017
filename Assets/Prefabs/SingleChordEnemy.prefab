@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4309847010815408}
   - component: {fileID: 58880382760381408}
   - component: {fileID: 114580059460516548}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: SingleChordEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4524894877095408}
   - component: {fileID: 212412845514088208}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

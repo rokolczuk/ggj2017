@@ -32,7 +32,6 @@ public class EnemiesManager: MonoBehaviour
 		if(spawnResult.HasSpawned)
 		{
 			HandleEnemyCreation(spawnResult.SpawnedEnemy);
-			Debug.Log("enemy spawned");
 		}
 	}
 
