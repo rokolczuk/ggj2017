@@ -7,11 +7,13 @@ public class SelectedKeyChanged
 {
 	public PlayerScript playerScript;
 	public KeyScript keyScript;
+    public bool IsLocalPlayer;
 
-	public SelectedKeyChanged(PlayerScript playerScript, KeyScript keyScript)
+	public SelectedKeyChanged(PlayerScript playerScript, KeyScript keyScript, bool localPlayer)
 	{
 		this.playerScript = playerScript;
 		this.keyScript = keyScript;
+        this.IsLocalPlayer = localPlayer;
 	}
 }
 
@@ -32,6 +34,9 @@ public class PlayerScript : NetworkBehaviour
 	public GameObject keyRayCast;
     private KeyScript keyScript;
 
+    [SyncVar]
+    public bool IsPressed;
+
     void Awake()
 	{
     }
@@ -46,6 +51,12 @@ public class PlayerScript : NetworkBehaviour
 	{
 		checkForKey();
         MovementChecks();
+
+        if (hasAuthority)
+            IsPressed = Input.GetMouseButton(0);
+
+        if (IsPressed)
+        { } // some animation?  
 	}
 	
     private void MovementChecks()
@@ -95,7 +106,7 @@ public class PlayerScript : NetworkBehaviour
 					KeyScript newKeyScript = raycastHit[i].collider.GetComponent<KeyScript>();
 					if (keyScript != newKeyScript)
 					{
-						EventDispatcher.Dispatch(new SelectedKeyChanged(this, newKeyScript));
+                        EventDispatcher.Dispatch(new SelectedKeyChanged(this, newKeyScript, hasAuthority));
 						keyScript = newKeyScript;
 					}
 				}
@@ -104,7 +115,7 @@ public class PlayerScript : NetworkBehaviour
 
 		if(!newKey)
 		{
-			EventDispatcher.Dispatch(new SelectedKeyChanged(this, null));
+            EventDispatcher.Dispatch(new SelectedKeyChanged(this, null, hasAuthority));
 		}
 	}
 }

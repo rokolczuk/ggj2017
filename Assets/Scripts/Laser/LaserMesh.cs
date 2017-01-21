@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LaserMesh : MonoBehaviour {
 
-	public Transform begin;
-	public Transform end;
 	public int tiles;
 	public float width;
 	public float amplitude;
@@ -13,6 +11,9 @@ public class LaserMesh : MonoBehaviour {
 	public float frequency;
 	public float offset;
 	public Color color;
+
+	Transform begin;
+	Transform end;
 
 	MaterialPropertyBlock material;
 	MeshRenderer meshRenderer;
@@ -32,6 +33,10 @@ public class LaserMesh : MonoBehaviour {
 	Vector3 anchor = new Vector3(0, 0, 10);
 	int[] tri;
 
+	public void SetBeginEnd(Transform begin, Transform end){
+		this.begin = begin;
+		this.end = end;
+	}
 
 	void Awake() {		
 		InitPositions ();
@@ -120,7 +125,7 @@ public class LaserMesh : MonoBehaviour {
 		halfWidth = width * 0.5f;
 	}
 
-	void Update() {
+	void LateUpdate() {
 		UpdateMaterials ();
 		UpdatePositions ();
 		UpdateWidth ();
@@ -153,7 +158,5 @@ public class LaserMesh : MonoBehaviour {
 
 		vertices[i] = curr - normal;
 		vertices[i+1] = curr + normal;
-
-
 	}
 }
