@@ -85,11 +85,11 @@ public class AudioPool : MonoBehaviour {
 	public void stopTrack(TrackName name){
 		for (int i = 0; i < playingSounds.Count; i++) {
 			var source = playingSounds [i].getAudioSource ();
-			if (source.clip.name == name){
+			/*if (source.clip.name == name){
 				source.Stop ();
 				playingSounds.Remove (playingSounds[i]);
 				break;
-			}
+			}*/
 		}
 	}
 

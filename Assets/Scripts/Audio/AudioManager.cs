@@ -17,16 +17,16 @@ public class AudioManager : MonoBehaviour {
 
 	TrackName generateTrackname(KeyNoteData note, string modifer) {
 		StringBuilder builder = new StringBuilder (note.ToString ());
-		builder.Append (octave.ToString());
+		//builder.Append (note .ToString());
 		builder.Append(modifer);
 		TrackName trackName = (TrackName) Enum.Parse(typeof(TrackName), builder.ToString(), true);
 		return trackName;
 	}
 
 	public void transitionLaser(KeyNoteData currentNote, KeyNoteData newNote){
-		var currentTrackname = generateTrackname (currentNote); 
+		var currentTrackname = generateTrackname (currentNote, laserModifier); 
 		pool.stopTrack (currentTrackname);
-		var newTrackname = generateTrackname (newNote);
+		var newTrackname = generateTrackname (newNote, laserModifier);
 		pool.playTrack (newTrackname, true);
 	}
 
