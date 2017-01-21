@@ -53,6 +53,8 @@
      <Compile Include="Assets\Scripts\Audio\AudioTest.cs" />
      <Compile Include="Assets\Scripts\Audio\AudioTimer.cs" />
      <Compile Include="Assets\Scripts\Config\EnemiesConfiguration.cs" />
+     <Compile Include="Assets\Scripts\Config\EnemySpawnProperties.cs" />
+     <Compile Include="Assets\Scripts\Config\KeyNoteData.cs" />
      <Compile Include="Assets\Scripts\KeyScript.cs" />
      <Compile Include="Assets\Scripts\Networking\ChordOfDutyNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Networking\GameManager.cs" />
@@ -65,7 +67,6 @@
      <Compile Include="Assets\Scripts\enemies\EnemiesFactory.cs" />
      <Compile Include="Assets\Scripts\enemies\EnemiesManager.cs" />
      <Compile Include="Assets\Scripts\enemies\Enemy.cs" />
-     <Compile Include="Assets\Scripts\enemies\EnemySpawnProperties.cs" />
      <Compile Include="Assets\Scripts\enemies\events\EnemyDiedEvent.cs" />
      <Compile Include="Assets\Scripts\shared\EventDispatcher.cs" />
  <Reference Include="UnityEngine.UI">

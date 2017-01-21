@@ -63,8 +63,7 @@ public class KeyScript : NetworkBehaviour
 
 	public void fireKey()
 	{
-		print(keyState.keyNote.ToString());
 		AudioManager manager = FindObjectOfType<AudioManager> ();
-		manager.playLaser (keyState.keyNote, keyState.octave);
+		manager.playLaser (keyState.keyNoteData.keyNote, keyState.octave);
 	}
 }
