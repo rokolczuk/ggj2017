@@ -31,6 +31,7 @@ public class AudioGun : MonoBehaviour
 	}
 
 	public void deactivateGun(bool active){
+		this.active = active;
 		audioManager.stopLaser (currentNote.synthSound);
 	}
 
