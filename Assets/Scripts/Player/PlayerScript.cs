@@ -39,8 +39,12 @@ public class PlayerScript : MonoBehaviour
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
 
-	void handleFiring(){
-		audioGun.SetKeyNote (keyScript.getKeyData());
+	void handleFiring()
+	{
+		if (keyScript != null)
+		{
+			audioGun.SetKeyNote(keyScript.getKeyData());
+		}
 	}
 
 	void Update()
@@ -48,14 +52,8 @@ public class PlayerScript : MonoBehaviour
 		checkForKey();
 
         MovementChecks();
-
-		if (Input.GetButtonDown("Jump"))
-		{
-			if (keyScript != null)
-			{
-				handleFiring ();
-			}
-		}
+		
+		handleFiring ();
 	}
 	
     private void MovementChecks()
