@@ -23,6 +23,11 @@ public class Enemy : MonoBehaviour
 	private List<KeyNote> currentChord = new List<KeyNote>();
 	private List<KeyNote> killerChord = new List<KeyNote>();
 
+	public void AddToKillerChord(KeyNote keyNote)
+	{
+		killerChord.Add(keyNote);
+	}
+
 	private void Awake()
 	{
 		speedVector = new Vector3(0, speed, 0);
