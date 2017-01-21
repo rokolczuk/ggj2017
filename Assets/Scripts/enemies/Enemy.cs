@@ -23,8 +23,12 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private Animation deathAnimation;
 
+	[SerializeField]
+	protected List<SpriteRenderer> enemyMaterialsSprites = new List<SpriteRenderer>();
 
-	private Material enemyMaterial;
+	private List<Material> enemyMaterials = new List<Material>(); 
+
+
 
 
 	private Vector3 speedVector;
@@ -55,7 +59,11 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		speedVector = new Vector3(0, speed, 0);
-		enemyMaterial = spriteRenderer.material;
+
+		for(int i = 0; i < enemyMaterialsSprites.Count; i++)
+		{
+			enemyMaterials.Add(enemyMaterialsSprites[i].material);
+		}
 	}
 
 	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
@@ -100,7 +108,11 @@ public class Enemy : MonoBehaviour
 		{
 			dyingTime+= Time.deltaTime;
 			float dyingProgress = dyingTime / timeToKill;
-			enemyMaterial.SetFloat("_Whiteness", dyingProgress); 
+
+			for(int i = 0; i < enemyMaterials.Count; i++)
+			{
+				enemyMaterials[i].SetFloat("_Whiteness", dyingProgress); 
+			}
 
 			var em = particles.emission;
 			em .rateOverTime = dyingProgress * maxParticleEmission;
