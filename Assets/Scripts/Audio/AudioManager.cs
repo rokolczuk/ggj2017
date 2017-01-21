@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour {
 		return trackName;
 	}
 
+	public void transitionLaser(KeyNoteData currentNote, KeyNoteData newNote){
+	}
+
 	public void playLaser(KeyNote note, int octave){
 		TrackName track = generateTrackname (note, octave, laserModifier);
 		pool.playTrack (track);

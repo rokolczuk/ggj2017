@@ -61,9 +61,7 @@ public class KeyScript : NetworkBehaviour
 		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
     }
 
-	public void fireKey()
-	{
-		AudioManager manager = FindObjectOfType<AudioManager> ();
-		manager.playLaser (keyState.keyNoteData.keyNote, keyState.octave);
+	public KeyNoteData getKeyData(){
+		return keyState.keyNoteData;
 	}
 }
