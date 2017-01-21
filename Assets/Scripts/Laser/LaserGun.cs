@@ -27,11 +27,8 @@ public class LaserGun : MonoBehaviour {
 			foreach (LaserMesh laser in lasers) {
 				laser.SetBeginEnd (transform, target);
 			}
-		} else {
-			foreach (LaserMesh laser in lasers) {
-				laser.SetBeginEnd (transform, mouseTransform);
-			}
-		}
+		} 
+		clearTransform();
 	}
 
 	public void clearTransform(){

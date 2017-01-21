@@ -9,7 +9,7 @@ public class AudioGun : MonoBehaviour
     private Enemy enemy;
 	private LaserGun laserGun;
 
-    SfxOrigin activator;
+    PlayerScript activator;
     private bool active;
 
     private void Awake()
@@ -17,22 +17,25 @@ public class AudioGun : MonoBehaviour
 		laserGun = GetComponentInChildren<LaserGun> (true);
         audioManager = FindObjectOfType<AudioManager>();
         active = false;
-    }
 
-    public void activateGun(KeyNoteData data, SfxOrigin origin)
+		laserGun.gameObject.SetActive(false);
+	}
+
+    public void activateGun(KeyNoteData data, PlayerScript playerScript)
     {
-        if (active && activator == origin)
-            return;
+        //if (active && activator == playerScript)
+        //    return;
 
-        if (active && activator != origin)
-            audioManager.stopLaser(currentNote.synthSound);
+        //if (active && activator != playerScript)
+        //    audioManager.stopLaser(currentNote.synthSound);
 
-        this.activator = origin;
+        this.activator = playerScript;
         this.active = true;
         this.currentNote = data;
 
-        audioManager.playLaser(currentNote.synthSound, origin);
-		laserGun.gameObject.SetActive (true);
+        audioManager.playLaser(currentNote.synthSound, SfxOrigin.LocalPlayer /*do this later*/);
+		laserGun.gameObject.SetActive(true);
+        laserGun.SetTarget(playerScript.Mouse.transform);
     }
 
     public void deactivateGun()
@@ -56,7 +59,9 @@ public class AudioGun : MonoBehaviour
         if (!active)
         {
             return;
-        }			
+        }
+        return;
+ 
 
 		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		var dir = Vector3.forward;

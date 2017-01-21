@@ -75,9 +75,21 @@ public class Enemy : MonoBehaviour
 		this.trackingGun = trackingGun;
 	}
 
-	public void clean(){
-		if (trackingGun != null) {
-			trackingGun.clearTransform ();
+	public void clean()
+	{
+		cleanGunTransform();
+	}
+
+	private void OnDestroy()
+	{
+		cleanGunTransform();
+	}
+
+	private void cleanGunTransform()
+	{
+		if (trackingGun != null)
+		{
+			trackingGun.clearTransform();
 		}
 	}
 
