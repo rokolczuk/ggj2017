@@ -14,6 +14,7 @@
 	{
 		Tags { "RenderType"="Transparent" }
 		Blend One One
+		ZWrite off
 		LOD 100
 
 		Pass
@@ -67,40 +68,6 @@
 			ENDCG
 		}
 
-
-//		Pass {
-//		    CGPROGRAM
-//
-//		    #pragma vertex vert             
-//		    #pragma fragment frag
-//
-//		    sampler2D _MainTex;
-//			float4 _MainTex_ST;
-//
-//		    struct vertInput {
-//		        float4 pos : POSITION;
-//		        float2 uv : TEXCOORD0;
-//		    };  
-//
-//		    struct vertOutput {
-//		        float4 pos : SV_POSITION;
-//		        float2 uv : TEXCOORD0;
-//		    };
-//
-//		    vertOutput vert(vertInput input) {
-//		        vertOutput o;
-//		        o.pos = mul(UNITY_MATRIX_MVP, input.pos);
-//		        o.uv = TRANSFORM_TEX(input.uv, _MainTex);
-//		        return o;
-//		    }
-//
-//		   
-//
-//		    half4 frag(vertOutput vert) : COLOR {
-//		        return half4(0.0, 1.0, vert.uv.x), 0.0, 1.0); 
-//		    }
-//		    ENDCG
-//		}
 
 	}
 }

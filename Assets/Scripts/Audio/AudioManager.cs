@@ -4,12 +4,6 @@ using UnityEngine;
 using System.Text;
 using System;
 
-public enum SfxOrigin
-{
-    LocalPlayer,
-    RemotePlayer,
-}
-
 public class AudioManager : MonoBehaviour {
 	AudioPool pool;
 
@@ -22,21 +16,22 @@ public class AudioManager : MonoBehaviour {
 		
 	public void playLaser(AudioClip clip, SfxOrigin origin)
     {
-        // TODO: check origin for volume brah
-
-        if (!activeSounds.Contains(clip))
-        {
-            pool.playTrack(clip, true);
-            activeSounds.Add(clip);
-        }
+		if(!activeSounds.Contains(clip))
+		{
+			pool.playTrack (clip, true, 1.0f);
+			activeSounds.Add(clip);
+		}
 	}
 
 	public void playPiano(AudioClip clip, SfxOrigin origin)
     {
-        if (origin != SfxOrigin.LocalPlayer)
-            return;
+        float volume;
+        if (origin == SfxOrigin.LocalPlayer)
+            volume = 0.5f;
+        else
+            volume = 0.1f;
 
-		pool.playTrack (clip, false);
+		pool.playTrack (clip, false, volume);
 		activeSounds.Add(clip);
 	}
 
@@ -51,5 +46,10 @@ public class AudioManager : MonoBehaviour {
 	public void stopPiano(AudioClip clip){
 		pool.stopTrack (clip);
 		activeSounds.Remove(clip);
+	}
+		
+	// Update is called once per frame
+	void Update () {
+		
 	}
 }

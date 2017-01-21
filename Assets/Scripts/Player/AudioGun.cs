@@ -4,6 +4,12 @@ using UnityEngine;
 using System;
 using UnityEngine.Networking;
 
+public enum SfxOrigin
+{
+    LocalPlayer,
+    RemotePlayer
+}
+
 public class AudioGun : NetworkBehaviour
 {
     private KeyNoteData currentNote;

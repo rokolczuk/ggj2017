@@ -73,8 +73,9 @@ public class AudioPool : MonoBehaviour {
 		return source;
 	}
 
-	public void playTrack(AudioClip clip, bool looping){
+	public void playTrack(AudioClip clip, bool looping, float volume){
 		AudioSource source = readySound(clip, looping);
+		source.volume = volume;
 		source.Play();
 		trackPlayingSound (source);
 	}
