@@ -23,11 +23,11 @@ public class AudioGun : MonoBehaviour
 
     public void activateGun(KeyNoteData data, PlayerScript playerScript)
     {
-        //if (active && activator == playerScript)
-        //    return;
+        if (active && activator == playerScript)
+            return;
 
-        //if (active && activator != playerScript)
-        //    audioManager.stopLaser(currentNote.synthSound);
+        if (active && activator != playerScript)
+            audioManager.stopLaser(currentNote.synthSound);
 
         this.activator = playerScript;
         this.active = true;
@@ -60,7 +60,6 @@ public class AudioGun : MonoBehaviour
         {
             return;
         }
-        return;
  
 
 		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
