@@ -61,7 +61,7 @@ Shader "Sprite/EnemyShader"
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-			    float4 color = tex2D (_MainTex, IN.texcoord);
+			    float4 color = tex2D (_MainTex, IN.texcoord) * _Color;
 			    color.rgb += _Color.rgb * _Whiteness ;
 			    color.rgb *= color.a;
 
