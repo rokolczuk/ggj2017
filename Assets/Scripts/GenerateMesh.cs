@@ -92,13 +92,13 @@ public class GenerateMesh : MonoBehaviour {
 	}
 
 	void UpdatePositions() {
-		var dis = (end.position - begin.position)/(float)tiles;
+		var dis = (end.localPosition - begin.localPosition)/(float)tiles;
 		for (int i = 0; i < tiles; ++i) {
 			
-			var pos = begin.position + dis*(float)i;
+			var pos = begin.localPosition + dis*(float)i;
 			p [i] = pos;
 		}
-		p [tiles] = end.position;
+		p [tiles] = end.localPosition;
 	}
 
 	void UpdateMaterials() {

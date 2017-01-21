@@ -48,6 +48,9 @@ public class AudioGun : MonoBehaviour
 			Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
 
+			//TODO replace this with motherfucking lazers
+			Debug.DrawLine(transform.position, Input.mousePosition);
+
 			if(hit.collider != null)
 			{
 				//TODO replace this with motherfucking lazers
