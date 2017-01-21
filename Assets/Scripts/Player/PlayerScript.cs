@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
 	public GameObject keyRayCast;
     private KeyScript keyScript;
 
-    void Awake()
+    void Start()
     {
         KeyArray = KeyManager.Instance.KeyList;
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
