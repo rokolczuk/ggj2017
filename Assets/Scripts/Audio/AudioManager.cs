@@ -7,17 +7,30 @@ using System;
 public class AudioManager : MonoBehaviour {
 	AudioPool pool;
 
+	private List<AudioClip> activeSounds = new List<AudioClip>();
+
 	// Use this for initialization
 	void Start () {
 		pool = FindObjectOfType<AudioPool> ();
 	}
 		
 	public void playLaser(AudioClip clip){
-		pool.playTrack (clip, true);
+
+		if(!activeSounds.Contains(clip))
+		{
+			pool.playTrack (clip, true);
+			activeSounds.Add(clip);
+		}
+
 	}
 
 	public void stopLaser(AudioClip clip){
-		pool.stopTrack (clip);
+
+		if(activeSounds.Contains(clip))
+		{
+			pool.stopTrack (clip);
+			activeSounds.Remove(clip);
+		}
 	}
 		
 	// Update is called once per frame

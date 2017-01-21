@@ -33,7 +33,7 @@ public class PlayerScript : NetworkBehaviour
     private KeyScript keyScript;
 
     void Awake()
-    {
+	{
     }
 
     void Start()

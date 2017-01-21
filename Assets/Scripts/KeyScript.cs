@@ -38,7 +38,6 @@ public class KeyScript : NetworkBehaviour
 	{
         EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
 		audioGun = gameObject.GetComponent<AudioGun> ();
-		audioGun = audioGun;
 	}
 	
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
@@ -49,7 +48,7 @@ public class KeyScript : NetworkBehaviour
 			if (playersOnKey.Count == 0) {
 				active = false;
 				pressed.SetActive(false);
-				audioGun.ActivateGun (false, keyState.keyNoteData);
+				audioGun.deactivateGun (false);
 				unpressed.SetActive(true);
 			}
 		}
@@ -58,7 +57,7 @@ public class KeyScript : NetworkBehaviour
 			playersOnKey.Add(selectedKey.playerScript);
             active = true;
 			pressed.SetActive(true);
-			audioGun.ActivateGun (true, keyState.keyNoteData);
+			audioGun.activateGun (true, keyState.keyNoteData);
 			unpressed.SetActive(false);
 		}
 	}

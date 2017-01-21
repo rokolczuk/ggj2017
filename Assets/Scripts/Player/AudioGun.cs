@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AudioGun : MonoBehaviour 
 {
 	private KeyNoteData currentNote;
 
-	private bool mouseButtonPressed = false;
+	[SerializeField]
+	private bool mouseButtonPressed;
 
 	private AudioManager audioManager;
 	private Enemy enemy;
@@ -15,33 +17,44 @@ public class AudioGun : MonoBehaviour
 	private void Awake()
 	{
 		audioManager = FindObjectOfType<AudioManager> ();
+		mouseButtonPressed = false;
 		active = false;
 	}
 
-	public void ActivateGun(bool active, KeyNoteData data){
+	public void activateGun(bool active, KeyNoteData data){
 		this.active = active;
 		this.currentNote = data;
-		if (!active && mouseButtonPressed) {
-			audioManager.stopLaser (currentNote.synthSound);
+
+		if (Input.GetMouseButton (0)) {
+			audioManager.playLaser (currentNote.synthSound);
+		}
+	}
+
+	public void deactivateGun(bool active){
+		this.active = active;
+		audioManager.stopLaser (currentNote.synthSound);
+	}
+
+	public void toggleMouseDown(){
+		if (Input.GetMouseButtonDown (0)) {
+			mouseButtonPressed = true;
+		}  else if (Input.GetMouseButtonUp (0)) {
 			mouseButtonPressed = false;
 		}
 	}
 
 	void Update () 
 	{
+		toggleMouseDown ();
+
 		if(!active){
 			return;
 		}
 
-		if(Input.GetMouseButtonDown(0))
-		{
+		if (Input.GetMouseButtonDown (0)) {
 			audioManager.playLaser (currentNote.synthSound);
-			mouseButtonPressed = true;
-		}
-		if(Input.GetMouseButtonUp(0))
-		{
+		} else if (Input.GetMouseButtonUp (0)) {
 			audioManager.stopLaser (currentNote.synthSound);
-			mouseButtonPressed = false;
 		}
 			
 		if(mouseButtonPressed)
@@ -49,9 +62,6 @@ public class AudioGun : MonoBehaviour
 			Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
 			Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
-
-			//TODO replace this with motherfucking lazers
-			Debug.DrawLine(transform.position, raycastDirection);
 
 			if(hit.collider != null)
 			{
