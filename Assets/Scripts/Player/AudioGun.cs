@@ -2,86 +2,97 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Networking;
 
-public class AudioGun : MonoBehaviour 
+public enum SfxOrigin
 {
-	private KeyNoteData currentNote;
+    LocalPlayer,
+    RemotePlayer
+}
 
-	[SerializeField]
-	private bool mouseButtonPressed;
+public class AudioGun : NetworkBehaviour
+{
+    private KeyNoteData currentNote;
 
-	private AudioManager audioManager;
-	private Enemy enemy;
-	private bool active;
+    private AudioManager audioManager;
+    private Enemy enemy;
 
-	private void Awake()
-	{
-		audioManager = FindObjectOfType<AudioManager> ();
-		mouseButtonPressed = false;
-		active = false;
-	}
+    SfxOrigin activator;
+    private bool active;
 
-	public void activateGun(bool active, KeyNoteData data){
-		this.active = active;
-		this.currentNote = data;
+    private void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+        active = false;
+    }
 
-		if (Input.GetMouseButton (0)) {
-			audioManager.playLaser (currentNote.synthSound);
-		}
-	}
+    public void activateGun(KeyNoteData data, SfxOrigin origin)
+    {
+        if (active && activator == origin)
+            return;
 
-	public void deactivateGun(bool active){
-		this.active = active;
-		audioManager.stopLaser (currentNote.synthSound);
+        if (active && activator != origin)
+            audioManager.stopLaser(currentNote.synthSound);
 
-		if(enemy != null)
-		{
-			enemy.RemoveActiveNote(currentNote.keyNote);
-			enemy = null;
-		}
-	}
+        this.activator = origin;
+        this.active = true;
+        this.currentNote = data;
 
-	public void toggleMouseDown(){
-		if (Input.GetMouseButtonDown (0)) {
-			mouseButtonPressed = true;
-		}  else if (Input.GetMouseButtonUp (0)) {
-			mouseButtonPressed = false;
-		}
-	}
+        audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+    }
 
-	void Update () 
-	{
-		toggleMouseDown ();
+    public void deactivateGun()
+    {
+        if (!active)
+            return;
 
-		if(!active){
-			return;
-		}
+        active = false;
+        audioManager.stopLaser(currentNote.synthSound);
 
-		if (Input.GetMouseButtonDown (0)) {
-			audioManager.playLaser (currentNote.synthSound);
-		} else if (Input.GetMouseButtonUp (0)) {
-			audioManager.stopLaser (currentNote.synthSound);
-		}
-			
-		if(mouseButtonPressed)
-		{
-			Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
-			Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
+        if (enemy != null)
+        {
+            enemy.RemoveActiveNote(currentNote.keyNote);
+            enemy = null;
+        }
+    }
 
-			if(hit.collider != null)
-			{
-				//TODO replace this with motherfucking lazers
-				Debug.DrawLine(transform.position, hit.point);
+    void Update()
+    {
+        if (!active)
+        {
+            return;
+        }
 
-				enemy = hit.collider.GetComponent<Enemy>();
-				enemy.AddActiveNote(currentNote.keyNote);
-			}
-			else if(enemy != null)
-			{
-				enemy.RemoveActiveNote(currentNote.keyNote);
-				enemy = null;
-			}
-		}
-	}
+        if (Input.GetMouseButtonDown(0))
+        {
+            audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            audioManager.stopLaser(currentNote.synthSound);
+        }
+
+        /*
+        if (mouseButtonPressed)
+        {
+            Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
+            Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
+
+            if (hit.collider != null)
+            {
+                //TODO replace this with motherfucking lazers
+                Debug.DrawLine(transform.position, hit.point);
+
+                enemy = hit.collider.GetComponent<Enemy>();
+                enemy.AddActiveNote(currentNote.keyNote);
+            }
+            else if (enemy != null)
+            {
+                enemy.RemoveActiveNote(currentNote.keyNote);
+                enemy = null;
+            }
+        }
+        */
+    }
 }
