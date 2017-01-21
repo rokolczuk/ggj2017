@@ -56,7 +56,9 @@ public class PlayerScript : NetworkBehaviour
             IsPressed = Input.GetMouseButton(0);
 
         if (IsPressed)
-        { } // some animation?  
+        { 
+			//Shoot laser!
+		} // some animation?  
 	}
 	
     private void MovementChecks()
