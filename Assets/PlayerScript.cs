@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class SelectedKeyChanged
 {
@@ -15,48 +14,74 @@ public class SelectedKeyChanged
 	}
 }
 
-public class PlayerScript : NetworkBehaviour
+public class PlayerScript : MonoBehaviour
 {
-	public GameObject keyRayCast;
+    [SerializeField]
+    private float MoveTime = 1;
+    [SerializeField]
+    private List<GameObject> KeyArray;
+    [SerializeField]
+    private Vector3 PlayerKeyPositionOffset;
 
-	private KeyScript keyScript;
+    private bool isMoving = false;
+    private Vector3 startPos;
+    private Vector3 targetPos;
+
+    private int _currentKeyIndex = 0;
+
+	public GameObject keyRayCast;
+    private KeyScript keyScript;
+
+    void Awake()
+    {
+        transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
+    }
 
 	void Update()
 	{
-		Debug.DrawRay(transform.position, keyRayCast.transform.localPosition * Vector3.Distance(transform.position, keyRayCast.transform.position));
-
 		checkForKey();
 
-        if (hasAuthority)
-        {
-            float input = Input.GetAxis("Horizontal");
-            if (input != 0)
-            {
-                move(input * Vector3.right);
-            }
+        MovementChecks();
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (keyScript != null)
-                {
-                    keyScript.fireKey();
-                }
-            }
-        }
+		if (Input.GetButtonDown("Jump"))
+		{
+			if (keyScript != null)
+			{
+				keyScript.fireKey();
+			}
+		}
 	}
 	
-	private void move(Vector3 direction)
-	{
-		transform.position += direction;
+    private void MovementChecks()
+    {
+        if (isMoving)
+            return;
 
-		keyScript = null;
-	}
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        if (horizontal != 0)
+        {
+            _currentKeyIndex += (int)horizontal;
+            _currentKeyIndex = Mathf.Clamp(_currentKeyIndex, 0, KeyArray.Count - 1);
+            StartCoroutine(MoveToNewPosition(KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset, MoveTime));
+        }
+    }
+
+    private IEnumerator MoveToNewPosition(Vector3 newPosition, float time)
+    {
+        isMoving = true;
+        float elapsedTime = 0;
+        var startingPosition = transform.position;
+        while (elapsedTime < time)
+        {
+            transform.position = Vector3.Lerp(startingPosition, newPosition, Mathf.SmoothStep(0, 1, (elapsedTime/ time)));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        isMoving = false;
+    }
 
 	private void checkForKey()
 	{
-        if (!isServer)
-            return;
-
 		RaycastHit2D[] raycastHit = Physics2D.RaycastAll(transform.position, keyRayCast.transform.localPosition);
 
 		bool newKey = false;
