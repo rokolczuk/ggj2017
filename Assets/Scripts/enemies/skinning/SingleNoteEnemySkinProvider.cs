@@ -17,6 +17,10 @@ public class SingleNoteEnemySkinProvider : EnemySkinProvider {
 	public override void SetSkin(Chord killerChord)
 	{
 		Assert.AreEqual(killerChord.notesInChord.Count, 1);
-		spriteRenderer.sprite = skins[notes.IndexOf(killerChord.notesInChord[0])];
+		try{
+			spriteRenderer.sprite = skins[notes.IndexOf(killerChord.notesInChord[0])];
+		} catch {
+			skins = skins;
+		}
 	}
 }
