@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
 	private Vector3 speedVector;
 
+	public bool IsDead {get { return dying; }}
+
 	private bool dying;
 	private bool dead;
 
@@ -21,25 +23,34 @@ public class Enemy : MonoBehaviour
 	private List<KeyNote> currentChord = new List<KeyNote>();
 	private List<KeyNote> killerChord = new List<KeyNote>();
 
-	private void Activate()
+	private void Awake()
 	{
 		speedVector = new Vector3(0, speed, 0);
 	}
 
 	public void AddActiveNote(KeyNote n)
 	{
-		currentChord.Add(n);
-		dying = hasKillerChord();
+		if(!currentChord.Contains(n))
+		{
+			currentChord.Add(n);
+			dying = hasKillerChord();
+			Debug.Log("Enemy add note: " + n);
+		}
 	}
 
 	public void RemoveActiveNote(KeyNote n)
 	{
-		currentChord.Add(n);
-		dying = hasKillerChord();
-
-		if(!dying)
+		if(currentChord.Contains(n))
 		{
-			dyingTime = 0;
+			currentChord.Remove(n);
+			dying = hasKillerChord();
+
+			if(!dying)
+			{
+				dyingTime = 0;
+			}
+
+			Debug.Log("Enemy remove note: " + n);
 		}
 	}
 
@@ -58,6 +69,9 @@ public class Enemy : MonoBehaviour
 			}
 		}
 
+		Debug.Log("Enemy killer chord matched: " + currentChord);
+
+
 		return true;
 	}
 
@@ -74,6 +88,8 @@ public class Enemy : MonoBehaviour
 				if(!dead)
 				{
 					dead = true;
+					Debug.Log("Enemy died");
+
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
 				}
 			}

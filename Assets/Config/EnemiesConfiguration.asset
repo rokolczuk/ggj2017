@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - minSpawnTime: 0
-    spawnProbability: 0.31
+    spawnProbability: 0.005
     prefab: {fileID: 1081006464297962, guid: ac018dd7659be43eba098dba0784e7bb, type: 2}

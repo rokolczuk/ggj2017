@@ -11,7 +11,7 @@ public class ServerAddedPlayer
 	public GameObject Player { get; private set; }
 }
 
-public class SpaceKingsNetworkManager : NetworkManager
+public class ChordOfDutyNetworkManager : NetworkManager
 {
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
 	{
@@ -20,4 +20,12 @@ public class SpaceKingsNetworkManager : NetworkManager
 
 		EventDispatcher.Dispatch(new ServerAddedPlayer(player));
 	}
+
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
+    {
+        GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+
+        EventDispatcher.Dispatch(new ServerAddedPlayer(player));
+    }
 }
