@@ -17,7 +17,7 @@ public class AudioGun : MonoBehaviour
 		{
 			enemy.RemoveActiveNote(noteData.keyNote);
 		}
-		audioManager.playLaser (noteData);
+		//audioManager.playLaser (noteData);
 		currentNote = noteData;
 
 		if(enemy != null)

@@ -43,28 +43,23 @@ public class KeyScript : NetworkBehaviour
 		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this) //wtf
 		{
 			playersOnKey.Remove(selectedKey.playerScript);
-            if (playersOnKey.Count == 0)
-                active = false;
+			if (playersOnKey.Count == 0) {
+				active = false;
+				pressed.SetActive(false);
+				unpressed.SetActive(true);
+			}
 		}
 		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this) //wtf
 		{
 			playersOnKey.Add(selectedKey.playerScript);
             active = true;
+			pressed.SetActive(true);
+			unpressed.SetActive(false);
 		}
 	}
 
     public void Update()
     {
-        if (active)
-        {
-            pressed.SetActive(true);
-            unpressed.SetActive(false);
-        }
-        else
-        {
-            pressed.SetActive(false);
-            unpressed.SetActive(true);
-        }
     }
 
 	public KeyNoteData getKeyData(){
