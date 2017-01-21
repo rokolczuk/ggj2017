@@ -63,6 +63,8 @@ public class KeyScript : NetworkBehaviour
 
     public void Update()
     {
+        playersOnKey.RemoveAll(p => p == null);
+
         var pressingPlayerScript = playersOnKey.FirstOrDefault(p => p.netId.Value == pressingPlayerScriptId);
         if (pressingPlayerScript == null || !pressingPlayerScript.IsPressed)
         {

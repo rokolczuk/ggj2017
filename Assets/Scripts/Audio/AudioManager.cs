@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour {
         if (origin == SfxOrigin.LocalPlayer)
             volume = 0.5f;
         else
-            volume = 0.1f;
+            volume = 0.25f;
 
 		pool.playTrack (clip, false, volume);
 		activeSounds.Add(clip);
