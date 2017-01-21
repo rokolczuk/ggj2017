@@ -97,7 +97,7 @@ public class KeyScript : NetworkBehaviour
             pressingPlayerScriptId = pressingPlayerScript.netId.Value;
 			
             bool isLocalPlayerActivatingGun = pressingPlayerScript.hasAuthority;
-            audioGun.activateGun(getKeyData(), isLocalPlayerActivatingGun ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+			audioGun.activateGun(getKeyData(), pressingPlayerScript);
         }
     }
 
