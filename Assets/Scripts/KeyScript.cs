@@ -99,7 +99,7 @@ public class KeyScript : NetworkBehaviour
             pressingPlayerScriptId = pressingPlayerScript.netId.Value;
 
             audioGun.activateGun(getKeyData(), pressingPlayerScript);
-        }
+		}
     }
 
     public KeyNoteData getKeyData()

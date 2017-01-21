@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Collider2D))]
-public class Enemy : MonoBehaviour 
+public class Enemy : NetworkBehaviour 
 {
 	[SerializeField]
 	private float speed;
@@ -42,15 +43,27 @@ public class Enemy : MonoBehaviour
 	private float dyingTime;
 
 	private Chord currentChord = new Chord();
-	private Chord killerChord;
+
+	public Chord killerChord;
 
 	private LaserGun trackingGun;
 
 	public void SetKillerChord(Chord chord)
 	{
 		killerChord = chord;
-		GetComponent<EnemySkinProvider>().SetSkin(chord);
+	}
 
+	[ClientRpc]
+	public void RpcSetKillaCord(int[] list)
+	{
+		List<KeyNote> keyNotes = new List<KeyNote> ();
+
+		for (int i = 0; i < list.Length; i++) {
+			keyNotes.Add((KeyNote)list[i]);
+		}
+
+		killerChord.notesInChord = keyNotes;
+		GetComponent<EnemySkinProvider>().SetSkin(killerChord);
 	}
 		
 	private void Awake()
@@ -62,6 +75,7 @@ public class Enemy : MonoBehaviour
 			enemyMaterials.Add(enemyMaterialsSprites[i].material);
 		}
 	}
+
 
 	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{
