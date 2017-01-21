@@ -33,8 +33,7 @@ public class PlayerScript : NetworkBehaviour
     private KeyScript keyScript;
 
     void Awake()
-    {
-        Debug.Log("poep");
+	{
     }
 
     void Start()
