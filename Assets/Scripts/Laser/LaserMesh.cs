@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateMesh : MonoBehaviour {
+public class LaserMesh : MonoBehaviour {
 
 	public Transform begin;
 	public Transform end;
@@ -12,6 +12,7 @@ public class GenerateMesh : MonoBehaviour {
 	public float speed;
 	public float frequency;
 	public float offset;
+	public Color color;
 
 	MaterialPropertyBlock material;
 	MeshRenderer meshRenderer;
@@ -106,6 +107,7 @@ public class GenerateMesh : MonoBehaviour {
 		material.SetFloat ("_Amplitude", amplitude);
 		material.SetFloat ("_Speed", speed);
 		material.SetFloat ("_Offset", offset);
+		material.SetColor ("_Color", color);
 		meshRenderer.SetPropertyBlock (material);
 	}
 

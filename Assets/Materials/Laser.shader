@@ -7,7 +7,7 @@
 		_Frequency ("Frequency", float) = 1
 		_Speed ("Speed", float) = 1
 		_Offset ("Offset", float) = 0
-
+		_Color ("Color", Color) = (1,1,1,1)
 	}
 
 	SubShader
@@ -32,6 +32,7 @@
 			float _Frequency;
 			float _Speed;
 			float _Offset;
+			float4 _Color;
 
 			struct appdata
 			{
@@ -48,9 +49,6 @@
 
 			v2f vert (appdata v)
 			{
-//				float phase = _Time * 20.0;
-//	    		float offset = (v.vertex.x + (v.vertex.z * 0.2)) * 0.5;
-				
 	    		v.vertex.xyz += v.normal*sin( (_Time.y * _Speed + v.uv.y * _Frequency) + _Offset) * _Amplitude;
 
 				v2f o;
@@ -62,9 +60,8 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
-				fixed4 col = tex2D(_MainTex, float2(i.uv.x, i.uv.y));
-
+				
+				fixed4 col = tex2D(_MainTex, float2(i.uv.x, i.uv.y)) * _Color;
 				return col;
 			}
 			ENDCG
