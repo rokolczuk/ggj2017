@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
     private float MoveTime = 1;
-    private List<GameObject> KeyArray;
+	private List<KeyScript> KeyArray;
     [SerializeField]
     private Vector3 PlayerKeyPositionOffset;
 
@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour
 	
     private void MovementChecks()
     {
-        if (isMoving)
+		if (isMoving)
             return;
 
         float horizontal = Input.GetAxisRaw("Horizontal");
