@@ -24,6 +24,9 @@ public class PlayerScript : NetworkBehaviour
 {
     public GameObject Mouse;
 
+    [SyncVar]
+    public uint MouseId;
+
     [SerializeField]
     private float MoveTime = 1;
 	private List<KeyScript> KeyArray;
@@ -53,7 +56,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
 	void Update()
-	{
+	{    
         findMouse();
 
 		checkForKey();
@@ -62,8 +65,6 @@ public class PlayerScript : NetworkBehaviour
         if (hasAuthority)
         {
             IsPressed = Input.GetMouseButton(0);
-
-       
         }
 	}
 	
@@ -72,10 +73,25 @@ public class PlayerScript : NetworkBehaviour
         if (Mouse != null)
             return;
 
-        var mice = FindObjectsOfType<TrackMouse>();
-        var found = mice.FirstOrDefault(m => m.hasAuthority);
-        if (found != null)
-            Mouse = found.gameObject;
+        if (hasAuthority)
+        {
+            var mice = FindObjectsOfType<TrackMouse>();
+            var found = mice.FirstOrDefault(m => m.hasAuthority);
+            if (found != null)
+            {
+                Mouse = found.gameObject;
+                MouseId = found.netId.Value;
+            }
+        }
+        else
+        {
+            var mice = FindObjectsOfType<TrackMouse>();
+            var found = mice.FirstOrDefault(m => m.netId.Value == MouseId);
+            if (found != null)
+            {
+                Mouse = found.gameObject;
+            }
+        }
     }
 
     private void MovementChecks()
