@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class LaserGun : MonoBehaviour {
 
-	public Transform begin;
-	public Transform end;
+	public GameObject end;
 
-	// Use this for initialization
-	void Start () {
-		
+	void Start()
+	{
+		if (end == null) {
+			print ("fuck");
+		}
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
-		foreach (Transform child in transform) {
-			child.GetComponent<LaserMesh> ().begin = begin;
-			child.GetComponent<LaserMesh> ().end = end;
+
+		var lasers = GetComponentsInChildren<LaserMesh> ();
+
+		foreach (LaserMesh laser in lasers) {
+			laser.begin = transform;
+			laser.end = end.transform;
 		}
 	}
 }
