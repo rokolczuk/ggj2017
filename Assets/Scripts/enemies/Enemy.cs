@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
 	private Chord currentChord = new Chord();
 	private Chord killerChord;
 
+	private LaserGun trackingGun;
+
 	public void SetKillerChord(Chord chord)
 	{
 		killerChord = chord;
@@ -50,13 +52,20 @@ public class Enemy : MonoBehaviour
 		enemyMaterial = spriteRenderer.material;
 	}
 
-	public void AddActiveNote(KeyNote n)
+	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{
 		if(!currentChord.notesInChord.Contains(n))
 		{
 			currentChord.notesInChord.Add(n);
 			dying = hasKillerChord();
 			particles.gameObject.SetActive(dying);
+		}
+		this.trackingGun = trackingGun;
+	}
+
+	public void clean(){
+		if (trackingGun != null) {
+			trackingGun.clearTransform ();
 		}
 	}
 

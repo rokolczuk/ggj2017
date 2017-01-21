@@ -20,7 +20,7 @@ public class LaserGun : MonoBehaviour {
 			lasers [1].color = script.getKeyData ().activeColor;
 			lasers [2].color = lasers [1].color + new Color (0.1f, 0.1f, 0.1f, 0);
 		}
-	}	
+	}
 
 	public void SetTarget(Transform target){	
 		if (target != null) {
@@ -32,7 +32,11 @@ public class LaserGun : MonoBehaviour {
 				laser.SetBeginEnd (transform, mouseTransform);
 			}
 		}
-
 	}
 
+	public void clearTransform(){
+		foreach (LaserMesh laser in lasers) {
+			laser.SetBeginEnd (transform, mouseTransform);
+		}
+	}
 }
