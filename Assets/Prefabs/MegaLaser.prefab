@@ -261,8 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b007ee0406d4c03a174627fe14a6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  begin: {fileID: 0}
-  end: {fileID: 0}
   tiles: 100
   width: 3
   amplitude: 0.2
@@ -281,8 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b007ee0406d4c03a174627fe14a6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  begin: {fileID: 0}
-  end: {fileID: 0}
   tiles: 100
   width: 1
   amplitude: 0.2
@@ -301,7 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947ccfc88005b4aa89f243ffe22cabae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: {fileID: 0}
 --- !u!114 &114723629691118384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,8 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b007ee0406d4c03a174627fe14a6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  begin: {fileID: 0}
-  end: {fileID: 0}
   tiles: 100
   width: 2
   amplitude: 0.47

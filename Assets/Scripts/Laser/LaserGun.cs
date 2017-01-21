@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class LaserGun : MonoBehaviour {
 
-	public GameObject end;
+	public Color baseColor;
 
-	// Update is called once per frame
-	void Update () {
-
+	void Awake() {	
+		var	begin = transform;
+		var end = FindObjectOfType<TrackMouse> ().gameObject.transform;
 		var lasers = GetComponentsInChildren<LaserMesh> ();
-
 		foreach (LaserMesh laser in lasers) {
-			laser.begin = transform;
-			laser.end = end.transform;
+			laser.SetBeginEnd (begin, end);
 		}
-	}
+
+
+		lasers [1].color = GetComponentInParent<KeyScript> ().getKeyData ().activeColor;
+		lasers [2].color = lasers [1].color + new Color (0.1f, 0.1f, 0.1f, 0);
+	}	
 }
