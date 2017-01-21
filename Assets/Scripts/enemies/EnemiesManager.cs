@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.Networking;
 
 public class EnemiesManager: MonoBehaviour
 {
@@ -24,8 +24,19 @@ public class EnemiesManager: MonoBehaviour
 
 	private List<Enemy> activeEnemies = new List<Enemy>();
 
+    bool activated;
 
-	private void SpawnEnemies()
+    public void Awake()
+    {
+        EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
+    }
+
+    private void OnGameStarted(GameStartedEvent e)
+    {
+        activated = true;
+    }
+
+    private void SpawnEnemies()
 	{
 		EnemySpawnResult spawnResult = enemiesFactory.TrySpawn(timePassed);
 
@@ -39,10 +50,17 @@ public class EnemiesManager: MonoBehaviour
 	{
 		spawnedEnemy.transform.position = new Vector2(UnityEngine.Random.Range(minEnemySpawnPositionX, maxEnemySpawnPositionX), spawnEnemyPositionY);
 		activeEnemies.Add(spawnedEnemy);
+
+        NetworkServer.Spawn(spawnedEnemy.gameObject);
 	}
 
 	public void Update()
 	{
+        // note: server only object
+
+        if (!activated)
+            return;
+
 		timePassed+= Time.deltaTime;
 
 		SpawnEnemies();
@@ -57,7 +75,7 @@ public class EnemiesManager: MonoBehaviour
 			{
 				Enemy enemy = activeEnemies[i];
 				activeEnemies.Remove(enemy);
-				Destroy(enemy.gameObject);
+				NetworkServer.Destroy(enemy.gameObject);
 			}
 		}
 	}
