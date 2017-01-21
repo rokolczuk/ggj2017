@@ -14,7 +14,8 @@ public class AudioManager : MonoBehaviour {
 		pool = FindObjectOfType<AudioPool> ();
 	}
 		
-	public void playLaser(AudioClip clip){
+	public void playLaser(AudioClip clip, SfxOrigin origin)
+    {
 		if(!activeSounds.Contains(clip))
 		{
 			pool.playTrack (clip, true, 1.0f);
@@ -22,8 +23,15 @@ public class AudioManager : MonoBehaviour {
 		}
 	}
 
-	public void playPiano(AudioClip clip){
-		pool.playTrack (clip, false, 0.5f);
+	public void playPiano(AudioClip clip, SfxOrigin origin)
+    {
+        float volume;
+        if (origin == SfxOrigin.LocalPlayer)
+            volume = 0.5f;
+        else
+            volume = 0.1f;
+
+		pool.playTrack (clip, false, volume);
 		activeSounds.Add(clip);
 	}
 
