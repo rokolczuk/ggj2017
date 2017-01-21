@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 114902192264449300}
   - component: {fileID: 61614756257759914}
   - component: {fileID: 114821715808173506}
-  - component: {fileID: 114872832678765876}
   m_Layer: 0
   m_Name: Finger
   m_TagString: Player
@@ -82,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1141163369620932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.43, y: -2.09, z: 0}
+  m_LocalPosition: {x: -7.71, y: -2.09, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4988950512290582}
@@ -169,17 +168,6 @@ MonoBehaviour:
     i15: 187
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114872832678765876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141163369620932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24322f4c3d2bb45328e87405eaf8bc89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114902192264449300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveTime: 0.1
-  PlayerKeyPositionOffset: {x: -0.15, y: 4, z: 0}
+  PlayerKeyPositionOffset: {x: -0.15, y: 1, z: -5}
   keyRayCast: {fileID: 1254262917968896}
 --- !u!212 &212985700449043222
 SpriteRenderer:
