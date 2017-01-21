@@ -71,7 +71,7 @@ public class EnemiesManager: MonoBehaviour
 	{
 		for(int i = 0; i < activeEnemies.Count; i++)
 		{
-			if(activeEnemies[i].IsDead || activeEnemies[i].transform.position.y <= enemyDiePositionY)
+			if((activeEnemies[i].IsDead && activeEnemies[i].IsDeathAnimationCompleted) || activeEnemies[i].transform.position.y <= enemyDiePositionY)
 			{
 				Enemy enemy = activeEnemies[i];
 				activeEnemies.Remove(enemy);
