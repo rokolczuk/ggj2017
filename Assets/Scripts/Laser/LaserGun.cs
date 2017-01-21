@@ -14,8 +14,10 @@ public class LaserGun : MonoBehaviour {
 			laser.SetBeginEnd (begin, end);
 		}
 
-
-		lasers [1].color = GetComponentInParent<KeyScript> ().getKeyData ().activeColor;
-		lasers [2].color = lasers [1].color + new Color (0.1f, 0.1f, 0.1f, 0);
+		KeyScript script = GetComponentInParent<KeyScript> ();
+		if (script) {
+			lasers [1].color = script.getKeyData ().activeColor;
+			lasers [2].color = lasers [1].color + new Color (0.1f, 0.1f, 0.1f, 0);
+		}
 	}	
 }
