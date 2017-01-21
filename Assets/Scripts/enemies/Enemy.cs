@@ -30,18 +30,27 @@ public class Enemy : MonoBehaviour
 
 	public void AddActiveNote(KeyNote n)
 	{
-		currentChord.Add(n);
-		dying = hasKillerChord();
+		if(!currentChord.Contains(n))
+		{
+			currentChord.Add(n);
+			dying = hasKillerChord();
+			Debug.Log("Enemy add note: " + n);
+		}
 	}
 
 	public void RemoveActiveNote(KeyNote n)
 	{
-		currentChord.Add(n);
-		dying = hasKillerChord();
-
-		if(!dying)
+		if(currentChord.Contains(n))
 		{
-			dyingTime = 0;
+			currentChord.Remove(n);
+			dying = hasKillerChord();
+
+			if(!dying)
+			{
+				dyingTime = 0;
+			}
+
+			Debug.Log("Enemy remove note: " + n);
 		}
 	}
 
@@ -60,6 +69,9 @@ public class Enemy : MonoBehaviour
 			}
 		}
 
+		Debug.Log("Enemy killer chord matched: " + currentChord);
+
+
 		return true;
 	}
 
@@ -76,6 +88,8 @@ public class Enemy : MonoBehaviour
 				if(!dead)
 				{
 					dead = true;
+					Debug.Log("Enemy died");
+
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
 				}
 			}
