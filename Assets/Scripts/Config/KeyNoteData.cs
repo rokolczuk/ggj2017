@@ -1,0 +1,12 @@
+﻿
+using System;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Key Notes Configuration", menuName = "Key Notes/Key", order = 1)]
+
+public class KeyNoteData: ScriptableObject
+{
+	public Color activeColor;
+	public Color inactiveColor;
+	public KeyNote keyNote;
+}

@@ -14,9 +14,7 @@ public enum KeyNote
 public class KeyState
 {
 	public int octave;
-	public KeyNote keyNote;
-	public Color activedColor;
-	public Color deactivatedColor;
+	public KeyNoteData keyNoteData;
 }
 
 public class KeyScript : NetworkBehaviour
@@ -61,7 +59,7 @@ public class KeyScript : NetworkBehaviour
 
     private void renderKeyState()
     {
-        spriteRenderer.color = active ? keyState.activedColor : keyState.deactivatedColor;
+		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
     }
 
 	public void fireKey()

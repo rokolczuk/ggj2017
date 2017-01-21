@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyManager : MonoBehaviour {
-    public List<GameObject> KeyList;
+
+	public List<KeyScript> KeyList;
+
     private static KeyManager instance;
     public static KeyManager Instance { get { return instance; } }
 
