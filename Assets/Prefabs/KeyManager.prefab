@@ -1660,8 +1660,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: f7da302beaa4448f39ebbedb76e3170e, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1353369687767920}
+  pressed: {fileID: 1544342836669444}
 --- !u!114 &114167813468322018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1677,8 +1677,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: 3ef4fd54410794b5e851dea850986eb4, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1399985330990076}
+  pressed: {fileID: 1471757076851392}
 --- !u!114 &114183627125728094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1737,8 +1737,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: 118757c7ed95b441ca174e121ac4ac1f, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1162181008479138}
+  pressed: {fileID: 1413258392754370}
 --- !u!114 &114242052827188570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1754,8 +1754,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: 58df0d26f8ae74b8a85649cbde63d2e0, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1480656425079618}
+  pressed: {fileID: 1172144905009800}
 --- !u!114 &114243484957552856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1771,8 +1771,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: a57196a7ccd15429394b330ba7ce3a1f, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1950137720681096}
+  pressed: {fileID: 1137197653099684}
 --- !u!114 &114325773177041872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1788,8 +1788,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: 162e7ff2a40234609b44ce83c5b0baad, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1199380352772052}
+  pressed: {fileID: 1546759308407596}
 --- !u!114 &114404294193417636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1805,8 +1805,8 @@ MonoBehaviour:
     octave: 3
     keyNoteData: {fileID: 11400000, guid: 73ac22d914c9a4f478315ea138ad3bb1, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1101254673396352}
+  pressed: {fileID: 1405411969893794}
 --- !u!114 &114415348605206798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1822,8 +1822,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: 77ecba32d3b7d427bb3d834668ffa538, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1184979033611658}
+  pressed: {fileID: 1483306766486478}
 --- !u!114 &114473045141257726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1839,8 +1839,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: 0a991c2be6f2d4b98b7a1a1ccfc49f03, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1307848345518874}
+  pressed: {fileID: 1606395393669740}
 --- !u!114 &114721720966194580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1856,8 +1856,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: c50340e81b7eb45458b8e717fc88c7a3, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1257794722674016}
+  pressed: {fileID: 1328811930100222}
 --- !u!114 &114726384930188838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1873,8 +1873,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: f9f65818609b64b449e4db11b0f7544a, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1549585277246096}
+  pressed: {fileID: 1928255621042442}
 --- !u!114 &114730356825184738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1890,8 +1890,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: 8d0b05fc292f84ee6975d65119f90e66, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1776294284742960}
+  pressed: {fileID: 1869356077872820}
 --- !u!114 &114730771512948802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1907,8 +1907,8 @@ MonoBehaviour:
     octave: 2
     keyNoteData: {fileID: 11400000, guid: 13723840bfb3e4f43a3ebcc00342481a, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1260852234139058}
+  pressed: {fileID: 1757847513015254}
 --- !u!114 &114753494246656698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1924,8 +1924,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: b9e600bc61ce64db08800f2d7fe66040, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1162023150663586}
+  pressed: {fileID: 1778855544436566}
 --- !u!114 &114766440549786978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1941,8 +1941,8 @@ MonoBehaviour:
     octave: 1
     keyNoteData: {fileID: 11400000, guid: 811df8ae93ab843e39b51d5199b33706, type: 2}
   playersOnKey: []
-  unpressed: {fileID: 0}
-  pressed: {fileID: 0}
+  unpressed: {fileID: 1616635982820512}
+  pressed: {fileID: 1258643895727050}
 --- !u!212 &212088441980273700
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -43,6 +43,8 @@ MonoBehaviour:
   Prefabs:
   - {fileID: 128374}
   - {fileID: 1630972143475666, guid: ff3da8c0df7a73b42980a9443b929e5e, type: 2}
+  - {fileID: 1081006464297962, guid: 3cba93d5f4e884aa4841573eb97bcb04, type: 2}
+  - {fileID: 1081006464297962, guid: ac018dd7659be43eba098dba0784e7bb, type: 2}
   - {fileID: 1299501084991652, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
   - {fileID: 1339525092647256, guid: 3cb1a636293e5fb4986698e8b4bce5f7, type: 2}
   - {fileID: 1517026993579610, guid: 92297e7f4e985254cae425cfbb503cf7, type: 2}
@@ -52,7 +54,6 @@ MonoBehaviour:
   - {fileID: 1868431325231718, guid: 654430bbe94214ff5bd0279f38de0ad0, type: 2}
   - {fileID: 1822237548934368, guid: b070ad18ca570b548827bc2a0d57c655, type: 2}
   - {fileID: 1141163369620932, guid: fcb040a1cb5cf2348a1a74a4596b58bb, type: 2}
-  - {fileID: 1081006464297962, guid: ac018dd7659be43eba098dba0784e7bb, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
