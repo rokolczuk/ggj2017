@@ -9,7 +9,8 @@ public class LaserGun : MonoBehaviour {
 	Transform mouseTransform;
 
 	void Awake() {
-		mouseTransform = FindObjectOfType<TrackMouse> ().gameObject.transform;
+        return;
+        mouseTransform = FindObjectOfType<TrackMouse> ().gameObject.transform;
 		lasers = GetComponentsInChildren<LaserMesh> ();
 		foreach (LaserMesh laser in lasers) {
 			laser.SetBeginEnd (transform, mouseTransform);
@@ -22,8 +23,9 @@ public class LaserGun : MonoBehaviour {
 		}
 	}
 
-	public void SetTarget(Transform target){	
-		if (target != null) {
+	public void SetTarget(Transform target){
+        return;
+        if (target != null) {
 			foreach (LaserMesh laser in lasers) {
 				laser.SetBeginEnd (transform, target);
 			}
@@ -35,7 +37,8 @@ public class LaserGun : MonoBehaviour {
 	}
 
 	public void clearTransform(){
-		foreach (LaserMesh laser in lasers) {
+        return;
+        foreach (LaserMesh laser in lasers) {
 			laser.SetBeginEnd (transform, mouseTransform);
 		}
 	}

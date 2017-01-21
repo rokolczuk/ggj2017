@@ -9,6 +9,8 @@ public class SelectedKeyChanged
 	public KeyScript keyScript;
     public bool IsLocalPlayer;
 
+
+
 	public SelectedKeyChanged(PlayerScript playerScript, KeyScript keyScript, bool localPlayer)
 	{
 		this.playerScript = playerScript;
@@ -19,6 +21,7 @@ public class SelectedKeyChanged
 
 public class PlayerScript : NetworkBehaviour
 {
+    public GameObject mousePrefab;
     [SerializeField]
     private float MoveTime = 1;
 	private List<KeyScript> KeyArray;
@@ -37,14 +40,27 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool IsPressed;
 
+   
     void Awake()
 	{
+      
     }
 
     void Start()
     {
+      
+
         KeyArray = KeyManager.Instance.KeyList;
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
+    }
+
+    public override void OnStartAuthority()
+    {
+        if (hasAuthority)
+        {
+            var mouse = GameObject.Instantiate(mousePrefab);
+            NetworkServer.Spawn(mouse);
+        }
     }
 
 	void Update()
@@ -53,8 +69,11 @@ public class PlayerScript : NetworkBehaviour
         MovementChecks();
 
         if (hasAuthority)
+        {
             IsPressed = Input.GetMouseButton(0);
-		       
+
+       
+        }
 	}
 	
     private void MovementChecks()

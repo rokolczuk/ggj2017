@@ -126,6 +126,7 @@ public class LaserMesh : MonoBehaviour {
 	}
 
 	void LateUpdate() {
+        return;
 		UpdateMaterials ();
 		UpdatePositions ();
 		UpdateWidth ();
