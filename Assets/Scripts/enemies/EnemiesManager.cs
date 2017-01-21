@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using AssemblyCSharp;
 
 public class EnemiesManager: MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class EnemiesManager: MonoBehaviour
 	[SerializeField]
 	private EnemiesFactory enemiesFactory;
 
+	EnemyWaveController waveController;
+
 	private float timePassed = 0f;
 
 	private List<Enemy> activeEnemies = new List<Enemy>();
@@ -29,20 +32,19 @@ public class EnemiesManager: MonoBehaviour
     public void Awake()
     {
         EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
+		waveController = gameObject.GetComponent<EnemyWaveController> ();
     }
 
     private void OnGameStarted(GameStartedEvent e)
     {
-       // activated = true;
+        activated = true;
     }
 
     private void SpawnEnemies()
 	{
-		EnemySpawnResult spawnResult = enemiesFactory.TrySpawn(timePassed);
-
-		if(spawnResult.HasSpawned)
-		{
-			HandleEnemyCreation(spawnResult.SpawnedEnemy);
+		var enemies = waveController.SpawnEnemies ();	
+		foreach (Enemy e in enemies) {
+			HandleEnemyCreation (e);
 		}
 	}
 
