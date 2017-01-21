@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
 		if(!currentChord.notesInChord.Contains(n))
 		{
 			currentChord.notesInChord.Add(n);
-			Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
+			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
 			dying = hasKillerChord();
 			particles.gameObject.SetActive(dying);
 		}
