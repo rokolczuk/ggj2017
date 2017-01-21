@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SelectedKeyChanged
 {
@@ -14,7 +15,7 @@ public class SelectedKeyChanged
 	}
 }
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : NetworkBehaviour
 {
     [SerializeField]
     private float MoveTime = 1;
@@ -58,6 +59,9 @@ public class PlayerScript : MonoBehaviour
 	
     private void MovementChecks()
     {
+		if (!isLocalPlayer)
+			return;
+
 		if (isMoving)
             return;
 

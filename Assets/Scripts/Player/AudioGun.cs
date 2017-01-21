@@ -11,17 +11,13 @@ public class AudioGun : MonoBehaviour
 	private AudioManager audioManager;
 	private Enemy enemy;
 
-	void transitionSound(KeyNoteData currentSound, KeyNoteData newSound){
-		audioManager.transitionLaser (currentSound, newSound);
-	}
-
 	public void SetKeyNote(KeyNoteData noteData)
 	{
 		if(enemy != null)
 		{
 			enemy.RemoveActiveNote(noteData.keyNote);
 		}
-		transitionSound (currentNote, noteData);
+		//audioManager.playLaser (noteData);
 		currentNote = noteData;
 
 		if(enemy != null)

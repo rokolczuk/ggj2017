@@ -19,6 +19,8 @@ public class ChordOfDutyNetworkManager : NetworkManager
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
 		EventDispatcher.Dispatch(new ServerAddedPlayer(player));
+
+		print("?");
 	}
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
@@ -27,5 +29,7 @@ public class ChordOfDutyNetworkManager : NetworkManager
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
         EventDispatcher.Dispatch(new ServerAddedPlayer(player));
+
+		print("!");
     }
 }

@@ -31,7 +31,6 @@ public enum TrackName {
 }
 
 public class AudioPool : MonoBehaviour {
-	public List<AudioClip> audioClips;
 	public int poolSize = 20;
 
 	List<GameObject> pool;
@@ -73,23 +72,22 @@ public class AudioPool : MonoBehaviour {
 		playingSounds.Add (timer);
 	}
 
-	public void playTrack(TrackName name, bool looping){
+	public void playTrack(AudioClip clip, bool looping){
 		AudioSource source = getFreeSource ();
-		int index = (int)name;
-		source.clip = audioClips [index];
+		source.clip = clip;
 		source.loop = looping;
 		source.Play();
 		trackPlayingSound (source);
 	}
 
-	public void stopTrack(TrackName name){
+	public void stopTrack(AudioClip clip){
 		for (int i = 0; i < playingSounds.Count; i++) {
 			var source = playingSounds [i].getAudioSource ();
-			/*if (source.clip.name == name){
+			if (source.clip == clip){
 				source.Stop ();
 				playingSounds.Remove (playingSounds[i]);
 				break;
-			}*/
+			}
 		}
 	}
 
