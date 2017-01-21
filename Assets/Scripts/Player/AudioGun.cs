@@ -61,7 +61,7 @@ public class AudioGun : MonoBehaviour
             return;
         }
 
-		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		var raycastOrigin = activator.Mouse.transform.position;
 		var dir = Vector3.forward;
 
 		Debug.DrawRay (raycastOrigin, dir);
@@ -72,8 +72,6 @@ public class AudioGun : MonoBehaviour
         {
             enemy = hit.collider.GetComponent<Enemy>();
 			enemy.AddActiveNote(currentNote.keyNote, laserGun);
-
-			//laserGun.SetTarget (enemy.transform);
 		} 
 		else if (enemy != null)
 		{
