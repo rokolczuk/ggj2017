@@ -60,7 +60,7 @@ public class AudioGun : MonoBehaviour
         {
             return;
         }
-        return;
+        
  
 
 		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
