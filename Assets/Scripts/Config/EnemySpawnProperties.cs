@@ -25,6 +25,17 @@ public class Chord
 		return true;
 
 	}
+
+	public int[] notesToNetworkForm()
+	{
+		int[] shindler = new int[notesInChord.Count];
+
+		for (int i = 0; i < notesInChord.Count; i++) {
+			shindler [i] = (int)notesInChord[i];
+		}
+
+		return shindler;
+	}
 		
 	public static bool operator !=(Chord x, Chord y) 
 	{

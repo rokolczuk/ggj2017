@@ -11,8 +11,8 @@ namespace AssemblyCSharp
 	{
 		public float difficultyModifier = 1;
 		public float timeBetweenWaves = 3.0f;
-		public int wavesBetweenDifficultyBump = 3;
-		public int difficultyBumpsBeforeEnemyAmountIncrease = 2;
+		public int wavesBetweenDifficultyBump = 4;
+		public int difficultyBumpsBeforeEnemyAmountIncrease = 3;
 		public int enemiesPerWave = 1;
 
 		public GameObject oneChordPrefab;
@@ -65,8 +65,6 @@ namespace AssemblyCSharp
 		}
 
 		void Update(){
-			print ("Current " + currentTime.ToString());
-			print ("DT" + Time.deltaTime.ToString());
 			currentTime -= Time.deltaTime;
 		}
 

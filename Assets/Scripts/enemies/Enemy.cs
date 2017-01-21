@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Collider2D))]
-public class Enemy : MonoBehaviour 
+public class Enemy : NetworkBehaviour 
 {
 	[SerializeField]
 	private float speed;
@@ -42,15 +43,27 @@ public class Enemy : MonoBehaviour
 	private float dyingTime;
 
 	private Chord currentChord = new Chord();
-	private Chord killerChord;
 
-	private LaserGun trackingGun;
+	public Chord killerChord;
+
+	//private LaserGun trackingGun;
 
 	public void SetKillerChord(Chord chord)
 	{
 		killerChord = chord;
-		GetComponent<EnemySkinProvider>().SetSkin(chord);
+	}
 
+	[ClientRpc]
+	public void RpcSetKillaCord(int[] list)
+	{
+		List<KeyNote> keyNotes = new List<KeyNote> ();
+
+		for (int i = 0; i < list.Length; i++) {
+			keyNotes.Add((KeyNote)list[i]);
+		}
+
+		killerChord.notesInChord = keyNotes;
+		GetComponent<EnemySkinProvider>().SetSkin(killerChord);
 	}
 		
 	private void Awake()
@@ -63,6 +76,7 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+
 	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{
 		if(!currentChord.notesInChord.Contains(n))
@@ -74,7 +88,7 @@ public class Enemy : MonoBehaviour
 				particles.gameObject.SetActive (dying);
 			}
 		}
-		this.trackingGun = trackingGun;
+		//this.trackingGun = trackingGun;
 	}
 
 	public void clean()
@@ -89,10 +103,10 @@ public class Enemy : MonoBehaviour
 
 	private void cleanGunTransform()
 	{
-		if (trackingGun != null)
-		{
-			trackingGun.clearTransform();
-		}
+		//if (trackingGun != null)
+		//{
+		//	trackingGun.clearTransform();
+		//}
 	}
 
 	public void RemoveActiveNote(KeyNote n)
