@@ -8,24 +8,16 @@ public class GameManager : NetworkBehaviour
 	PrefabManager prefabManager;
 
     bool gameStarted = false;
+    bool gameOver = false;
 
 	public void Awake()
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
-	}
+        EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
+    }
 
-	// Use this for initialization
-	private void Start()
-	{
-	}
-
-	// Update is called once per frame
-	private void Update()
-	{
-	}
-
-	private void OnServerAddedPlayer(ServerAddedPlayer eventData)
+    private void OnServerAddedPlayer(ServerAddedPlayer eventData)
 	{
 		PlayerScript player = prefabManager.Instantiate<PlayerScript>();
 		NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
@@ -37,10 +29,22 @@ public class GameManager : NetworkBehaviour
             startButton.SetActive(true);
 	}
 
+    private void OnGameOver(GameOverEvent e)
+    {
+        if (gameOver)
+            return;
+
+        gameOver = true;
+        Debug.Log("GAME OVER BRAH");
+    }
+
     public void StartButtonClicked()
     {
-        startButton.SetActive(false);
-        gameStarted = true;
-        EventDispatcher.Dispatch(new GameStartedEvent());
+        if (!gameStarted)
+        {
+            startButton.SetActive(false);
+            gameStarted = true;
+            EventDispatcher.Dispatch(new GameStartedEvent());
+        }
     }
 }

@@ -6,3 +6,11 @@ public class GameStartedEvent
 {
 
 }
+
+public class LifeLostEvent
+{
+}
+
+public class GameOverEvent
+{
+}
