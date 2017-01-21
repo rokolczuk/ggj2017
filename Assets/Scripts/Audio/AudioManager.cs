@@ -39,9 +39,11 @@ public class AudioManager : MonoBehaviour {
 		pool.stopTrack (clip);
 		activeSounds.Remove(clip);
 	}
-		
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void PlayEffect(AudioClip clip){
+	{
+		 pool.playTrack(clip, false, 1f);
+	}
+
 	}
 }
