@@ -70,7 +70,9 @@ public class Enemy : MonoBehaviour
 			currentChord.notesInChord.Add(n);
 			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
 			dying = hasKillerChord();
-			particles.gameObject.SetActive(dying);
+			if (particles != null) {
+				particles.gameObject.SetActive (dying);
+			}
 		}
 		this.trackingGun = trackingGun;
 	}
