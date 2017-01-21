@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1141163369620932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.43, y: -2.39, z: 0}
+  m_LocalPosition: {x: -10.43, y: -2.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4988950512290582}
@@ -94,8 +94,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643122911128828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalScale: {x: 4.9500003, y: 10.520627, z: 6}
   m_Children: []
   m_Father: {fileID: 4818655218298832}
   m_RootOrder: 0
@@ -125,6 +125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f004baabddc02a48ab7a657afed0a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveTime: 0.1
+  KeyArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  PlayerKeyPositionOffset: {x: -0.15, y: 4, z: 0}
   keyRayCast: {fileID: 1254262917968896}
 --- !u!212 &212985700449043222
 SpriteRenderer:
@@ -157,7 +175,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 0.5147059, b: 0.5147059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
