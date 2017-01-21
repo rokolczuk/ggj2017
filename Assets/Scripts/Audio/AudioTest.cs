@@ -8,19 +8,13 @@ public class AudioTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		audioPool = FindObjectOfType(typeof(AudioPool)) as AudioPool;
-		//audioPool.playTrack (AudioPool.TrackName.A1_Synth);
+		audioPool = new AudioPool ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetButtonUp("Jump"))
 		{
-			audioPool.playTrack (AudioPool.TrackName.A1_Synth);	
-			audioPool.playTrack (AudioPool.TrackName.A2_Synth);	
-			audioPool.playTrack (AudioPool.TrackName.C1_Synth);	
-			audioPool.playTrack (AudioPool.TrackName.C2_Synth);	
-			audioPool.playTrack (AudioPool.TrackName.D1_Synth);	
 
 		}
 	}

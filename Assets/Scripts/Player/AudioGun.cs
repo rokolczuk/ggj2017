@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class AudioGun : MonoBehaviour 
 {
-	private KeyNote currentNote;
+	private KeyNoteData currentNote;
 
 	private bool mouseButtonPressed = false;
 
+	private AudioManager audioManager;
 	private Enemy enemy;
 
-	public void SetKeyNote(KeyNote keyNote)
+	void transitionSound(KeyNoteData currentSound, KeyNoteData newSound){
+		audioManager.transitionLaser (currentSound, newSound);
+	}
+
+	public void SetKeyNote(KeyNoteData noteData)
 	{
 		if(enemy != null)
 		{
-			enemy.RemoveActiveNote(keyNote);
+			enemy.RemoveActiveNote(noteData.keyNote);
 		}
-
-		currentNote = keyNote;
+		transitionSound (currentNote, noteData);
+		currentNote = noteData;
 
 		if(enemy != null)
 		{
-			enemy.AddActiveNote(currentNote);
+			enemy.AddActiveNote(currentNote.keyNote);
 		}
 	}
 
 	private void Awake()
 	{
-		//TEMP
-		SetKeyNote(KeyNote.A);
+		audioManager = FindObjectOfType<AudioManager> ();
 	}
 
 	void Update () 
@@ -48,16 +52,20 @@ public class AudioGun : MonoBehaviour
 			Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
 
+			//TODO replace this with motherfucking lazers
+			Debug.DrawLine(transform.position, raycastDirection);
+
 			if(hit.collider != null)
 			{
+				//TODO replace this with motherfucking lazers
 				Debug.DrawLine(transform.position, hit.point);
 
 				enemy = hit.collider.GetComponent<Enemy>();
-				enemy.AddActiveNote(currentNote);
+				enemy.AddActiveNote(currentNote.keyNote);
 			}
 			else if(enemy != null)
 			{
-				enemy.RemoveActiveNote(currentNote);
+				enemy.RemoveActiveNote(currentNote.keyNote);
 				enemy = null;
 			}
 		}

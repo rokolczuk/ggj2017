@@ -30,12 +30,18 @@ public class PlayerScript : MonoBehaviour
 
 	public GameObject keyRayCast;
     private KeyScript keyScript;
+	private AudioGun audioGun;
 
     void Start()
     {
         KeyArray = KeyManager.Instance.KeyList;
+		audioGun = gameObject.GetComponent<AudioGun> ();
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
+
+	void handleFiring(){
+		audioGun.SetKeyNote (keyScript.getKeyData());
+	}
 
 	void Update()
 	{
@@ -47,7 +53,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			if (keyScript != null)
 			{
-				keyScript.fireKey();
+				handleFiring ();
 			}
 		}
 	}

@@ -14,6 +14,10 @@ namespace AssemblyCSharp
 			this.callback = callback;
 		}
 
+		public AudioSource getAudioSource(){
+			return component;
+		}
+
 		new public void Tick(float dt){
 			base.Tick (dt);
 			if (isDone) {

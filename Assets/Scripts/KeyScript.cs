@@ -27,53 +27,41 @@ public class KeyScript : NetworkBehaviour
 	[SerializeField]
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
 
-    [SerializeField]
-    private SpriteRenderer unpressed;
-    [SerializeField]
-    private SpriteRenderer pressed;
-
     [SyncVar]
     bool active;
 
 	private void Awake()
 	{
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+	}
+	
+	private void Update()
+	{
+		renderKeyState();
 	}
 
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
 	{
-		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this)
+		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this) //wtf
 		{
 			playersOnKey.Remove(selectedKey.playerScript);
-
             if (playersOnKey.Count == 0)
                 active = false;
 		}
-		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this)
+		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this) //wtf
 		{
 			playersOnKey.Add(selectedKey.playerScript);
             active = true;
 		}
 	}
 
-    public void Update()
+    private void renderKeyState()
     {
-        //TEMP CODE FOR TESTING WHAT IT LOOKS LIKE
-        if (active)
-        {
-            pressed.gameObject.SetActive(true);
-            unpressed.gameObject.SetActive(false);
-        }
-        else
-        {
-            pressed.gameObject.SetActive(false);
-            unpressed.gameObject.SetActive(true);
-        }
+		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
     }
 
-	public void fireKey()
-	{
-		print("StR8 fYr");
-        
+	public KeyNoteData getKeyData(){
+		return keyState.keyNoteData;
 	}
 }
