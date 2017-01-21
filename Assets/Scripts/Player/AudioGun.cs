@@ -10,35 +10,37 @@ public class AudioGun : MonoBehaviour
 
 	private AudioManager audioManager;
 	private Enemy enemy;
-
-	public void SetKeyNote(KeyNoteData noteData)
-	{
-		if(enemy != null)
-		{
-			enemy.RemoveActiveNote(noteData.keyNote);
-		}
-		//audioManager.playLaser (noteData);
-		currentNote = noteData;
-
-		if(enemy != null)
-		{
-			enemy.AddActiveNote(currentNote.keyNote);
-		}
-	}
+	private bool active;
 
 	private void Awake()
 	{
 		audioManager = FindObjectOfType<AudioManager> ();
+		active = false;
+	}
+
+	public void ActiveGun(bool active, KeyNoteData data){
+		this.active = active;
+		this.currentNote = data;
+		if (!active && mouseButtonPressed) {
+			audioManager.stopLaser (currentNote.synthSound);
+			mouseButtonPressed = false;
+		}
 	}
 
 	void Update () 
 	{
+		if(!active){
+			return;
+		}
+
 		if(Input.GetMouseButtonDown(0))
 		{
+			audioManager.playLaser (currentNote.synthSound);
 			mouseButtonPressed = true;
 		}
 		if(Input.GetMouseButtonUp(0))
 		{
+			audioManager.stopLaser (currentNote.synthSound);
 			mouseButtonPressed = false;
 		}
 			

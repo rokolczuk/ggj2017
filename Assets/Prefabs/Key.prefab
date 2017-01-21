@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4799131529186480}
   - component: {fileID: 114903374366319912}
   - component: {fileID: 61201550554039278}
+  - component: {fileID: 114276800048785750}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -85,6 +86,17 @@ BoxCollider2D:
   m_Offset: {x: -0.2, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.4, y: 9}
+--- !u!114 &114276800048785750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1517026993579610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24322f4c3d2bb45328e87405eaf8bc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114903374366319912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,10 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyState:
     octave: 0
-    keyNote: 0
-    activedColor: {r: 1, g: 0, b: 0, a: 1}
-    deactivatedColor: {r: 1, g: 0.375, b: 0.375, a: 1}
+    keyNoteData: {fileID: 0}
   playersOnKey: []
+  unpressed: {fileID: 0}
+  pressed: {fileID: 0}
 --- !u!212 &212316220238314760
 SpriteRenderer:
   m_ObjectHideFlags: 1

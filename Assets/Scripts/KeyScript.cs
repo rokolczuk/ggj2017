@@ -33,9 +33,12 @@ public class KeyScript : NetworkBehaviour
     [SyncVar]
     bool active;
 
+	private AudioGun audioGun;
+
 	private void Awake()
 	{
         EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+		audioGun = gameObject.GetComponent<AudioGun> ();
 	}
 	
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)

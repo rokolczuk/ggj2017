@@ -12,12 +12,12 @@ public class AudioManager : MonoBehaviour {
 		pool = FindObjectOfType<AudioPool> ();
 	}
 		
-	public void playLaser(KeyNoteData data){
-		pool.playTrack (data.synthSound, true);
+	public void playLaser(AudioClip clip){
+		pool.playTrack (clip, true);
 	}
 
-	public void stopLaser(KeyNoteData data){
-		pool.stopTrack (data.synthSound);
+	public void stopLaser(AudioClip clip){
+		pool.stopTrack (clip);
 	}
 		
 	// Update is called once per frame
