@@ -34,7 +34,6 @@ public class PlayerScript : NetworkBehaviour
 
     void Awake()
     {
-        Debug.Log("poep");
     }
 
     void Start()
