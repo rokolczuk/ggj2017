@@ -11,12 +11,17 @@ namespace AssemblyCSharp
 	{
 		public float difficultyModifier = 1;
 		public float timeBetweenWaves = 3.0f;
-		[SerializeField]
-		float currentTime;
+		public int wavesBetweenDifficultyBump = 3;
+		public int difficultyBumpsBeforeEnemyAmountIncrease = 2;
 		public int enemiesPerWave = 1;
 
 		public GameObject oneChordPrefab;
 		public GameObject twoChordPrefab;
+
+		float currentTime;
+		int currentWave;
+		int nextDifficultyIncrease;
+		int totalDifficultyIncreases;
 
 		string chordFilename = "";
 		List<Chord> loadedChords;
@@ -24,6 +29,9 @@ namespace AssemblyCSharp
 	
 
 		void Awake(){
+			currentWave = 0;
+			nextDifficultyIncrease = currentWave + wavesBetweenDifficultyBump;
+			totalDifficultyIncreases = 0;
 			currentTime = timeBetweenWaves;
 			chordFilename = Application.dataPath + "/WaveData/TwoPlayer.txt";
 			preloadChords ();
@@ -82,6 +90,18 @@ namespace AssemblyCSharp
 				return null;
 			}
 		}
+
+		void handleWaveParams(){
+			currentTime = timeBetweenWaves;
+			currentWave++;
+			if (currentWave > nextDifficultyIncrease) {
+				totalDifficultyIncreases++;
+				nextDifficultyIncrease = currentWave + wavesBetweenDifficultyBump;
+				if (totalDifficultyIncreases % difficultyBumpsBeforeEnemyAmountIncrease == 0) {
+					enemiesPerWave ++;
+				}
+			}
+		}
 			
 
 		public List<Enemy> SpawnEnemies(){
@@ -89,9 +109,7 @@ namespace AssemblyCSharp
 			if (currentTime >= 0) {
 				return enemies;
 			}
-			print ("creating enemy");
-			currentTime = timeBetweenWaves;
-			print ("Current: " + currentTime.ToString());
+			handleWaveParams ();
 			for (int i = 0; i < enemiesPerWave; i++) {
 				var chord = getNextChordData ();
 				var prefab = getPrefabForChord (chord);

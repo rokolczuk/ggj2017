@@ -37,7 +37,7 @@ public class EnemiesManager: MonoBehaviour
 
     private void OnGameStarted(GameStartedEvent e)
     {
-        //activated = true;
+        activated = true;
     }
 
     private void SpawnEnemies()
@@ -54,6 +54,7 @@ public class EnemiesManager: MonoBehaviour
 		activeEnemies.Add(spawnedEnemy);
 
         NetworkServer.Spawn(spawnedEnemy.gameObject);
+		spawnedEnemy.RpcSetKillaCord (spawnedEnemy.killerChord.notesToNetworkForm());
 	}
 
 	public void Update()

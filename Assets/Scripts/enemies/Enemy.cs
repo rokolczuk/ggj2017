@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Collider2D))]
-public class Enemy : MonoBehaviour 
+public class Enemy : NetworkBehaviour 
 {
 	[SerializeField]
 	private float speed;
@@ -28,9 +29,6 @@ public class Enemy : MonoBehaviour
 
 	private List<Material> enemyMaterials = new List<Material>(); 
 
-
-
-
 	private Vector3 speedVector;
 
 	private const int maxParticleEmission = 60;
@@ -45,15 +43,27 @@ public class Enemy : MonoBehaviour
 	private float dyingTime;
 
 	private Chord currentChord = new Chord();
-	private Chord killerChord;
+
+	public Chord killerChord;
 
 	//private LaserGun trackingGun;
 
 	public void SetKillerChord(Chord chord)
 	{
 		killerChord = chord;
-		GetComponent<EnemySkinProvider>().SetSkin(chord);
+	}
 
+	[ClientRpc]
+	public void RpcSetKillaCord(int[] list)
+	{
+		List<KeyNote> keyNotes = new List<KeyNote> ();
+
+		for (int i = 0; i < list.Length; i++) {
+			keyNotes.Add((KeyNote)list[i]);
+		}
+
+		killerChord.notesInChord = keyNotes;
+		GetComponent<EnemySkinProvider>().SetSkin(killerChord);
 	}
 		
 	private void Awake()
@@ -66,6 +76,7 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+
 	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{
 		if(!currentChord.notesInChord.Contains(n))
@@ -73,7 +84,9 @@ public class Enemy : MonoBehaviour
 			currentChord.notesInChord.Add(n);
 			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
 			dying = hasKillerChord();
-			particles.gameObject.SetActive(dying);
+			if (particles != null) {
+				particles.gameObject.SetActive (dying);
+			}
 		}
 		//this.trackingGun = trackingGun;
 	}
@@ -102,7 +115,11 @@ public class Enemy : MonoBehaviour
 		{
 			currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
-			particles.gameObject.SetActive(dying);
+
+			if(particles != null)
+			{
+				particles.gameObject.SetActive(dying);
+			}
 		}
 	}
 
@@ -127,7 +144,7 @@ public class Enemy : MonoBehaviour
 			}
 
 			var em = particles.emission;
-			em .rateOverTime = dyingProgress * maxParticleEmission;
+			em.rateOverTime = dyingProgress * maxParticleEmission;
 
 			if(dyingTime >= timeToKill)
 			{
@@ -136,8 +153,16 @@ public class Enemy : MonoBehaviour
 					dead = true;
 					deathAnimationPlaying = true;
 					deathAnimation.Play();
+
 					GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
 					EventDispatcher.Dispatch<EnemyDiedEvent>(new EnemyDiedEvent(this));
+
+					particles.transform.SetParent(transform.parent, true);
+					em.rateOverTime = 0;
+
+					EventDispatcher.Dispatch(new ParticlesDetachedEvent(particles));
+					particles = null;
+					enabled = false;
 
 				}
 			}
