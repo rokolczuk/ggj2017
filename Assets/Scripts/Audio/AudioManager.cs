@@ -11,6 +11,10 @@ public enum SfxOrigin
 }
 
 public class AudioManager : MonoBehaviour {
+
+	[SerializeField]
+	private AudioClip music;
+
 	AudioPool pool;
 
 	private List<AudioClip> activeSounds = new List<AudioClip>();
@@ -54,10 +58,21 @@ public class AudioManager : MonoBehaviour {
 		activeSounds.Remove(clip);
 	}
 
-	public void PlayEffect(AudioClip clip){
+	public void PlayEffect(AudioClip clip)
 	{
 		 pool.playTrack(clip, false, 1f);
 	}
 
+	public void StartMusic()
+	{
+		pool.playTrack(music, true, 0.35f);
 	}
+
+	public void StopMusic()
+	{
+		pool.stopTrack(music);
+	}
+	
+
+	
 }
