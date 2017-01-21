@@ -50,6 +50,7 @@ public class AudioGun : MonoBehaviour
 
 			if(hit.collider != null)
 			{
+				//TODO replace this with motherfucking lazers
 				Debug.DrawLine(transform.position, hit.point);
 
 				enemy = hit.collider.GetComponent<Enemy>();
