@@ -35,6 +35,9 @@ public class KeyScript : NetworkBehaviour
     private AudioManager audioManager;
     private AudioGun audioGun;
 
+    [SyncVar]
+    uint pressingPlayerScriptId; // the unique network id of the script what pressed us (0 for none)
+
     private void Awake()
     {
         EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
@@ -60,19 +63,29 @@ public class KeyScript : NetworkBehaviour
 
     public void Update()
     {
-        if (playersOnKey.Any(p => p.IsPressed))
-        {
-            pressed.SetActive(true);
-            unpressed.SetActive(false);
+        playersOnKey.RemoveAll(p => p == null);
 
-            bool isLocalPlayerActivatingGun = playersOnKey.Any(p => p.hasAuthority);
-            audioGun.activateGun(getKeyData(), isLocalPlayerActivatingGun ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+        var pressingPlayerScript = playersOnKey.FirstOrDefault(p => p.netId.Value == pressingPlayerScriptId);
+        if (pressingPlayerScript == null || !pressingPlayerScript.IsPressed)
+        {
+            pressingPlayerScript = playersOnKey.FirstOrDefault(p => p.IsPressed);
         }
-        else
+
+        if (pressingPlayerScript == null)
         {
             unpressed.SetActive(true);
             pressed.SetActive(false);
             audioGun.deactivateGun();
+        }
+        else
+        {
+            pressingPlayerScriptId = pressingPlayerScript.netId.Value;
+
+            pressed.SetActive(true);
+            unpressed.SetActive(false);
+
+            bool isLocalPlayerActivatingGun = pressingPlayerScript.hasAuthority;
+            audioGun.activateGun(getKeyData(), isLocalPlayerActivatingGun ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
         }
     }
 
