@@ -16,12 +16,14 @@ public class AudioGun : NetworkBehaviour
 
     private AudioManager audioManager;
     private Enemy enemy;
+	private LaserGun laserGun;
 
     SfxOrigin activator;
     private bool active;
 
     private void Awake()
     {
+		laserGun = GetComponentInChildren<LaserGun> (true);
         audioManager = FindObjectOfType<AudioManager>();
         active = false;
     }
@@ -39,6 +41,9 @@ public class AudioGun : NetworkBehaviour
         this.currentNote = data;
 
         audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+		laserGun.gameObject.SetActive (true);
+
+
     }
 
     public void deactivateGun()
@@ -48,6 +53,7 @@ public class AudioGun : NetworkBehaviour
 
         active = false;
         audioManager.stopLaser(currentNote.synthSound);
+		laserGun.gameObject.SetActive (false);
 
         if (enemy != null)
         {
@@ -61,38 +67,32 @@ public class AudioGun : NetworkBehaviour
         if (!active)
         {
             return;
-        }
+        }			
 
-        if (Input.GetMouseButtonDown(0))
+		var raycastOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		var dir = Vector3.forward;
+
+		Debug.DrawRay (raycastOrigin, dir);
+
+		RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector3.forward, 1000f, Layers.GetLayerMask(Layers.Enemies));
+
+        if (hit.collider != null)
         {
-            audioManager.playLaser(currentNote.synthSound, isLocalPlayer ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
-        }
-        else if (Input.GetMouseButtonUp(0))
+            enemy = hit.collider.GetComponent<Enemy>();
+			enemy.AddActiveNote(currentNote.keyNote);
+
+			laserGun.SetTarget (enemy.transform);
+		} 
+		else if (enemy != null)
+		{
+			enemy.RemoveActiveNote(currentNote.keyNote);
+			enemy = null;
+		}
+
+		if(hit.collider == null)
         {
-            audioManager.stopLaser(currentNote.synthSound);
+			laserGun.SetTarget (null);
         }
 
-        /*
-        if (mouseButtonPressed)
-        {
-            Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y);
-            Vector2 raycastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, raycastDirection - raycastOrigin, 1000f, Layers.GetLayerMask(Layers.Enemies));
-
-            if (hit.collider != null)
-            {
-                //TODO replace this with motherfucking lazers
-                Debug.DrawLine(transform.position, hit.point);
-
-                enemy = hit.collider.GetComponent<Enemy>();
-                enemy.AddActiveNote(currentNote.keyNote);
-            }
-            else if (enemy != null)
-            {
-                enemy.RemoveActiveNote(currentNote.keyNote);
-                enemy = null;
-            }
-        }
-        */
     }
 }

@@ -54,9 +54,7 @@ public class PlayerScript : NetworkBehaviour
 
         if (hasAuthority)
             IsPressed = Input.GetMouseButton(0);
-
-        if (IsPressed)
-        { } // some animation?  
+		       
 	}
 	
     private void MovementChecks()

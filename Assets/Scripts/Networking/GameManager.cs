@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour
 {
+    public GameObject startButton;
 	PrefabManager prefabManager;
+
+    bool gameStarted = false;
 
 	public void Awake()
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
-
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
 	}
 
@@ -28,7 +30,14 @@ public class GameManager : NetworkBehaviour
 		PlayerScript player = prefabManager.Instantiate<PlayerScript>();
 		NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
 
-        // auto start at 1 player joined, put this in a button or something
-        EventDispatcher.Dispatch(new GameStartedEvent());
+        if (!gameStarted)
+            startButton.SetActive(true);
 	}
+
+    public void StartButtonClicked()
+    {
+        startButton.SetActive(false);
+        gameStarted = true;
+        EventDispatcher.Dispatch(new GameStartedEvent());
+    }
 }
