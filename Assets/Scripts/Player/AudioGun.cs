@@ -33,6 +33,7 @@ public class AudioGun : MonoBehaviour
 
         audioManager.playLaser(currentNote.synthSound, SfxOrigin.LocalPlayer /*do this later*/);
 		laserGun.gameObject.SetActive(true);
+        laserGun.SetTarget(playerScript.Mouse.transform);
     }
 
     public void deactivateGun()
