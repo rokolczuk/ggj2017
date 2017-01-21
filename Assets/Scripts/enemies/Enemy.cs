@@ -88,7 +88,6 @@ public class Enemy : NetworkBehaviour
 				particles.gameObject.SetActive (dying);
 			}
 		}
-		//this.trackingGun = trackingGun;
 	}
 
 	public void clean()
