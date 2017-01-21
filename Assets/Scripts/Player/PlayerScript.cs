@@ -32,6 +32,11 @@ public class PlayerScript : NetworkBehaviour
 	public GameObject keyRayCast;
     private KeyScript keyScript;
 
+    void Awake()
+    {
+        Debug.Log("poep");
+    }
+
     void Start()
     {
         KeyArray = KeyManager.Instance.KeyList;
@@ -46,7 +51,7 @@ public class PlayerScript : NetworkBehaviour
 	
     private void MovementChecks()
     {
-		if (!isLocalPlayer)
+		if (!hasAuthority)
 			return;
 
 		if (isMoving)
