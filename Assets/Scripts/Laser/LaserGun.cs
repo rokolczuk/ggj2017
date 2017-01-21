@@ -6,14 +6,6 @@ public class LaserGun : MonoBehaviour {
 
 	public GameObject end;
 
-	void Start()
-	{
-		if (end == null) {
-			print ("fuck");
-		}
-	}
-
-	
 	// Update is called once per frame
 	void Update () {
 

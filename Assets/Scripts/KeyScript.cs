@@ -13,52 +13,60 @@ public enum KeyNote
 [Serializable]
 public class KeyState
 {
-	public int octave;
 	public KeyNoteData keyNoteData;
 }
 
 public class KeyScript : NetworkBehaviour
 {
-	private SpriteRenderer spriteRenderer;
-
 	[SerializeField]
 	private KeyState keyState;
 
 	[SerializeField]
 	private List<PlayerScript> playersOnKey = new List<PlayerScript>();
 
+    [SerializeField]
+    private GameObject unpressed;
+    [SerializeField]
+    private GameObject pressed;
+
     [SyncVar]
     bool active;
 
+	private AudioManager audioManager;
+	private AudioGun audioGun;
+
 	private void Awake()
 	{
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+        EventDispatcher.AddEventListener<SelectedKeyChanged>(OnPlayerSelectedKey);
+		audioManager = FindObjectOfType<AudioManager> ();
+		audioGun = gameObject.GetComponent<AudioGun> ();
 	}
 	
-	private void Update()
-	{
-		renderKeyState();
-	}
-
 	private void OnPlayerSelectedKey(SelectedKeyChanged selectedKey)
 	{
 		if (playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript != this) //wtf
 		{
 			playersOnKey.Remove(selectedKey.playerScript);
-            if (playersOnKey.Count == 0)
-                active = false;
+			if (playersOnKey.Count == 0) {
+				active = false;
+				pressed.SetActive(false);
+				audioGun.deactivateGun (false);
+				unpressed.SetActive(true);
+			}
 		}
 		else if (!playersOnKey.Contains(selectedKey.playerScript) && selectedKey.keyScript == this) //wtf
 		{
 			playersOnKey.Add(selectedKey.playerScript);
             active = true;
+			pressed.SetActive(true);
+			audioGun.activateGun (true, keyState.keyNoteData);
+			unpressed.SetActive(false);
+			audioManager.playPiano (keyState.keyNoteData.pianoSound);
 		}
 	}
 
-    private void renderKeyState()
+    public void Update()
     {
-		spriteRenderer.color = active ? keyState.keyNoteData.activeColor : keyState.keyNoteData.inactiveColor;
     }
 
 	public KeyNoteData getKeyData(){

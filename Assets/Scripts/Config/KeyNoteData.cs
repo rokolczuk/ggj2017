@@ -7,6 +7,9 @@ using UnityEngine;
 public class KeyNoteData: ScriptableObject
 {
 	public Color activeColor;
-	public Color inactiveColor;
 	public KeyNote keyNote;
+	public AudioClip pianoSound;
+	public AudioClip synthSound;
+	[Range(1,3)]
+	public int octave;
 }

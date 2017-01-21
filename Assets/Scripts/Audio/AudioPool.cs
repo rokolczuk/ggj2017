@@ -31,8 +31,8 @@ public enum TrackName {
 }
 
 public class AudioPool : MonoBehaviour {
-	public List<AudioClip> audioClips;
 	public int poolSize = 20;
+	const string defaultAudioName = "Empty Audio Source";
 
 	List<GameObject> pool;
 	List<AudioTimer> playingSounds;
@@ -47,6 +47,8 @@ public class AudioPool : MonoBehaviour {
 		pool = new List<GameObject> (poolSize);
 		for (int i = 0; i < poolSize; i++) {
 			GameObject obj = new GameObject();
+			obj.transform.parent = gameObject.transform;
+			obj.name = defaultAudioName;
 			obj.AddComponent<AudioSource> ();
 			AudioSource source = obj.GetComponent<AudioSource> ();
 			source.Stop ();
@@ -56,10 +58,30 @@ public class AudioPool : MonoBehaviour {
 		}
 	}
 
-	AudioSource getFreeSource(){
+	GameObject getFreeAudioObj(){
 		GameObject source = pool.FirstOrDefault(i => !i.GetComponent<AudioSource>().isPlaying);
 		Debug.Assert (source != null, "AUDIO OBJECT POOL IS EMPTY, ALLOCATE MORE");
-		return source.GetComponent<AudioSource>();
+		return source;
+	}
+
+	AudioSource readySound(AudioClip clip, bool looping) {
+		var obj = getFreeAudioObj ();
+		obj.name = clip.name;
+		var source = obj.GetComponent<AudioSource>();
+		source.clip = clip;
+		source.loop = looping;
+		return source;
+	}
+
+	public void playTrack(AudioClip clip, bool looping){
+		AudioSource source = readySound(clip, looping);
+		source.Play();
+		trackPlayingSound (source);
+	}
+
+	void trackPlayingSound(AudioSource source){
+		AudioTimer timer = new AudioTimer(source, source.clip.length, onSoundEnd);
+		playingSounds.Add (timer);
 	}
 
 	void onSoundEnd (AudioSource source, AudioTimer timer){
@@ -68,28 +90,14 @@ public class AudioPool : MonoBehaviour {
 		}
 	}
 
-	void trackPlayingSound(AudioSource source){
-		AudioTimer timer = new AudioTimer(source, source.clip.length, onSoundEnd);
-		playingSounds.Add (timer);
-	}
-
-	public void playTrack(TrackName name, bool looping){
-		AudioSource source = getFreeSource ();
-		int index = (int)name;
-		source.clip = audioClips [index];
-		source.loop = looping;
-		source.Play();
-		trackPlayingSound (source);
-	}
-
-	public void stopTrack(TrackName name){
+	public void stopTrack(AudioClip clip){
 		for (int i = 0; i < playingSounds.Count; i++) {
 			var source = playingSounds [i].getAudioSource ();
-			/*if (source.clip.name == name){
+			if (source.clip == clip){
 				source.Stop ();
 				playingSounds.Remove (playingSounds[i]);
 				break;
-			}*/
+			}
 		}
 	}
 

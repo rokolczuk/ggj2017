@@ -20,12 +20,4 @@ public class ChordOfDutyNetworkManager : NetworkManager
 
 		EventDispatcher.Dispatch(new ServerAddedPlayer(player));
 	}
-
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
-    {
-        GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-
-        EventDispatcher.Dispatch(new ServerAddedPlayer(player));
-    }
 }

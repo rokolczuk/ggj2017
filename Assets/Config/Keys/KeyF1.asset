@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7726ec9511643ffaad69ff78c621cf, type: 3}
+  m_Name: KeyF1
+  m_EditorClassIdentifier: 
+  activeColor: {r: 1, g: 0.9724138, b: 0, a: 1}
+  keyNote: 5
+  pianoSound: {fileID: 8300000, guid: 8f790d1d224244781b0a36ffe8740738, type: 3}
+  synthSound: {fileID: 8300000, guid: 2db65748d24094140a768c5849280a2a, type: 3}
+  octave: 1

@@ -27,5 +27,8 @@ public class GameManager : NetworkBehaviour
 	{
 		PlayerScript player = prefabManager.Instantiate<PlayerScript>();
 		NetworkServer.SpawnWithClientAuthority(player.gameObject, eventData.Player);
+
+        // auto start at 1 player joined, put this in a button or something
+        EventDispatcher.Dispatch(new GameStartedEvent());
 	}
 }

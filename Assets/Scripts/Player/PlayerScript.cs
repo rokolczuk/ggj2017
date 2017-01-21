@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SelectedKeyChanged
 {
@@ -14,7 +15,7 @@ public class SelectedKeyChanged
 	}
 }
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : NetworkBehaviour
 {
     [SerializeField]
     private float MoveTime = 1;
@@ -30,36 +31,28 @@ public class PlayerScript : MonoBehaviour
 
 	public GameObject keyRayCast;
     private KeyScript keyScript;
-	private AudioGun audioGun;
+
+    void Awake()
+	{
+    }
 
     void Start()
     {
         KeyArray = KeyManager.Instance.KeyList;
-		audioGun = gameObject.GetComponent<AudioGun> ();
         transform.position = KeyArray[_currentKeyIndex].transform.position + PlayerKeyPositionOffset;
     }
-
-	void handleFiring(){
-		audioGun.SetKeyNote (keyScript.getKeyData());
-	}
 
 	void Update()
 	{
 		checkForKey();
-
         MovementChecks();
-
-		if (Input.GetButtonDown("Jump"))
-		{
-			if (keyScript != null)
-			{
-				handleFiring ();
-			}
-		}
 	}
 	
     private void MovementChecks()
     {
+		if (!hasAuthority)
+			return;
+
 		if (isMoving)
             return;
 
