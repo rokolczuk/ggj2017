@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114902192264449300}
   - component: {fileID: 61614756257759914}
   - component: {fileID: 114821715808173506}
+  - component: {fileID: 114872832678765876}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -168,6 +169,17 @@ MonoBehaviour:
     i15: 187
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114872832678765876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141163369620932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24322f4c3d2bb45328e87405eaf8bc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114902192264449300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,22 +192,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveTime: 0.1
-  KeyArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   PlayerKeyPositionOffset: {x: -0.15, y: 4, z: 0}
   keyRayCast: {fileID: 1254262917968896}
 --- !u!212 &212985700449043222

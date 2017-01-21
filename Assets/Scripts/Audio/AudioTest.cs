@@ -15,9 +15,6 @@ public class AudioTest : MonoBehaviour {
 	void Update () {
 		if(Input.GetButtonUp("Jump"))
 		{
-			audioPool.playTrack (TrackName.A2_Piano);		
-			audioPool.playTrack (TrackName.C2_Piano);	
-			audioPool.playTrack (TrackName.E2_Piano);	
 
 		}
 	}

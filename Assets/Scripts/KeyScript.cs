@@ -60,9 +60,7 @@ public class KeyScript : NetworkBehaviour
     {
     }
 
-	public void fireKey()
-	{
-		AudioManager manager = FindObjectOfType<AudioManager> ();
-		manager.playLaser (keyState.keyNoteData.keyNote, keyState.octave);
+	public KeyNoteData getKeyData(){
+		return keyState.keyNoteData;
 	}
 }

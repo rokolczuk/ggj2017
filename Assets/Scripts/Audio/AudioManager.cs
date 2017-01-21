@@ -15,17 +15,24 @@ public class AudioManager : MonoBehaviour {
 		pool = FindObjectOfType<AudioPool> ();
 	}
 
-	TrackName generateTrackname(KeyNote note, int octave, string modifer) {
+	TrackName generateTrackname(KeyNoteData note, string modifer) {
 		StringBuilder builder = new StringBuilder (note.ToString ());
-		builder.Append (octave.ToString());
+		//builder.Append (note .ToString());
 		builder.Append(modifer);
 		TrackName trackName = (TrackName) Enum.Parse(typeof(TrackName), builder.ToString(), true);
 		return trackName;
 	}
 
+	public void transitionLaser(KeyNoteData currentNote, KeyNoteData newNote){
+		var currentTrackname = generateTrackname (currentNote, laserModifier); 
+		pool.stopTrack (currentTrackname);
+		var newTrackname = generateTrackname (newNote, laserModifier);
+		pool.playTrack (newTrackname, true);
+	}
+
 	public void playLaser(KeyNote note, int octave){
-		TrackName track = generateTrackname (note, octave, laserModifier);
-		pool.playTrack (track);
+		//TrackName track = generateTrackname (note, octave, laserModifier);
+		//pool.playTrack (track);
 	}
 	
 	// Update is called once per frame
