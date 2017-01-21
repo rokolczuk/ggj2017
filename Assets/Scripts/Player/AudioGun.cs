@@ -18,7 +18,7 @@ public class AudioGun : MonoBehaviour
 		active = false;
 	}
 
-	public void ActiveGun(bool active, KeyNoteData data){
+	public void ActivateGun(bool active, KeyNoteData data){
 		this.active = active;
 		this.currentNote = data;
 		if (!active && mouseButtonPressed) {
