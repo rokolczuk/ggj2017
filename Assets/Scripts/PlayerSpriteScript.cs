@@ -16,6 +16,11 @@ public class PlayerSpriteScript : NetworkBehaviour
 
 	private SpriteRenderer spriteRenderer;
 
+	public override void OnStartClient()
+	{
+		setSprite();
+	}
+
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -60,7 +65,11 @@ public class PlayerSpriteScript : NetworkBehaviour
 	private void OnSpriteIDChanged(int id)
 	{
 		spriteID = id;
+		setSprite();
+	}
 
+	private void setSprite()
+	{
 		spriteRenderer.sprite = fingerSprites[spriteID];
 	}
 }

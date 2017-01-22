@@ -40,6 +40,7 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 				{
 					spriteRenderer.color = Color.white;
 				}
+				else
 				{
 					spriteRenderer.color = e.keyScript.getKeyData().activeColor;
 				}
