@@ -30,6 +30,7 @@ public class LaserMesh : MonoBehaviour {
 	Vector3[] vertices;
 	Vector3[] normals;
 	Vector2[] uv;
+	Vector4[] tanget;
 	Vector3 anchor = new Vector3(0, 0, 10);
 	int[] tri;
 
@@ -50,6 +51,7 @@ public class LaserMesh : MonoBehaviour {
 		mesh = new Mesh ();
 		mf.mesh = mesh;
 
+		InitTangent ();
 		InitVertices ();
 		InitNormals ();
 		InitUvs ();
@@ -59,10 +61,11 @@ public class LaserMesh : MonoBehaviour {
 		mesh.triangles = tri;
 		mesh.normals = normals;
 		mesh.uv = uv;
+		mesh.tangents = tanget;
 	}
-
+		
 	void InitPositions () {
-		p = new Vector3[tiles + 1];
+		p = new Vector3[tiles + 3];
 	}
 
 	void InitVertices() {
@@ -74,13 +77,30 @@ public class LaserMesh : MonoBehaviour {
 
 	}
 
+	void InitTangent() {
+		tanget = new Vector4[numVerts];
+		for (int i = 0; i < numVerts; i+=2) {
+			float v = i / (float)(numVerts-2);
+			tanget [i] = new Vector4 (v, v, v, v);
+			tanget [i+1] = new Vector4 (v, v, v, v);
+		}
+	}
+
 	void InitUvs() {
 		uv = new Vector2[numVerts];
 		for (int i = 0; i < numVerts; i += 2) {
-			float v = i / (float)(numVerts-2);
+			//float v = i / (float)(numVerts-2);
 
-			uv[i] = new Vector2(0, v);
-			uv[i+1] = new Vector2(1, v);
+			if (i == 0) {
+				uv [i] = new Vector2 (0, 0);
+				uv [i + 1] = new Vector2 (1, 0);
+			} else if (i < numVerts - 2) {
+				uv [i] = new Vector2 (0, 0.5f);
+				uv [i + 1] = new Vector2 (1, 0.5f);
+			} else {
+				uv [i] = new Vector2 (0, 1);
+				uv [i + 1] = new Vector2 (1, 1);
+			}
 		}
 	}
 
@@ -99,17 +119,18 @@ public class LaserMesh : MonoBehaviour {
 		}
 	}
 	void UpdatePositions() {
-		
 		transform.position = anchor;
+		var direction = (end.position - begin.position)/(float)(tiles);
 
+		p [0] = begin.position - direction.normalized*halfWidth;
 
-		var direction = (end.position - begin.position)/(float)tiles;
 		for (int i = 0; i < tiles; ++i) {
 			
 			var pos = begin.position + direction*(float)i;
-			p [i] = pos;
+			p [i+1] = pos;
 		}
-		p [tiles] = end.position;
+		p [tiles+1] = end.position;
+		p [tiles+2] = end.position + direction.normalized*halfWidth;
 	}
 
 	void UpdateMaterials() {
@@ -147,9 +168,14 @@ public class LaserMesh : MonoBehaviour {
 
 		mesh.vertices = vertices;
 		mesh.normals = normals;
+		mesh.tangents = tanget;
 	}
 
 	void GenerateVerts(int i, Vector3 prev, Vector3 curr, Vector3 next){
+
+		float v = i / (float)(numVerts-2);
+		float scale = Mathf.Sin (0.1f + v*Mathf.PI*0.9f);
+
 		var prevDirection = curr - prev;
 		var nextDirection = next - curr;
 
@@ -160,6 +186,9 @@ public class LaserMesh : MonoBehaviour {
 
 		normals [i] = normal;
 		normals [i+1] = normal;
+
+		tanget [i] = new Vector4 (v, scale, 1, 1);
+		tanget [i+1] = new Vector4 (v, scale, 1, 1);
 			
 		normal *= halfWidth;
 

@@ -84,6 +84,8 @@ public class Enemy : NetworkBehaviour
 	{
 		if(!currentChord.notesInChord.Contains(n))
 		{
+            EventDispatcher.Dispatch(new LaserHitEvent(n));
+
 			currentChord.notesInChord.Add(n);
 			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
 			dying = hasKillerChord();
@@ -97,7 +99,9 @@ public class Enemy : NetworkBehaviour
 	{
 		if(currentChord.notesInChord.Contains(n))
 		{
-			currentChord.notesInChord.Remove(n);
+            EventDispatcher.Dispatch(new LaserStopHitEvent(n));
+
+            currentChord.notesInChord.Remove(n);
 			dying = hasKillerChord();
 
 			if(particles != null)

@@ -9,7 +9,8 @@ public class NetworkHUDMenu : MonoBehaviour
 {
 	public GameObject canvas;
 	public Text playerCountText;
-	public GameObject startGameLayout, startGameButt, serverButt, clientButt, broadButt, waitButt, waitingForHostGO;
+	public GameObject startGameLayout, startGameButt, serverButt, clientButt, 
+		broadButt, waitButt, waitingForHostGO, playerSpriteChangeGO;
 
 	private NetworkDiscovery networkDiscovery;
 	private NetworkManager networkManager;
@@ -21,7 +22,6 @@ public class NetworkHUDMenu : MonoBehaviour
 	private void Awake()
 	{
 		EventDispatcher.AddEventListener<GameStartedEvent>(GameStarted);
-		EventDispatcher.AddEventListener<GameRestartEvent>(GameRestart);
 		canvas.SetActive(true);
 		networkDiscovery = GetComponent<OverriddenNetworkDiscovery>();
 		networkManager = GetComponent<NetworkManager>();
@@ -100,12 +100,14 @@ public class NetworkHUDMenu : MonoBehaviour
 		startGameLayout.SetActive(false);
 		startGameButt.SetActive(false);
 		waitingForHostGO.SetActive(false);
+		playerSpriteChangeGO.SetActive(false);
 	}
 
-	private void startWaiting()
+	public void startWaiting()
 	{
 		broadButt.SetActive(false);
 		waitButt.SetActive(true);
+		playerSpriteChangeGO.SetActive(true);
 		displayPlayerCountOnly();
 	}
 
@@ -123,11 +125,6 @@ public class NetworkHUDMenu : MonoBehaviour
 		networkDiscovery.StartAsServer();
 
 		startBroadcasting();
-		startWaiting();
-	}
-
-	private void GameRestart(GameRestartEvent e)
-	{
 		startWaiting();
 	}
 
@@ -178,6 +175,7 @@ public class NetworkHUDMenu : MonoBehaviour
 		serverButt.SetActive(false);
 		clientButt.SetActive(false);
 		waitingForHostGO.SetActive(true);
+		playerSpriteChangeGO.SetActive(true);
 	}
 	
 	private void GameStarted(GameStartedEvent gameS)
@@ -189,6 +187,7 @@ public class NetworkHUDMenu : MonoBehaviour
 	{
 		OnConnect();
 		waitingForHostGO.SetActive(false);
+		playerSpriteChangeGO.SetActive(false);
 	}
 
 	public void displayStartGame()
