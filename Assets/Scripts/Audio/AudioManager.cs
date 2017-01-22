@@ -73,11 +73,11 @@ public class AudioManager : MonoBehaviour {
 
 	public void StartMusic()
 	{
-		//pool.playTrack(music, true, 0.35f);
+		pool.playTrack(music, true, 0.35f);
 	}
 
 	public void StopMusic()
 	{
-		//pool.stopTrack(music);
+		pool.stopTrack(music);
 	}
 }
