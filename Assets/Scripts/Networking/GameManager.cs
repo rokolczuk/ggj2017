@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
+        EventDispatcher.AddEventListener<EnemyCrashedEvent>(OnEnemyCrashed);
         EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
     }
 
@@ -36,6 +37,14 @@ public class GameManager : NetworkBehaviour
 
         gameOver = true;
         Debug.Log("GAME OVER BRAH");
+    }
+
+    private void OnEnemyCrashed(EnemyCrashedEvent e)
+    {
+        if (isServer)
+        {
+            EventDispatcher.Dispatch(new LifeLostEvent());
+        }
     }
 
     public void StartButtonClicked()
