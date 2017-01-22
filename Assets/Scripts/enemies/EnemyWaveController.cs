@@ -19,23 +19,41 @@ namespace AssemblyCSharp
 		public GameObject twoChordPrefab;
 		public GameObject threeChordPrefab;
 
+		public List<LevelData> waveData;
+		int currentLevel;
+
 		float currentTime;
 		int currentWave;
-		int nextDifficultyIncrease;
 		int totalDifficultyIncreases;
 
-		string chordFilename = "";
-		List<Chord> loadedChords;
-		int chordIndex = 0;
-	
+		const string oneChordFilename = "OneChord";
+		int oneChordIndex = 0;
+		const string twoChordFilename = "TwoChords";
+		int twoChordIndex = 0;
+		const string threeChordFilename = "ThreeChords";
+		int threeChordIndex = 0;
+		List<List<Chord>> loadedChords;	
 
 		void Awake(){
-			currentWave = 0;
-			nextDifficultyIncrease = currentWave + wavesBetweenDifficultyBump;
-			totalDifficultyIncreases = 0;
-			currentTime = timeBetweenWaves;
-			chordFilename = "TwoPlayer";
 			preloadChords ();
+			preloadLevelData ();
+			EventDispatcher.AddEventListener<GameRestartEvent> (OnGameRestart);
+			currentWave = 0;
+			oneChordIndex = 0;
+			twoChordIndex = 0;
+			threeChordIndex = 0;
+			currentLevel = 0;
+			currentTime = waveData [currentLevel].timeBetweenWaves;
+		}
+
+		private void OnGameRestart(GameRestartEvent eventData)
+		{
+			currentWave = 0;
+			oneChordIndex = 0;
+			twoChordIndex = 0;
+			threeChordIndex = 0;
+			currentLevel = 0;
+			currentTime = waveData [currentLevel].timeBetweenWaves;
 		}
 
 		Chord convertStringToChord(string chordString){
@@ -51,27 +69,83 @@ namespace AssemblyCSharp
 		}
 
 		void preloadChords(){
-			loadedChords = new List<Chord> ();
-			TextAsset asset = Resources.Load(chordFilename) as TextAsset;
+			loadedChords = new List<List<Chord>> ();
+			loadedChords.Add (loadChordList (oneChordFilename));
+			loadedChords.Add (loadChordList (twoChordFilename));
+			loadedChords.Add (loadChordList (threeChordFilename));
+		}
+
+		List<Chord> loadChordList(string file){
+			List<Chord> chordList = new List<Chord>();
+			TextAsset asset = Resources.Load(file) as TextAsset;
 			List<string> splitLines = asset.text.Split ('\n').ToList();
 			splitLines  = splitLines.Where(s => !string.IsNullOrEmpty(s)).ToList();
 			foreach(var line in splitLines){
 				var chord = convertStringToChord (line);
-				loadedChords.Add (chord);
+				chordList.Add (chord);
 			}
+			return chordList;
+		}
+
+		void preloadLevelData(){
+			waveData = new List<LevelData> ();
+			waveData.Add(new LevelData("Level2_waves"));
+			waveData.Add(new LevelData("Level2_waves"));
+			waveData.Add(new LevelData("Level3_waves"));
+			waveData.Add(new LevelData("Level4_waves"));
+			waveData.Add(new LevelData("Level5_waves"));
 		}
 
 		void Update(){
 			currentTime -= Time.deltaTime;
 		}
 
-		Chord getNextChordData(){
-			var c = loadedChords [chordIndex];
-			chordIndex++;
-			if (chordIndex >= loadedChords.Count) {
-				chordIndex = 0;
+		List<Chord> getListForChordType(EnemyTypes type){
+			switch (type) {
+			case EnemyTypes.ONE:
+				return loadedChords [0];
+			case EnemyTypes.TWO:
+				return loadedChords [1];
+			case EnemyTypes.THREE:
+				return loadedChords [2];
 			}
-			return c;
+
+			return null;
+		}
+
+		int getIndexForChordType(List<Chord> chordList, EnemyTypes type){
+			//increment the index if we need to otherwise set it to 0
+			int returnVal = 0;
+			switch (type) {
+			case EnemyTypes.ONE:
+				returnVal = oneChordIndex;
+				oneChordIndex++;
+				if (oneChordIndex >= chordList.Count) {
+					oneChordIndex = 0;
+				}
+				break;
+			case EnemyTypes.TWO:
+				returnVal = twoChordIndex;
+				twoChordIndex++;
+				if (twoChordIndex >= chordList.Count) {
+					twoChordIndex = 0;
+				}
+				break;
+			case EnemyTypes.THREE:
+				returnVal = threeChordIndex;
+				threeChordIndex++;
+				if (threeChordIndex >= chordList.Count) {
+					threeChordIndex = 0;
+				}
+				break;
+			}
+			return returnVal;
+		}
+
+		Chord newGetNextChordData(EnemyTypes type){
+			var chordList = getListForChordType (type);
+			var index = getIndexForChordType (chordList, type);
+			return chordList[index];
 		}
 
 		GameObject getPrefabForChord(Chord chord){
@@ -86,14 +160,10 @@ namespace AssemblyCSharp
 		}
 
 		void handleWaveParams(){
-			currentTime = timeBetweenWaves;
-			currentWave++;
-			if (currentWave > nextDifficultyIncrease) {
-				totalDifficultyIncreases++;
-				nextDifficultyIncrease = currentWave + wavesBetweenDifficultyBump;
-				if (totalDifficultyIncreases % difficultyBumpsBeforeEnemyAmountIncrease == 0) {
-					enemiesPerWave ++;
-				}
+			currentTime = waveData[currentLevel].timeBetweenWaves;
+			waveData [currentLevel].incrementWave();
+			if (waveData [currentLevel].isDone()) {
+				currentLevel++;
 			}
 		}
 			
@@ -105,7 +175,7 @@ namespace AssemblyCSharp
 			}
 			handleWaveParams ();
 			for (int i = 0; i < enemiesPerWave; i++) {
-				var chord = getNextChordData ();
+				var chord = newGetNextChordData (waveData[currentLevel].getNextEnemyType());
 				var prefab = getPrefabForChord (chord);
 				GameObject enemyGameObject = GameObject.Instantiate(prefab) as GameObject;
 				Enemy enemy = enemyGameObject.GetComponent<Enemy>();

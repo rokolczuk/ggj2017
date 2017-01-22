@@ -540,6 +540,31 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[1].enemyTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[2].enemyTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[3].enemyTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[4].enemyTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4260439659168172, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -571,6 +596,66 @@ Prefab:
     - target: {fileID: 4260439659168172, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[1].amountOfEnemiesSpawned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[1].timeBetweenWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[1].totalWaves
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[2].amountOfEnemiesSpawned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[2].timeBetweenWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[2].totalWaves
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[3].amountOfEnemiesSpawned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[3].timeBetweenWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[3].totalWaves
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[4].amountOfEnemiesSpawned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[4].timeBetweenWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
+        type: 2}
+      propertyPath: waveData.Array.data[4].totalWaves
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
