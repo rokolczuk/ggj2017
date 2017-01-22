@@ -20,11 +20,30 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
+		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnSelectedKeyChanged);
+
 		Cursor.visible = false;
 
 		Color color = Color.white;
 		color.a = 0.3f;
 
 		spriteRenderer.color = color;
+	}
+
+	private void OnSelectedKeyChanged(SelectedKeyChanged e)
+	{
+		if (hasAuthority)
+		{
+			if (e.playerScript.hasAuthority)
+			{
+				if (e.keyScript == null)
+				{
+					spriteRenderer.color = Color.white;
+				}
+				{
+					spriteRenderer.color = e.keyScript.getKeyData().activeColor;
+				}
+			}
+		}
 	}
 }
