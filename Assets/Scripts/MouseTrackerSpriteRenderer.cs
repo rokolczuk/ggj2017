@@ -16,6 +16,11 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 		spriteRenderer.color = color;
 	}
 
+	private void OnDestroy()
+	{
+		Cursor.visible = true;
+	}
+
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
