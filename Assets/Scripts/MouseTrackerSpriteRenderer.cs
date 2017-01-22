@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 public class MouseTrackerSpriteRenderer : NetworkBehaviour
 {
@@ -41,7 +42,15 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 					spriteRenderer.color = Color.white;
 				}
 				{
+					try 
+					{
 					spriteRenderer.color = e.keyScript.getKeyData().activeColor;
+					}
+
+					catch (Exception r)
+					{
+						Debug.Log("oops");
+					}
 				}
 			}
 		}

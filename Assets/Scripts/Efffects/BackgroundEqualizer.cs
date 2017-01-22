@@ -35,7 +35,14 @@ public class BackgroundEqualizer : MonoBehaviour {
 
 		int scale = spectrum.Length / buckets.Length;
 
+
 		AudioListener.GetSpectrumData( spectrum, 0, FFTWindow.Hamming );
+
+		if(AudioListener.pause)
+
+		{
+			Debug.Log("paused");
+		}
 
 		for(int i = 0; i < buckets.Length; i++)
 		{
