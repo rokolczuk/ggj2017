@@ -6,18 +6,22 @@ public class GameManager : NetworkBehaviour
 {
 	[SerializeField]
 	private AudioManager audioManager;
-	
+
+    [SyncVar]
+    public int LivesLeft = 3;
+
+    [SyncVar]
+    private bool gameOver = false;
+
 	PrefabManager prefabManager;
 
     bool gameStarted = false;
-    bool gameOver = false;
 
 	public void Awake()
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
         EventDispatcher.AddEventListener<EnemyCrashedEvent>(OnEnemyCrashed);
-        EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
     }
 
     private void OnServerAddedPlayer(ServerAddedPlayer eventData)
@@ -30,20 +34,18 @@ public class GameManager : NetworkBehaviour
 		
 	}
 
-    private void OnGameOver(GameOverEvent e)
-    {
-        if (gameOver)
-            return;
-
-        gameOver = true;
-        Debug.Log("GAME OVER BRAH");
-    }
-
     private void OnEnemyCrashed(EnemyCrashedEvent e)
     {
         if (isServer)
         {
-            EventDispatcher.Dispatch(new LifeLostEvent());
+            if (!gameOver)
+            {
+                LivesLeft--;
+                if (LivesLeft <= 0)
+                {
+                    gameOver = true;
+                }
+            }
         }
     }
 
