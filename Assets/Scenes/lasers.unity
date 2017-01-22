@@ -226,7 +226,7 @@ Prefab:
         type: 2}
       propertyPath: end
       value: 
-      objectReference: {fileID: 1584775083}
+      objectReference: {fileID: 0}
     - target: {fileID: 114715611611121436, guid: 654430bbe94214ff5bd0279f38de0ad0,
         type: 2}
       propertyPath: begin
@@ -236,7 +236,7 @@ Prefab:
         type: 2}
       propertyPath: end
       value: 
-      objectReference: {fileID: 1584775083}
+      objectReference: {fileID: 0}
     - target: {fileID: 4463711590116512, guid: 654430bbe94214ff5bd0279f38de0ad0, type: 2}
       propertyPath: m_RootOrder
       value: 2
@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1584775084}
   - component: {fileID: 1584775085}
   - component: {fileID: 1584775086}
+  - component: {fileID: 1584775087}
   m_Layer: 0
   m_Name: End
   m_TagString: Untagged
@@ -342,11 +343,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1584775082}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47ec3b9eaa3214125bae95947f40aae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 300
 --- !u!114 &1584775086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,3 +360,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0704852e7ad1748e78d973c23f2ac259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1584775087
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1584775082}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 40
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

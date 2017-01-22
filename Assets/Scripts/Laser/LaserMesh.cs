@@ -89,7 +89,7 @@ public class LaserMesh : MonoBehaviour {
 	void InitUvs() {
 		uv = new Vector2[numVerts];
 		for (int i = 0; i < numVerts; i += 2) {
-			float v = i / (float)(numVerts-2);
+			//float v = i / (float)(numVerts-2);
 
 			if (i == 0) {
 				uv [i] = new Vector2 (0, 0);
