@@ -10,6 +10,7 @@ public class AudioPool : MonoBehaviour {
 	const string defaultAudioName = "Empty Audio Source";
 
 	List<GameObject> pool;
+
 	List<AudioTimer> playingSounds;
 
 	// Use this for initialization
@@ -72,7 +73,7 @@ public class AudioPool : MonoBehaviour {
 			if (source.clip == clip){
 				source.Stop ();
 				playingSounds.Remove (playingSounds[i]);
-				break;
+				i--;
 			}
 		}
 	}
