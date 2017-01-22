@@ -42,6 +42,8 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 		Color color = Color.white;
 		color.a = 0.3f;
 
+		Cursor.visible = false;
+
 		spriteRenderer.color = color;
 	}
 
