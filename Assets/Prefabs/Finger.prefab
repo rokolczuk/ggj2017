@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114902192264449300}
   - component: {fileID: 61614756257759914}
   - component: {fileID: 114821715808173506}
+  - component: {fileID: 114324917898023264}
   m_Layer: 0
   m_Name: Finger
   m_TagString: Player
@@ -96,8 +97,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643122911128828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
-  m_LocalScale: {x: 4.9500003, y: 10.520627, z: 6}
+  m_LocalPosition: {x: 0.15, y: -1.25, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4818655218298832}
   m_RootOrder: 0
@@ -116,6 +117,26 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &114324917898023264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141163369620932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76ca41c70dd4e543b8fd00651d536a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fingerSprites:
+  - {fileID: 21300000, guid: 97ab3422b4f93074f81fbecaaa8c9545, type: 3}
+  - {fileID: 21300000, guid: fabfc5aa37d66ea44bdc590380698839, type: 3}
+  - {fileID: 21300000, guid: 0439b7548a1659541995847ffbe8ccf2, type: 3}
+  - {fileID: 21300000, guid: ce8c1dcc893cc044a9d815ffca3c49ca, type: 3}
+  - {fileID: 21300000, guid: 8fd784ca2dd955c418b650158f295340, type: 3}
+  - {fileID: 21300000, guid: 20cad292bb9cf7c449559642abdaa48b, type: 3}
+  - {fileID: 21300000, guid: 83be919e3cf72d04a9f6a9806ac516a3, type: 3}
+  - {fileID: 21300000, guid: 559782758ab4ea0488e8a1649e3e81ae, type: 3}
 --- !u!114 &114465664076025428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,14 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f004baabddc02a48ab7a657afed0a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePrefab: {fileID: 1708556413699632, guid: f487f7c6d849744e1a85c14d911a9910,
-    type: 2}
+  Mouse: {fileID: 0}
+  MouseId: 0
   MoveTime: 0.1
   PlayerKeyPositionOffset: {x: -0.15, y: 1, z: -5}
   keyRayCast: {fileID: 1254262917968896}
   IsPressed: 0
-  MouseX: 0
-  MouseY: 0
 --- !u!212 &212985700449043222
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -218,7 +237,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.5147059, b: 0.5147059, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 97ab3422b4f93074f81fbecaaa8c9545, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
