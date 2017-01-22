@@ -16,7 +16,8 @@ public class ScoreManager : MonoBehaviour {
     {
         scoreText = GetComponent<Text>();
         EventDispatcher.AddEventListener<EnemyDiedEvent>(OnEnemyDied);
-    }
+        EventDispatcher.AddEventListener<GameRestartEvent>(OnGameRestart);
+	}
 
     void Update()
     {
@@ -28,6 +29,12 @@ public class ScoreManager : MonoBehaviour {
             scoreText.text = currentScore.ToString();
         }
     }
+	
+	private void OnGameRestart(GameRestartEvent e)
+	{
+		currentScore = 0;
+		actualScore = 0;
+	}
 
     private void OnEnemyDied(EnemyDiedEvent e)
     {
