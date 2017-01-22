@@ -5,31 +5,6 @@ using System.Linq;
 using AssemblyCSharp;
 using System;
 
-public enum TrackName {
-	A1_Synth,
-	A2_Synth,
-	B1_Synth,
-	B2_Synth,
-	C1_Synth,
-	C2_Synth,
-	D1_Synth,
-	D2_Synth,
-	E1_Synth,
-	E2_Synth,
-	F1_Synth,
-	F2_Synth,
-	G1_Synth,
-	G2_Synth,
-	A2_Piano,
-	B2_Piano,
-	C2_Piano,
-	D2_Piano,
-	E2_Piano,
-	F2_Piano,
-	G2_Piano,
-	C0_Bass
-}
-
 public class AudioPool : MonoBehaviour {
 	public int poolSize = 20;
 	const string defaultAudioName = "Empty Audio Source";
