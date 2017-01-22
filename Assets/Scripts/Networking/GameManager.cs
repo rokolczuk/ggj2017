@@ -44,6 +44,7 @@ public class GameManager : NetworkBehaviour
 
     private void OnEnemyCrashed(EnemyCrashedEvent e)
     {
+        EventDispatcher.Dispatch(new CameraShakeEvent());
         if (isServer)
         {
             if (!gameOver)
@@ -94,8 +95,6 @@ public class GameManager : NetworkBehaviour
 		gameOver = false;
 		gameStarted = false;
 
-		audioManager.SpeedUpMusic();
-
         gameOverText.SetActive(false);
 		restartButt.SetActive(false);
 	}
@@ -105,7 +104,6 @@ public class GameManager : NetworkBehaviour
         if (!gameStarted)
         {
             gameStarted = true;
-			audioManager.StartMusic();
         }
     }
 
@@ -113,6 +111,9 @@ public class GameManager : NetworkBehaviour
 	{
 		gameStarted = started;
 		if (gameStarted)
+		{
 			EventDispatcher.Dispatch(new GameStartedEvent());
+			audioManager.StartMusic();
+		}
 	}
 }

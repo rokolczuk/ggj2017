@@ -8,6 +8,7 @@ namespace Assets.Scripts.Util
 {
     public class ChordConsole : MonoBehaviour
     {
+        public bool Show;
         Dictionary<string, string> lines = new Dictionary<string, string>();
 
         public void Set(string key, string value)
@@ -22,6 +23,9 @@ namespace Assets.Scripts.Util
 
         public void OnGUI()
         {
+            if (!Show)
+                return;
+
             int y = 0;
             const int LINEHEIGHT = 20;
             foreach (var item in lines)

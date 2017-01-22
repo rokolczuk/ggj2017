@@ -26,3 +26,7 @@ public class GameRestartEvent
 {
 	
 }
+
+public class CameraShakeEvent
+{
+}
