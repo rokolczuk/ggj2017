@@ -832,92 +832,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 377fbe32d41404e0ca9258e4abbe816e,
-        type: 3}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5d9dbbddaae3d40bf9a7df9011116716, type: 2}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212281752606319426, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 0.072
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[1]
-      value: 0.08797142
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[2]
-      value: 0.04479997
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[3]
-      value: 0.067911625
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[4]
-      value: 0.09318189
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[5]
-      value: 0.075584956
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[6]
-      value: 0.059617482
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: buckets.Array.data[7]
-      value: 0.017210623
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: minLerpValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915608308744060, guid: adb82046c97454c839068cc7fb4dd036,
-        type: 2}
-      propertyPath: maxLerpValue
-      value: 0.75
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adb82046c97454c839068cc7fb4dd036, type: 2}
   m_IsPrefabParent: 0
@@ -950,6 +864,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 8300000, guid: 2583cdba07dbb4bac907eb3b5bfbee93, type: 3}
+  musicSlowMoPitch: 0.15
+  musicSlowMoDecreaseSpeed: 0.01
 --- !u!114 &1915456618
 MonoBehaviour:
   m_ObjectHideFlags: 0
