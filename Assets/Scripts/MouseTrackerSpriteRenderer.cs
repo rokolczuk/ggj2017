@@ -20,6 +20,7 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 	private void OnDestroy()
 	{
 		Cursor.visible = true;
+		EventDispatcher.RemoveEventListener<SelectedKeyChanged>(OnSelectedKeyChanged);
 	}
 
 	private void OnGameStart(GameStartedEvent e)
