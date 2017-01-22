@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minEnemySpawnPositionX: -12
   maxEnemySpawnPositionX: 12
-  spawnEnemyPositionY: 12
+  spawnEnemyMinPositionY: 12
+  spawnEnemyMaxPositionY: 14
   enemyDiePositionY: -6
   enemiesFactory: {fileID: 114335617948903610}
