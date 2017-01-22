@@ -1,0 +1,12 @@
+enemies_per_wave:1
+time_between_waves:3
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1

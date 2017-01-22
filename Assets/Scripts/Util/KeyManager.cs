@@ -9,6 +9,9 @@ public class KeyManager : MonoBehaviour {
 	[SerializeField]
 	private List<KeyNoteData> KeyNotesConfiguration;
 
+	[SerializeField]
+	private GameObject blackKeys;
+
 	public KeyNoteData GetKeyData(KeyNote note)
 	{
 		for(int i = 0; i < KeyNotesConfiguration.Count; i++)
@@ -28,5 +31,17 @@ public class KeyManager : MonoBehaviour {
     void Awake()
     {
         instance = this;
+		blackKeys.SetActive(false);
+		EventDispatcher.AddEventListener<InitializeGameEvent>(OnGameStartedEvent);
     }
+
+	void OnGameStartedEvent(InitializeGameEvent e)
+	{
+		blackKeys.SetActive(true);
+	}
+
+	private void OnDestroy()
+	{
+		EventDispatcher.RemoveEventListener<InitializeGameEvent>(OnGameStartedEvent);
+	}
 }

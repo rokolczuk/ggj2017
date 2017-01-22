@@ -126,6 +126,8 @@ public class NetworkHUDMenu : MonoBehaviour
 
 		startBroadcasting();
 		startWaiting();
+
+		EventDispatcher.Dispatch<InitializeGameEvent>(new InitializeGameEvent());
 	}
 
 	public string LocalIPAddress()
@@ -150,6 +152,8 @@ public class NetworkHUDMenu : MonoBehaviour
 		networkDiscovery.StartAsClient();
 
 		startBroadcasting();
+
+		EventDispatcher.Dispatch<InitializeGameEvent>(new InitializeGameEvent());
 	}
 
 	public void StopSearching()
