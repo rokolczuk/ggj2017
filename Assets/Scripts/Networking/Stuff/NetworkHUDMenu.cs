@@ -9,7 +9,7 @@ public class NetworkHUDMenu : MonoBehaviour
 {
 	public GameObject canvas;
 	public Text playerCountText;
-	public GameObject startGameLayout, startGameButt, serverButt, clientButt, broadButt, waitButt;
+	public GameObject startGameLayout, startGameButt, serverButt, clientButt, broadButt, waitButt, waitingForHostGO;
 
 	private NetworkDiscovery networkDiscovery;
 	private NetworkManager networkManager;
@@ -20,7 +20,7 @@ public class NetworkHUDMenu : MonoBehaviour
 	
 	private void Awake()
 	{
-		EventDispatcher.AddEventListener<GameStartedEvent>(OnConnect);
+		EventDispatcher.AddEventListener<GameStartedEvent>(GameStarted);
 		canvas.SetActive(true);
 		networkDiscovery = GetComponent<OverriddenNetworkDiscovery>();
 		networkManager = GetComponent<NetworkManager>();
@@ -57,10 +57,10 @@ public class NetworkHUDMenu : MonoBehaviour
 		}
 #endif
 
+		var players = FindObjectsOfType<PlayerScript>();
+
 		if (startGameLayout.activeSelf)
 		{
-			var players = FindObjectsOfType<PlayerScript>();
-
 			updatePlayerCount(players.Length);
 
 			if (players.Length >= minPlayerCount)
@@ -98,6 +98,7 @@ public class NetworkHUDMenu : MonoBehaviour
 		waitButt.SetActive(false);
 		startGameLayout.SetActive(false);
 		startGameButt.SetActive(false);
+		waitingForHostGO.SetActive(false);
 	}
 
 	private void startWaiting()
@@ -163,18 +164,25 @@ public class NetworkHUDMenu : MonoBehaviour
 		
 		stopBroadcasting();
 	}
-
-	public void OnConnect(GameStartedEvent gameS)
-	{
-		OnConnect();
-	}
-
+	
 	public void OnConnect()
 	{
 		StopSearching();
 
 		serverButt.SetActive(false);
 		clientButt.SetActive(false);
+		waitingForHostGO.SetActive(true);
+	}
+	
+	private void GameStarted(GameStartedEvent gameS)
+	{
+		GameStarted();
+	}
+
+	public void GameStarted()
+	{
+		OnConnect();
+		waitingForHostGO.SetActive(false);
 	}
 
 	public void displayStartGame()

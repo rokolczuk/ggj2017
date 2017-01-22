@@ -9,6 +9,7 @@ public class GameManager : NetworkBehaviour
 	
 	PrefabManager prefabManager;
 
+	[SyncVar (hook = "OnGameStartedChanged")]
     bool gameStarted = false;
     bool gameOver = false;
 
@@ -53,7 +54,13 @@ public class GameManager : NetworkBehaviour
         {
             gameStarted = true;
 			//audioManager.StartMusic();
-            EventDispatcher.Dispatch(new GameStartedEvent());
         }
     }
+
+	private void OnGameStartedChanged(bool started)
+	{
+		gameStarted = started;
+		if (gameStarted)
+			EventDispatcher.Dispatch(new GameStartedEvent());
+	}
 }
