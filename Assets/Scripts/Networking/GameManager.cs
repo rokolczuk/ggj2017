@@ -73,6 +73,7 @@ public class GameManager : NetworkBehaviour
 	{
 		Time.timeScale = 0;
 
+		audioManager.SlowDownMusic();
 		gameOverText.SetActive(true);
 
 		if (isServer)
@@ -93,6 +94,8 @@ public class GameManager : NetworkBehaviour
 		LivesLeft = 3;
 		gameOver = false;
 		gameStarted = false;
+
+		audioManager.SpeedUpMusic();
 
         gameOverText.SetActive(false);
 		restartButt.SetActive(false);

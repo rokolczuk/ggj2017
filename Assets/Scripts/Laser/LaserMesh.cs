@@ -12,8 +12,7 @@ public class LaserMesh : MonoBehaviour {
 	public float offset;
 	public Color color;
 
-	Transform begin;
-	Transform end;
+	List<Transform> controlPoints = new List<Transform>();
 
 	MaterialPropertyBlock material;
 	MeshRenderer meshRenderer;
@@ -34,9 +33,8 @@ public class LaserMesh : MonoBehaviour {
 	Vector3 anchor = new Vector3(0, 0, 10);
 	int[] tri;
 
-	public void SetBeginEnd(Transform begin, Transform end){
-		this.begin = begin;
-		this.end = end;
+	public void SetControlPoints(List<Transform> controlPoints){
+		this.controlPoints = controlPoints;
 	}
 
 	void Awake() {		
@@ -118,19 +116,44 @@ public class LaserMesh : MonoBehaviour {
 			tri [i+5] = 2 * n + 1;
 		}
 	}
+
+	Vector3 GetBeginDirection(){
+		return controlPoints [controlPoints.Count-1].position - controlPoints [0].position;
+	}
+
+	Vector3 GetEndDirection(){
+		
+		return controlPoints [controlPoints.Count-1].position - controlPoints [0].position;
+	}
+
+	Vector3 GetBegin(){
+		return controlPoints [0].position;
+	}
+
+	Vector3 GetEnd() {
+		return controlPoints [controlPoints.Count-1].position;
+	}
+
+	Vector3 GetPoint(float t){		
+		return Vector3.Lerp (controlPoints [0].position, controlPoints [controlPoints.Count - 1].position, t);
+	}
+
 	void UpdatePositions() {
 		transform.position = anchor;
-		var direction = (end.position - begin.position)/(float)(tiles);
 
-		p [0] = begin.position - direction.normalized*halfWidth;
+		//var direction = (end.position - begin.position)/(float)(tiles);
+		var direction = GetBeginDirection().normalized;
 
+		p [0] = GetBegin() - direction*halfWidth;
+
+		Debug.Log ("Root:" + GetBegin ());
 		for (int i = 0; i < tiles; ++i) {
 			
-			var pos = begin.position + direction*(float)i;
+			var pos = GetPoint (i / (float)tiles);
 			p [i+1] = pos;
 		}
-		p [tiles+1] = end.position;
-		p [tiles+2] = end.position + direction.normalized*halfWidth;
+		p [tiles+1] = GetEnd();
+		p [tiles+2] = GetEnd() + direction.normalized*halfWidth;
 	}
 
 	void UpdateMaterials() {
@@ -147,12 +170,9 @@ public class LaserMesh : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-
-        if (begin == null)
-            return;
-
-        if (end == null)
-            return;
+		if (controlPoints.Count == 0)
+			return;
+        
 
 		UpdateMaterials ();
 		UpdatePositions ();
