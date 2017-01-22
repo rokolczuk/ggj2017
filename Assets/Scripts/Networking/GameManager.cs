@@ -71,8 +71,6 @@ public class GameManager : NetworkBehaviour
 
 	private void OnGameOver()
 	{
-		Time.timeScale = 0;
-
 		audioManager.SlowDownMusic();
 		gameOverText.SetActive(true);
 
@@ -88,14 +86,11 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	private void RpcRestart()
 	{
-		Time.timeScale = 1;
 
 		EventDispatcher.Dispatch(new GameRestartEvent());
 		LivesLeft = 3;
 		gameOver = false;
 		gameStarted = false;
-
-		audioManager.SpeedUpMusic();
 
         gameOverText.SetActive(false);
 		restartButt.SetActive(false);
@@ -106,7 +101,6 @@ public class GameManager : NetworkBehaviour
         if (!gameStarted)
         {
             gameStarted = true;
-			audioManager.StartMusic();
         }
     }
 
@@ -114,6 +108,9 @@ public class GameManager : NetworkBehaviour
 	{
 		gameStarted = started;
 		if (gameStarted)
+		{
 			EventDispatcher.Dispatch(new GameStartedEvent());
+			audioManager.StartMusic();
+		}
 	}
 }
