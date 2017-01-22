@@ -22,16 +22,28 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 		Cursor.visible = true;
 	}
 
+	private void OnGameStart(GameStartedEvent e)
+	{
+		Cursor.visible = false;
+	}
+
+	private void OnGameOver(GameOverEvent e)
+	{
+		Cursor.visible = true;
+	}
+
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnSelectedKeyChanged);
-
-		Cursor.visible = false;
+		EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStart);
+		EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
 
 		Color color = Color.white;
 		color.a = 0.3f;
+
+		Cursor.visible = false;
 
 		spriteRenderer.color = color;
 	}

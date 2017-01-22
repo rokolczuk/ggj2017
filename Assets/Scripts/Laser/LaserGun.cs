@@ -21,7 +21,6 @@ public class LaserGun : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-		Debug.Log ("Setting Target...");
         foreach (LaserMesh laser in lasers)
         {
             laser.SetBeginEnd(transform, target);
