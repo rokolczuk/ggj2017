@@ -5,7 +5,7 @@ public class AudioGun : MonoBehaviour
 {
     private KeyNoteData currentNote;
 
-    private AudioManager audioManager;
+   
     private Enemy enemy;
 	private LaserGun laserGun;
 
@@ -15,7 +15,7 @@ public class AudioGun : MonoBehaviour
     private void Awake()
     {
 		laserGun = GetComponentInChildren<LaserGun> (true);
-        audioManager = FindObjectOfType<AudioManager>();
+     
         active = false;
 
 		laserGun.gameObject.SetActive(false);
@@ -27,17 +27,14 @@ public class AudioGun : MonoBehaviour
             return;
 
         if (active && activator != playerScript)
-        {
             EventDispatcher.Dispatch(new LaserStopEvent(currentNote.keyNote));
-            audioManager.stopLaser(currentNote.synthSound);
-        }
 
         this.activator = playerScript;
         this.active = true;
         this.currentNote = data;
 
         EventDispatcher.Dispatch(new LaserStartEvent(currentNote.keyNote, playerScript.hasAuthority));
-        audioManager.playLaser(currentNote.synthSound, playerScript.hasAuthority ? SfxOrigin.LocalPlayer : SfxOrigin.RemotePlayer);
+
 		laserGun.gameObject.SetActive(true);
         laserGun.SetTarget(playerScript.Mouse.transform);
     }
@@ -49,7 +46,7 @@ public class AudioGun : MonoBehaviour
 
         active = false;
         EventDispatcher.Dispatch(new LaserStopEvent(currentNote.keyNote));
-        audioManager.stopLaser(currentNote.synthSound);
+
 		laserGun.gameObject.SetActive (false);
 
         if (enemy != null)
