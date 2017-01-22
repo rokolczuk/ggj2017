@@ -17,6 +17,7 @@ namespace AssemblyCSharp
 
 		public GameObject oneChordPrefab;
 		public GameObject twoChordPrefab;
+		public GameObject threeChordPrefab;
 
 		float currentTime;
 		int currentWave;
@@ -80,8 +81,7 @@ namespace AssemblyCSharp
 			case 2:
 				return twoChordPrefab;
 			default:
-				Debug.Assert (false, "Invalid chord count");
-				return null;
+				return threeChordPrefab;
 			}
 		}
 

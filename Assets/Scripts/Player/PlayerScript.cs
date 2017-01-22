@@ -44,7 +44,7 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public bool IsPressed;
-   
+	
     void Awake()
 	{
     }

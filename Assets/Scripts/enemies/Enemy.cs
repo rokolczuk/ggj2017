@@ -24,6 +24,9 @@ public class Enemy : NetworkBehaviour
 	[SerializeField]
 	private Animation deathAnimation;
 
+    [SerializeField]
+    private float DeathBoundary;
+
 	[SerializeField]
 	protected List<SpriteRenderer> enemyMaterialsSprites = new List<SpriteRenderer>();
 
@@ -90,24 +93,6 @@ public class Enemy : NetworkBehaviour
 		}
 	}
 
-	public void clean()
-	{
-		cleanGunTransform();
-	}
-
-	private void OnDestroy()
-	{
-		cleanGunTransform();
-	}
-
-	private void cleanGunTransform()
-	{
-		//if (trackingGun != null)
-		//{
-		//	trackingGun.clearTransform();
-		//}
-	}
-
 	public void RemoveActiveNote(KeyNote n)
 	{
 		if(currentChord.notesInChord.Contains(n))
@@ -129,8 +114,11 @@ public class Enemy : NetworkBehaviour
 
 	private void Update()
 	{
-		transform.position += speedVector;
+		transform.position += speedVector * Time.deltaTime;
 
+        CheckIfHitPlayers();
+        if (!enabled)
+            return;
 
 		if(dying)
 		{
@@ -142,8 +130,8 @@ public class Enemy : NetworkBehaviour
 				enemyMaterials[i].SetFloat("_Whiteness", dyingProgress); 
 			}
 
-			var em = particles.emission;
-			em.rateOverTime = dyingProgress * maxParticleEmission;
+            var em = particles.emission;
+            em.rateOverTime = dyingProgress * maxParticleEmission;
 
 			if(dyingTime >= timeToKill)
 			{
@@ -168,7 +156,28 @@ public class Enemy : NetworkBehaviour
 		}
 	}
 
-	public void OnDeathAnimationCompleted()
+    private void CheckIfHitPlayers()
+    {
+        if (transform.position.y < DeathBoundary)
+        {
+            dead = true;
+            deathAnimationPlaying = true;
+            deathAnimation.Play();
+
+            GameObject.FindObjectOfType<AudioManager>().PlayEffect(dieSoundEffect);
+            EventDispatcher.Dispatch<EnemyCrashedEvent>(new EnemyCrashedEvent());
+
+            particles.transform.SetParent(transform.parent, true);
+            var em = particles.emission;
+            em.rateOverTime = 0;
+
+            EventDispatcher.Dispatch(new ParticlesDetachedEvent(particles));
+            particles = null;
+            enabled = false;
+        }
+    }
+
+    public void OnDeathAnimationCompleted()
 	{
 		deathAnimationPlaying = false;
 
