@@ -81,7 +81,9 @@ namespace AssemblyCSharp
 		List<Chord> loadChordList(string file){
 			List<Chord> chordList = new List<Chord>();
 			TextAsset asset = Resources.Load(file) as TextAsset;
-			List<string> splitLines = asset.text.Split ('\n').ToList();
+            string text = asset.text;
+            text = text.Trim(new char[] { '\r' });
+			List<string> splitLines = text.Split ('\n').ToList();
 			splitLines  = splitLines.Where(s => !string.IsNullOrEmpty(s)).ToList();
 			foreach(var line in splitLines){
 				var chord = convertStringToChord (line);

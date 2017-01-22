@@ -106,7 +106,7 @@ public class GameManager : NetworkBehaviour
         if (!gameStarted)
         {
             gameStarted = true;
-			audioManager.StartMusic();
+			
         }
     }
 
