@@ -15,7 +15,15 @@ public class AudioManager : MonoBehaviour {
 	[SerializeField]
 	private AudioClip music;
 
+	[SerializeField]
+	private float musicSlowMoPitch = 0.15f;
+
+	[SerializeField]
+	private float musicSlowMoDecreaseSpeed = 0.01f;
+
 	AudioPool pool;
+
+	AudioSource musicAudioSource;
 
 	private List<AudioClip> activeSounds = new List<AudioClip>();
 
@@ -73,11 +81,43 @@ public class AudioManager : MonoBehaviour {
 
 	public void StartMusic()
 	{
-		pool.playTrack(music, true, 0.35f);
+		musicAudioSource = pool.playTrack(music, true, 0.35f);
 	}
 
 	public void StopMusic()
 	{
 		pool.stopTrack(music);
+	}
+
+	public void SlowDownMusic()
+	{
+		StartCoroutine(InternalSlowDownMusic());
+
+	}
+
+	public void SpeedUpMusic()
+	{
+		StartCoroutine(InternalSpeedUpMusic());
+
+	}
+
+	private IEnumerator InternalSlowDownMusic()
+	{
+		while(musicAudioSource.pitch > musicSlowMoPitch)
+		{
+			musicAudioSource.pitch -= musicSlowMoDecreaseSpeed;
+			yield return new WaitForEndOfFrame();
+		}
+	}
+
+	private IEnumerator InternalSpeedUpMusic()
+	{
+		while(musicAudioSource.pitch < 1)
+		{
+			musicAudioSource.pitch += musicSlowMoDecreaseSpeed;
+			yield return new WaitForEndOfFrame();
+		}
+
+		musicAudioSource.pitch = 1f;
 	}
 }
