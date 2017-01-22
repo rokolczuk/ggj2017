@@ -117,6 +117,8 @@ public class Enemy : NetworkBehaviour
 		transform.position += speedVector * Time.deltaTime;
 
         CheckIfHitPlayers();
+        if (!enabled)
+            return;
 
 		if(dying)
 		{
