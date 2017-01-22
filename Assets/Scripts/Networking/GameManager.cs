@@ -101,7 +101,6 @@ public class GameManager : NetworkBehaviour
         if (!gameStarted)
         {
             gameStarted = true;
-
         }
     }
 

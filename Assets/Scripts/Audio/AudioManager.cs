@@ -27,11 +27,21 @@ public class AudioManager : MonoBehaviour {
 
 	private List<AudioClip> activeSounds = new List<AudioClip>();
 
+    void Awake()
+    {
+        EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
+    }
+
 	// Use this for initialization
 	void Start () {
 		pool = FindObjectOfType<AudioPool> ();
 	}
-		
+
+    private void OnGameStarted(GameStartedEvent e)
+    {
+        StartMusic();
+    }
+
     public void setVolume(AudioClip clip, float volume)
     {
         if (activeSounds.Contains(clip))
