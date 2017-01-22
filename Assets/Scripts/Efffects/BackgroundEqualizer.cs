@@ -6,8 +6,6 @@ using UnityEngine;
 public class BackgroundEqualizer : MonoBehaviour {
 
 	private float[] spectrum = new float[256];
-
-	[SerializeField]
 	private float[] buckets = new float[8];
 
 	[SerializeField]
@@ -25,17 +23,54 @@ public class BackgroundEqualizer : MonoBehaviour {
 	[SerializeField]
 	private float bucketValueMultiplier;
 
+	private bool gameStarted;
 
-	void Start () {
-		
+	private void Start()
+	{
+		SetAlpha(0f);
+		EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
+		EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
+		EventDispatcher.AddEventListener<GameRestartEvent>(OnGameRestarted);
 	}
-	
-	// Update is called once per frame
+
+	private void OnDestroy()
+	{
+		EventDispatcher.RemoveEventListener<GameStartedEvent>(OnGameStarted);
+		EventDispatcher.RemoveEventListener<GameOverEvent>(OnGameOver);
+		EventDispatcher.RemoveEventListener<GameRestartEvent>(OnGameRestarted);
+	}
+	private void OnGameStarted(GameStartedEvent e)
+	{
+		gameStarted = true;
+	}
+
+	private void OnGameOver(GameOverEvent e)
+	{
+		gameStarted = false;
+	}
+
+	void OnGameRestarted(GameRestartEvent e)
+	{
+		gameStarted = true;
+	}
+
 	void Update () {
+
+		if(!gameStarted)
+		{
+			return;
+		}
 
 		int scale = spectrum.Length / buckets.Length;
 
+
 		AudioListener.GetSpectrumData( spectrum, 0, FFTWindow.Hamming );
+
+		if(AudioListener.pause)
+
+		{
+			Debug.Log("paused");
+		}
 
 		for(int i = 0; i < buckets.Length; i++)
 		{
@@ -55,7 +90,16 @@ public class BackgroundEqualizer : MonoBehaviour {
 		{
 			buckets[i] /= maxBucket;
 		}
+			
+		SetAlpha(Mathf.Max(minLerpValue, buckets[bucketIndex] * bucketValueMultiplier));
 
-		backgroundSprite.color = Color.Lerp(Color.black, Color.white, Mathf.Min(maxLerpValue, Mathf.Max(minLerpValue, buckets[bucketIndex] * bucketValueMultiplier)));
+	}
+
+	private void SetAlpha(float alpha)
+	{
+		Color c = backgroundSprite.color ;
+		c.a = alpha;
+		backgroundSprite.color = c;
+
 	}
 }

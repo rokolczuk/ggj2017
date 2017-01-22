@@ -55,6 +55,8 @@ public class LaserState
     public bool Active; // being played
     public bool IsLocal; // played by local player? only valid if Active == true
     public bool HittingEnemy;
+
+    public AudioClip CurrentActiveClip;
 }
 
 public class LaserAudioManager : MonoBehaviour
@@ -63,10 +65,12 @@ public class LaserAudioManager : MonoBehaviour
     List<LaserState> keyStates;
 
     ChordConsole console;
+    AudioManager audioManager;
 
     void Awake()
     {
         console = FindObjectOfType<ChordConsole>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Start()
@@ -99,16 +103,74 @@ public class LaserAudioManager : MonoBehaviour
         }
     }
 
+    void UpdateNoteSfx(KeyNote note)
+    {
+        print(note);
+
+        const float FULL_VOLUME = 1;
+        const float MED_VOLUME = 0.3f;
+        const float LOW_VOLUME = 0.13f;
+
+        var state = keyStates[(int)note];
+        var data = Keys.FirstOrDefault(k => k.keyNote == note);
+
+        if (state.Active)
+        {
+            // hit target
+            if (state.HittingEnemy)
+            {
+                playLaserWithVolume(FULL_VOLUME, note);
+            }
+
+            // miss target local player
+            if (!state.HittingEnemy && state.IsLocal)
+            {
+                playLaserWithVolume(MED_VOLUME, note);
+            }
+
+            // miss target remote player
+            if (!state.HittingEnemy && !state.IsLocal)
+            {
+                playLaserWithVolume(LOW_VOLUME, note);
+            }
+        }
+        else
+        {
+            audioManager.stopLaser(data.synthSound);
+            state.CurrentActiveClip = null;
+        }
+    }
+
+    private void playLaserWithVolume(float FULL_VOLUME, KeyNote note)
+    {
+        var state = keyStates[(int)note];
+        var data = Keys.FirstOrDefault(k => k.keyNote == note);
+
+        if (state.CurrentActiveClip != null && state.CurrentActiveClip == data.synthSound)
+        {
+            audioManager.setVolume(state.CurrentActiveClip, FULL_VOLUME);
+        }
+        else
+        {
+            // stop previous sfx if any
+            if (state.CurrentActiveClip != null)
+                audioManager.stopLaser(state.CurrentActiveClip);
+
+            audioManager.playLaser(data.synthSound, FULL_VOLUME);
+            state.CurrentActiveClip = data.synthSound;
+        }
+    }
+
     private void OnLaserStopHit(LaserStopHitEvent e)
     {
         keyStates[(int)e.Note].HittingEnemy = false;
-        Print(e.Note);
+        UpdateNoteSfx(e.Note);
     }
 
     private void OnLaserHit(LaserHitEvent e)
     {
         keyStates[(int)e.Note].HittingEnemy = true;
-        Print(e.Note);
+        UpdateNoteSfx(e.Note);
     }
 
     private void OnLaserStart(LaserStartEvent e)
@@ -116,12 +178,12 @@ public class LaserAudioManager : MonoBehaviour
         keyStates[(int)e.Note].Active = true;
         keyStates[(int)e.Note].IsLocal = e.IsLocal;
 
-        Print(e.Note);
+        UpdateNoteSfx(e.Note);
     }
 
     private void OnLaserStop(LaserStopEvent e)
     {
         keyStates[(int)e.Note].Active = false;
-        Print(e.Note);
+        UpdateNoteSfx(e.Note);
     }
 }
