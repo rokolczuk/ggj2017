@@ -81,8 +81,7 @@ namespace AssemblyCSharp
 			case 2:
 				return twoChordPrefab;
 			default:
-				Debug.Assert (false, "Invalid chord count");
-				return null;
+				return threeChordPrefab;
 			}
 		}
 

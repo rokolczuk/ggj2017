@@ -390,13 +390,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd875f7d6200d4af9a8078a8354d200a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -2
+  speed: -1
   timeToKill: 0.6
   spriteRenderer: {fileID: 212836851442277468}
   particles: {fileID: 198092255840645926}
   dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
   deathAnimation: {fileID: 111348444464780694}
-  DeathBoundary: -1.5
+  DeathBoundary: -1
   enemyMaterialsSprites:
   - {fileID: 212836851442277468}
   - {fileID: 212302519757707596}
