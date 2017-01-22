@@ -17,6 +17,7 @@ namespace AssemblyCSharp
 
 		public GameObject oneChordPrefab;
 		public GameObject twoChordPrefab;
+		public GameObject threeChordPrefab;
 
 		float currentTime;
 		int currentWave;

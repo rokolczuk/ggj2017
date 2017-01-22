@@ -392,30 +392,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
-        type: 2}
-      propertyPath: currentTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
-        type: 2}
-      propertyPath: timeBetweenWaves
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
-        type: 2}
-      propertyPath: wavesBetweenDifficultyBump
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231287170609710, guid: bad603cbbb7574b629e6f124af5acd55,
-        type: 2}
-      propertyPath: difficultyBumpsBeforeEnemyAmountIncrease
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1299501084991652, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bad603cbbb7574b629e6f124af5acd55, type: 2}
   m_IsPrefabParent: 0
