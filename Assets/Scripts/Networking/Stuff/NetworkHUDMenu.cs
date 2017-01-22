@@ -21,6 +21,8 @@ public class NetworkHUDMenu : MonoBehaviour
 	
 	private void Awake()
 	{
+		Time.timeScale = 1;
+
 		EventDispatcher.AddEventListener<GameStartedEvent>(GameStarted);
 		canvas.SetActive(true);
 		networkDiscovery = GetComponent<OverriddenNetworkDiscovery>();

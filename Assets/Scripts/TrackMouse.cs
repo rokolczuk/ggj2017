@@ -15,7 +15,6 @@ public class TrackMouse : NetworkBehaviour {
     {		
 		if (hasAuthority) {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			//pos.z = transform.position.z;
 			rb2d.position = pos;
 		} 
 	}
