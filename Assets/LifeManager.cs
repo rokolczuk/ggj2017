@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class LifeManager : MonoBehaviour {
 
     [SerializeField]
+    private GameManager gm;
+    [SerializeField]
     private Text Life1;
     [SerializeField]
     private Text Life2;
@@ -16,37 +18,29 @@ public class LifeManager : MonoBehaviour {
     [SerializeField]
     private Color deadColour;
 
-    private int LifeCount = 3;
-
-    void Awake()
-    {
-        EventDispatcher.AddEventListener<LifeLostEvent>(OnLifeLost);
-    }
-
     void Update()
     {
-        //TESTING  
-        if (Input.GetKeyDown(KeyCode.T))
-            EventDispatcher.Dispatch(new LifeLostEvent());
-    }
-
-	void OnLifeLost(LifeLostEvent e)
-    {
-        LifeCount--;
-        switch (LifeCount)
+        switch (gm.LivesLeft)
         {
+            case 3:
+                Life3.color = startColour;
+                Life2.color = startColour;
+                Life1.color = startColour;
+                break;
             case 2:
                 Life3.color = deadColour;
+                Life2.color = startColour;
+                Life1.color = startColour;
                 break;
             case 1:
                 Life3.color = deadColour;
                 Life2.color = deadColour;
+                Life1.color = startColour;
                 break;
             case 0:
                 Life3.color = deadColour;
                 Life2.color = deadColour;
                 Life1.color = deadColour;
-                EventDispatcher.Dispatch(new GameOverEvent());
                 break;
         }
     }

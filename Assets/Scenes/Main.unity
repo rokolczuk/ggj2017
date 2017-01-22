@@ -478,6 +478,11 @@ Prefab:
       propertyPath: startButton
       value: 
       objectReference: {fileID: 1758689578}
+    - target: {fileID: 114771759606900398, guid: 3cb1a636293e5fb4986698e8b4bce5f7,
+        type: 2}
+      propertyPath: LivesLeft
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3cb1a636293e5fb4986698e8b4bce5f7, type: 2}
   m_IsPrefabParent: 0
@@ -662,21 +667,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 223913449817115348, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
+    - target: {fileID: 114567209795593988, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
         type: 2}
-      propertyPath: m_Camera
+      propertyPath: gm
       value: 
-      objectReference: {fileID: 257096744}
+      objectReference: {fileID: 1951744048}
     - target: {fileID: 114818208300582230, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1951744048}
-    - target: {fileID: 114818208300582230, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
+    - target: {fileID: 223913449817115348, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartButtonClicked
-      objectReference: {fileID: 0}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 257096744}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1e97663fa62bbd4c91ac5aee4c09dde, type: 2}
   m_IsPrefabParent: 0
@@ -687,6 +692,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11491830, guid: ba2a9f5336762f84cb18bbd26ec41ee9, type: 2}
+      propertyPath: Prefabs.Array.size
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 467934, guid: ba2a9f5336762f84cb18bbd26ec41ee9, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.03
@@ -719,6 +728,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11491830, guid: ba2a9f5336762f84cb18bbd26ec41ee9, type: 2}
+      propertyPath: Prefabs.Array.data[19]
+      value: 
+      objectReference: {fileID: 1180648479770592, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba2a9f5336762f84cb18bbd26ec41ee9, type: 2}
   m_IsPrefabParent: 0
