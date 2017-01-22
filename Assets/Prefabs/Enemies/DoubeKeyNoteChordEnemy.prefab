@@ -359,11 +359,11 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.18891896, y: 0.24432611}
+    - - {x: 0.6115445, y: 0.5104236}
       - {x: 1.3918655, y: -0.08981037}
-      - {x: 0.14697522, y: -0.41018963}
+      - {x: -0.0095528355, y: -0.7545511}
       - {x: -1.3644499, y: -0.13730717}
-      - {x: -0.090428054, y: 0.24604464}
+      - {x: -0.60696995, y: 0.49648926}
 --- !u!111 &111348444464780694
 Animation:
   m_ObjectHideFlags: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -0.02
-  timeToKill: 1.2
+  timeToKill: 0.6
   spriteRenderer: {fileID: 212836851442277468}
   particles: {fileID: 198092255840645926}
   dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}

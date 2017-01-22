@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour
 {
+	[SerializeField]
+	private AudioManager audioManager;
+
     public GameObject startButton;
 	PrefabManager prefabManager;
 
@@ -53,6 +56,7 @@ public class GameManager : NetworkBehaviour
         {
             startButton.SetActive(false);
             gameStarted = true;
+			audioManager.StartMusic();
             EventDispatcher.Dispatch(new GameStartedEvent());
         }
     }
