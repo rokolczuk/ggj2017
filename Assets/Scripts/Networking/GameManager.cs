@@ -56,7 +56,7 @@ public class GameManager : NetworkBehaviour
         {
             startButton.SetActive(false);
             gameStarted = true;
-			audioManager.StartMusic();
+			//audioManager.StartMusic();
             EventDispatcher.Dispatch(new GameStartedEvent());
         }
     }

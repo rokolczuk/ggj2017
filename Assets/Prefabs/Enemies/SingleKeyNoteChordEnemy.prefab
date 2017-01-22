@@ -224,12 +224,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd875f7d6200d4af9a8078a8354d200a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.04
+  speed: -4
   timeToKill: 0.45
   spriteRenderer: {fileID: 212412845514088208}
   particles: {fileID: 198336116348165062}
   dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
   deathAnimation: {fileID: 111246744889320192}
+  DeathBoundary: -1.5
   enemyMaterialsSprites:
   - {fileID: 212412845514088208}
   killerChord:

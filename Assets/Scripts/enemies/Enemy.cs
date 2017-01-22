@@ -128,8 +128,8 @@ public class Enemy : NetworkBehaviour
 				enemyMaterials[i].SetFloat("_Whiteness", dyingProgress); 
 			}
 
-			var em = particles.emission;
-			em.rateOverTime = dyingProgress * maxParticleEmission;
+            var em = particles.emission;
+            em.rateOverTime = dyingProgress * maxParticleEmission;
 
 			if(dyingTime >= timeToKill)
 			{
