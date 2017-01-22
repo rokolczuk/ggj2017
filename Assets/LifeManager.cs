@@ -8,39 +8,39 @@ public class LifeManager : MonoBehaviour {
     [SerializeField]
     private GameManager gm;
     [SerializeField]
-    private Text Life1;
+    private Image Life1;
     [SerializeField]
-    private Text Life2;
+    private Image Life2;
     [SerializeField]
-    private Text Life3;
+    private Image Life3;
     [SerializeField]
-    private Color startColour;
+    private Sprite startSprite;
     [SerializeField]
-    private Color deadColour;
+    private Sprite deadSprite;
 
     void Update()
     {
         switch (gm.LivesLeft)
         {
             case 3:
-                Life3.color = startColour;
-                Life2.color = startColour;
-                Life1.color = startColour;
+                Life3.sprite = startSprite;
+                Life2.sprite = startSprite;
+                Life1.sprite = startSprite;
                 break;
             case 2:
-                Life3.color = deadColour;
-                Life2.color = startColour;
-                Life1.color = startColour;
+                Life3.sprite = deadSprite;
+                Life2.sprite = startSprite;
+                Life1.sprite = startSprite;
                 break;
             case 1:
-                Life3.color = deadColour;
-                Life2.color = deadColour;
-                Life1.color = startColour;
+                Life3.sprite = deadSprite;
+                Life2.sprite = deadSprite;
+                Life1.sprite = startSprite;
                 break;
             case 0:
-                Life3.color = deadColour;
-                Life2.color = deadColour;
-                Life1.color = deadColour;
+                Life3.sprite = deadSprite;
+                Life2.sprite = deadSprite;
+                Life1.sprite = deadSprite;
                 break;
         }
     }
