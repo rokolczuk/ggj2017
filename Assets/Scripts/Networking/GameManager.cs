@@ -93,8 +93,7 @@ public class GameManager : NetworkBehaviour
 		gameOver = false;
 		gameStarted = false;
 
-
-		gameOverText.SetActive(false);
+        gameOverText.SetActive(false);
 		restartButt.SetActive(false);
 	}
 
