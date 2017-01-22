@@ -8,3 +8,7 @@ public class EnemyDiedEvent {
 		this.Enemy = enemy;
 	}
 }
+
+public class EnemyCrashedEvent
+{
+}

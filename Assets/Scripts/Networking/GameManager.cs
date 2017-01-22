@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour
 {
+	[SerializeField]
+	private AudioManager audioManager;
+
     public GameObject startButton;
 	PrefabManager prefabManager;
 
@@ -14,6 +17,7 @@ public class GameManager : NetworkBehaviour
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
+        EventDispatcher.AddEventListener<EnemyCrashedEvent>(OnEnemyCrashed);
         EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
     }
 
@@ -38,12 +42,21 @@ public class GameManager : NetworkBehaviour
         Debug.Log("GAME OVER BRAH");
     }
 
+    private void OnEnemyCrashed(EnemyCrashedEvent e)
+    {
+        if (isServer)
+        {
+            EventDispatcher.Dispatch(new LifeLostEvent());
+        }
+    }
+
     public void StartButtonClicked()
     {
         if (!gameStarted)
         {
             startButton.SetActive(false);
             gameStarted = true;
+			//audioManager.StartMusic();
             EventDispatcher.Dispatch(new GameStartedEvent());
         }
     }

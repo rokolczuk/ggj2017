@@ -95,6 +95,8 @@ MonoBehaviour:
     type: 2}
   twoChordPrefab: {fileID: 1081006464297962, guid: 3cba93d5f4e884aa4841573eb97bcb04,
     type: 2}
+  threeChordPrefab: {fileID: 1325707875187426, guid: e1924efc127634b4bbd7e7f78e39458e,
+    type: 2}
 --- !u!114 &114335617948903610
 MonoBehaviour:
   m_ObjectHideFlags: 1

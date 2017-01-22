@@ -479,11 +479,12 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.18891896, y: 0.24432611}
-      - {x: 1.3918655, y: -0.08981037}
-      - {x: 0.14697522, y: -0.41018963}
-      - {x: -1.3644499, y: -0.13730717}
-      - {x: -0.090428054, y: 0.24604464}
+    - - {x: 0.26718315, y: -1.0078971}
+      - {x: 1.6892686, y: -0.6689633}
+      - {x: 1.6818666, y: -1.7374908}
+      - {x: -1.2304708, y: -3.0085533}
+      - {x: -1.505325, y: -1.9373786}
+      - {x: -0.56001216, y: -1.2096652}
 --- !u!111 &111799384665579152
 Animation:
   m_ObjectHideFlags: 1
@@ -618,12 +619,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd875f7d6200d4af9a8078a8354d200a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.02
-  timeToKill: 2
+  speed: -1
+  timeToKill: 0.8
   spriteRenderer: {fileID: 212676751837770624}
   particles: {fileID: 198648026454154638}
   dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
   deathAnimation: {fileID: 111799384665579152}
+  DeathBoundary: -1.5
   enemyMaterialsSprites:
   - {fileID: 212676751837770624}
   - {fileID: 212092813830519314}
