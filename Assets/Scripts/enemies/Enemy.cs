@@ -77,8 +77,19 @@ public class Enemy : NetworkBehaviour
 		{
 			enemyMaterials.Add(enemyMaterialsSprites[i].material);
 		}
+
+		EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
 	}
 
+	private void OnDestroy()
+	{
+		EventDispatcher.RemoveEventListener<GameOverEvent>(OnGameOver);
+	}
+
+	private void OnGameOver(GameOverEvent e)
+	{
+		enabled = false;
+	}
 
 	public void AddActiveNote(KeyNote n, LaserGun trackingGun)
 	{

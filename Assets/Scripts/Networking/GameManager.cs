@@ -71,8 +71,6 @@ public class GameManager : NetworkBehaviour
 
 	private void OnGameOver()
 	{
-		Time.timeScale = 0;
-
 		audioManager.SlowDownMusic();
 		gameOverText.SetActive(true);
 
@@ -88,7 +86,6 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	private void RpcRestart()
 	{
-		Time.timeScale = 1;
 
 		EventDispatcher.Dispatch(new GameRestartEvent());
 		LivesLeft = 3;
