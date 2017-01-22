@@ -5,7 +5,10 @@ using UnityEngine;
 public class LaserGun : MonoBehaviour
 {
     public Color baseColor;
+	public GameObject[] nodes;
     LaserMesh[] lasers;
+
+	List<Transform> controlPoints = new List<Transform>();
 
     void Awake()
     {
@@ -21,11 +24,28 @@ public class LaserGun : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
+		
+		CreateControlPoints (target);
 		Debug.Log ("Setting Target...");
+		if (target != null) {
+			SpringJoint2D joint = target.GetComponent<SpringJoint2D> ();
+			var lastNode = nodes [nodes.Length-1];
+			joint.connectedBody = lastNode.GetComponent<Rigidbody2D> ();
+		}
+
         foreach (LaserMesh laser in lasers)
         {
-            laser.SetBeginEnd(transform, target);
+			laser.SetControlPoints(controlPoints);
         }
-        
     }
+
+	void CreateControlPoints(Transform target){
+		controlPoints.Clear ();
+		if (target != null) {				
+			for (int i = 0; i < nodes.Length; ++i) {
+				controlPoints.Add (nodes [i].transform);
+			}
+			controlPoints.Add (target);
+		}
+	}
 }
