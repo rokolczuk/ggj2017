@@ -109,7 +109,7 @@ public class LaserAudioManager : MonoBehaviour
 
         const float FULL_VOLUME = 1;
         const float MED_VOLUME = 0.3f;
-        const float LOW_VOLUME = 0.16f;
+        const float LOW_VOLUME = 0.13f;
 
         var state = keyStates[(int)note];
         var data = Keys.FirstOrDefault(k => k.keyNote == note);
