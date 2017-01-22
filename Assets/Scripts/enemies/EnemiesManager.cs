@@ -36,9 +36,17 @@ public class EnemiesManager: MonoBehaviour
     public void Awake()
     {
         EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
+		EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
 		waveController = gameObject.GetComponent<EnemyWaveController> ();
 		EventDispatcher.AddEventListener<GameRestartEvent> (OnGameRestart);
     }
+
+	private void OnDestroy()
+	{
+		EventDispatcher.RemoveEventListener<GameStartedEvent>(OnGameStarted);
+		EventDispatcher.RemoveEventListener<GameOverEvent>(OnGameOver);
+		EventDispatcher.RemoveEventListener<GameRestartEvent> (OnGameRestart);
+	}
 
 	private void OnGameRestart(GameRestartEvent eventData)
 	{
@@ -53,6 +61,11 @@ public class EnemiesManager: MonoBehaviour
     {
         activated = true;
     }
+
+	private void OnGameOver(GameOverEvent e)
+	{
+		activated = false;
+	}
 
     private void SpawnEnemies()
 	{

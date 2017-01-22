@@ -91,7 +91,14 @@ public class AudioManager : MonoBehaviour {
 
 	public void StartMusic()
 	{
-		musicAudioSource = pool.playTrack(music, true, 0.35f);
+		if(musicAudioSource == null)
+		{
+			 musicAudioSource = pool.playTrack(music, true, 0.35f);
+		}
+		else 
+		{
+			SpeedUpMusic();
+		}
 	}
 
 	public void StopMusic()
