@@ -49,6 +49,18 @@ public class AudioPool : MonoBehaviour {
 		return source;
 	}
 
+    public void setVolume(AudioClip clip, float volume)
+    {
+        for (int i = 0; i < playingSounds.Count; i++)
+        {
+            var source = playingSounds[i].getAudioSource();
+            if (source.clip == clip)
+            {
+                source.volume = volume;
+            }
+        }
+    }
+
 	public void playTrack(AudioClip clip, bool looping, float volume){
 		AudioSource source = readySound(clip, looping);
 		source.volume = volume;

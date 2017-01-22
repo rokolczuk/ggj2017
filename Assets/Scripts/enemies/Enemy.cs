@@ -84,7 +84,8 @@ public class Enemy : NetworkBehaviour
 	{
 		if(!currentChord.notesInChord.Contains(n))
 		{
-            EventDispatcher.Dispatch(new LaserHitEvent(n));
+            if (killerChord.Contains(n))
+                EventDispatcher.Dispatch(new LaserHitEvent(n));
 
 			currentChord.notesInChord.Add(n);
 			//Debug.Log("curr: " + currentChord.ToString() + " / " + killerChord.ToString());
@@ -113,7 +114,7 @@ public class Enemy : NetworkBehaviour
 
 	private bool hasKillerChord()
 	{
-		return currentChord == killerChord;
+		return currentChord.Contains(killerChord);
 	}
 
 	private void Update()
