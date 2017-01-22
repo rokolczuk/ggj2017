@@ -54,6 +54,9 @@ namespace AssemblyCSharp
 			threeChordIndex = 0;
 			currentLevel = 0;
 			currentTime = waveData [currentLevel].timeBetweenWaves;
+			foreach (LevelData data in waveData) {
+				data.reset ();
+			}
 		}
 
 		Chord convertStringToChord(string chordString){
@@ -89,7 +92,7 @@ namespace AssemblyCSharp
 
 		void preloadLevelData(){
 			waveData = new List<LevelData> ();
-			waveData.Add(new LevelData("Level2_waves"));
+			waveData.Add(new LevelData("Level1_waves"));
 			waveData.Add(new LevelData("Level2_waves"));
 			waveData.Add(new LevelData("Level3_waves"));
 			waveData.Add(new LevelData("Level4_waves"));
@@ -164,6 +167,7 @@ namespace AssemblyCSharp
 			waveData [currentLevel].incrementWave();
 			if (waveData [currentLevel].isDone()) {
 				currentLevel++;
+				waveData [currentLevel].incrementWave();
 			}
 		}
 			

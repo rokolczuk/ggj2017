@@ -37,7 +37,17 @@ public class EnemiesManager: MonoBehaviour
     {
         EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStarted);
 		waveController = gameObject.GetComponent<EnemyWaveController> ();
+		EventDispatcher.AddEventListener<GameRestartEvent> (OnGameRestart);
     }
+
+	private void OnGameRestart(GameRestartEvent eventData)
+	{
+		foreach(Enemy enemy in activeEnemies){
+			GameObject.Destroy (enemy.gameObject);
+		}
+		activeEnemies.Clear ();
+	}
+
 
     private void OnGameStarted(GameStartedEvent e)
     {

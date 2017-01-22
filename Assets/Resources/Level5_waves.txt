@@ -1,6 +1,5 @@
-waves:10
 enemies_per_wave:5
-time_between_waves:3
+time_between_waves:2
 1
 1
 2
