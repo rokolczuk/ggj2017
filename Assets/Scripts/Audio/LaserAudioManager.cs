@@ -104,8 +104,7 @@ public class LaserAudioManager : MonoBehaviour
     }
 
     void UpdateNoteSfx(KeyNote note)
-    {
-        print(note);
+    {        
 
         const float FULL_VOLUME = 1;
         const float MED_VOLUME = 0.3f;

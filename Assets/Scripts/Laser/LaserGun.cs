@@ -28,6 +28,18 @@ public class LaserGun : MonoBehaviour
         }
     }
 
+	void Update(){
+		if (controlPoints.Count > 0) {
+			float dist = (controlPoints [controlPoints.Count - 1].position - controlPoints [0].position).magnitude / 2.0f;
+			foreach (Transform t in controlPoints) {				
+				var spring = t.GetComponent<SpringJoint2D> ();
+				if (spring != null) {
+					spring.distance = dist / (controlPoints.Count - 1);
+				}
+			}
+		}
+	}
+
     public void SetTarget(Transform target)
     {
 		CreateControlPoints (target);

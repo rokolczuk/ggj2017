@@ -118,12 +118,12 @@ public class LaserMesh : MonoBehaviour {
 	}
 
 	Vector3 GetBeginDirection(){
-		return controlPoints [controlPoints.Count-1].position - controlPoints [0].position;
+		return controlPoints [1].position - controlPoints [0].position;
 	}
 
 	Vector3 GetEndDirection(){
 		
-		return controlPoints [controlPoints.Count-1].position - controlPoints [0].position;
+		return controlPoints [controlPoints.Count-1].position - controlPoints [controlPoints.Count-2].position;
 	}
 
 	Vector3 GetBegin(){
@@ -134,26 +134,38 @@ public class LaserMesh : MonoBehaviour {
 		return controlPoints [controlPoints.Count-1].position;
 	}
 
-	Vector3 GetPoint(float t){		
-		return Vector3.Lerp (controlPoints [0].position, controlPoints [controlPoints.Count - 1].position, t);
+	Vector3 Bezier3(Vector3 s, Vector3 st, Vector3 et, Vector3 e, float t)
+	{
+		return (((-s + 3*(st-et) + e)* t + (3*(s+et) - 6*st))* t + 3*(st-s))* t + s;
+	}
+
+	Vector3 GetPoint(float t){	
+
+		Vector3 start = controlPoints [0].position;
+		Vector3 startTangent = GetBeginDirection();
+
+		Vector3 end = controlPoints [controlPoints.Count - 1].position;
+		Vector3 endTangent = GetEndDirection();
+
+		return Bezier3 (start, startTangent, endTangent, end, t);
 	}
 
 	void UpdatePositions() {
 		transform.position = anchor;
+		for (int i = 0; i < p.Length; ++i) {
+			float t = i / ((float)p.Length - 1);
+			p [i] = GetPoint (t);
+		}
+		/*
+		p [0] = GetBegin() - GetBeginDirection().normalized*halfWidth;
 
-		//var direction = (end.position - begin.position)/(float)(tiles);
-		var direction = GetBeginDirection().normalized;
-
-		p [0] = GetBegin() - direction*halfWidth;
-
-		Debug.Log ("Root:" + GetBegin ());
 		for (int i = 0; i < tiles; ++i) {
 			
 			var pos = GetPoint (i / (float)tiles);
 			p [i+1] = pos;
 		}
 		p [tiles+1] = GetEnd();
-		p [tiles+2] = GetEnd() + direction.normalized*halfWidth;
+		p [tiles+2] = GetEnd() + GetEndDirection().normalized*halfWidth;*/
 	}
 
 	void UpdateMaterials() {
@@ -172,7 +184,6 @@ public class LaserMesh : MonoBehaviour {
 	void LateUpdate() {
 		if (controlPoints.Count == 0)
 			return;
-        
 
 		UpdateMaterials ();
 		UpdatePositions ();
