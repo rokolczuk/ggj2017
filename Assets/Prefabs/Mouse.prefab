@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 114529553055694036}
   - component: {fileID: 114987513047386140}
   - component: {fileID: 114564731795197010}
-  - component: {fileID: 50581824811769230}
-  - component: {fileID: 231764438598707064}
+  - component: {fileID: 50975067115572260}
+  - component: {fileID: 231886466133924502}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -75,19 +75,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50581824811769230
+--- !u!50 &50975067115572260
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1708556413699632}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 50
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ec3b9eaa3214125bae95947f40aae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1000
 --- !u!114 &114529553055694036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,7 +204,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!231 &231764438598707064
+--- !u!231 &231886466133924502
 SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

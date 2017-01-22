@@ -12,7 +12,7 @@ public class LaserMesh : MonoBehaviour {
 	public float offset;
 	public Color color;
 
-	List<Transform> controlPoints;
+	List<Transform> controlPoints = new List<Transform>();
 
 	MaterialPropertyBlock material;
 	MeshRenderer meshRenderer;
