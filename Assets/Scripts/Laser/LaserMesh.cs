@@ -81,7 +81,6 @@ public class LaserMesh : MonoBehaviour {
 		tanget = new Vector4[numVerts];
 		for (int i = 0; i < numVerts; i+=2) {
 			float v = i / (float)(numVerts-2);
-			Debug.Log ("V:" + v);
 			tanget [i] = new Vector4 (v, v, v, v);
 			tanget [i+1] = new Vector4 (v, v, v, v);
 		}
