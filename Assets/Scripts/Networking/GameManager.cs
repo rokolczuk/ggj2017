@@ -93,8 +93,7 @@ public class GameManager : NetworkBehaviour
 		gameOver = false;
 		gameStarted = false;
 
-
-		gameOverText.SetActive(false);
+        gameOverText.SetActive(false);
 		restartButt.SetActive(false);
 	}
 
@@ -103,7 +102,7 @@ public class GameManager : NetworkBehaviour
         if (!gameStarted)
         {
             gameStarted = true;
-			//audioManager.StartMusic();
+			audioManager.StartMusic();
         }
     }
 

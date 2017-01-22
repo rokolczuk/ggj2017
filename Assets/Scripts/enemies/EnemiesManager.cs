@@ -13,7 +13,11 @@ public class EnemiesManager: MonoBehaviour
 	private float maxEnemySpawnPositionX;
 
 	[SerializeField]
-	private float spawnEnemyPositionY;
+	private float spawnEnemyMinPositionY;
+
+	[SerializeField]
+	private float spawnEnemyMaxPositionY;
+
 
 	[SerializeField]
 	private float enemyDiePositionY;
@@ -48,13 +52,56 @@ public class EnemiesManager: MonoBehaviour
 		}
 	}
 
+	private Vector2 GetRandomPosition()
+	{
+		return 	new Vector2(UnityEngine.Random.Range(minEnemySpawnPositionX, maxEnemySpawnPositionX), UnityEngine.Random.Range(spawnEnemyMinPositionY, spawnEnemyMaxPositionY));
+	}
+
 	private void HandleEnemyCreation(Enemy spawnedEnemy)
 	{
-		spawnedEnemy.transform.position = new Vector2(UnityEngine.Random.Range(minEnemySpawnPositionX, maxEnemySpawnPositionX), spawnEnemyPositionY);
-		activeEnemies.Add(spawnedEnemy);
+		bool isIntersectingWithOtherEnemies = activeEnemies.Count > 0;
 
-        NetworkServer.Spawn(spawnedEnemy.gameObject);
-		spawnedEnemy.RpcSetKillaCord (spawnedEnemy.killerChord.notesToNetworkForm());
+		int maxPlacementAttempts = 10;
+		int currentPlacementAttemptIndex = 0;
+	
+		Collider2D spawnedEnemyCollider = spawnedEnemy.GetComponent<Collider2D>();
+
+		spawnedEnemy.transform.position = GetRandomPosition();
+
+
+		while(isIntersectingWithOtherEnemies)
+		{
+			spawnedEnemy.transform.position = GetRandomPosition();
+			isIntersectingWithOtherEnemies = false;
+
+			for(int i = 0; i < activeEnemies.Count; i++)
+			{
+				Collider2D other = activeEnemies[i].GetComponent<Collider2D>();
+									
+				if(spawnedEnemyCollider.bounds.Intersects(other.bounds))
+				{
+					isIntersectingWithOtherEnemies = true;
+					break;
+				}
+			}
+
+			if(++currentPlacementAttemptIndex > maxPlacementAttempts)
+			{
+				break;
+			}
+		}
+
+		if(isIntersectingWithOtherEnemies)
+		{
+			Debug.LogWarning("failed to place the enemy after " + currentPlacementAttemptIndex + " attempts");
+			Destroy(spawnedEnemy.gameObject);
+		}
+		else 
+		{
+			activeEnemies.Add(spawnedEnemy);
+	        NetworkServer.Spawn(spawnedEnemy.gameObject);
+			spawnedEnemy.RpcSetKillaCord (spawnedEnemy.killerChord.notesToNetworkForm());
+		}
 	}
 
 	public void Update()
