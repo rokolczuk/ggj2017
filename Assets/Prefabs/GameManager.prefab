@@ -85,4 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
-  startButton: {fileID: 0}
+  LivesLeft: 3
+  gameOverText: {fileID: 0}
+  restartButt: {fileID: 0}

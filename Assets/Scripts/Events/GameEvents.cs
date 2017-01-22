@@ -21,3 +21,8 @@ public class LifeLostEvent
 public class GameOverEvent
 {
 }
+
+public class GameRestartEvent
+{
+	
+}

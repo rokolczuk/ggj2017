@@ -21,6 +21,7 @@ public class NetworkHUDMenu : MonoBehaviour
 	private void Awake()
 	{
 		EventDispatcher.AddEventListener<GameStartedEvent>(GameStarted);
+		EventDispatcher.AddEventListener<GameRestartEvent>(GameRestart);
 		canvas.SetActive(true);
 		networkDiscovery = GetComponent<OverriddenNetworkDiscovery>();
 		networkManager = GetComponent<NetworkManager>();
@@ -122,6 +123,11 @@ public class NetworkHUDMenu : MonoBehaviour
 		networkDiscovery.StartAsServer();
 
 		startBroadcasting();
+		startWaiting();
+	}
+
+	private void GameRestart(GameRestartEvent e)
+	{
 		startWaiting();
 	}
 

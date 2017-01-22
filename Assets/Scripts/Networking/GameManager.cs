@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
@@ -10,7 +11,7 @@ public class GameManager : NetworkBehaviour
     [SyncVar]
     public int LivesLeft = 3;
 
-    [SyncVar]
+    [SyncVar (hook = "OnGameOverChanged")]
     private bool gameOver = false;
 
 	PrefabManager prefabManager;
@@ -18,11 +19,17 @@ public class GameManager : NetworkBehaviour
 	[SyncVar (hook = "OnGameStartedChanged")]
     bool gameStarted = false;
 
+	public GameObject gameOverText;
+	public GameObject restartButt;
+
 	public void Awake()
 	{
 		prefabManager = FindObjectOfType<PrefabManager>();
 		EventDispatcher.AddEventListener<ServerAddedPlayer>(OnServerAddedPlayer);
         EventDispatcher.AddEventListener<EnemyCrashedEvent>(OnEnemyCrashed);
+
+		gameOverText.SetActive(false);
+		restartButt.SetActive(false);
     }
 
     private void OnServerAddedPlayer(ServerAddedPlayer eventData)
@@ -50,7 +57,48 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void StartButtonClicked()
+	private void OnGameOverChanged(bool over)
+	{
+		gameOver = over;
+
+		if (gameOver)
+		{
+			EventDispatcher.Dispatch(new GameOverEvent());
+			OnGameOver();
+		}
+	}
+
+	private void OnGameOver()
+	{
+		Time.timeScale = 0;
+
+		gameOverText.SetActive(true);
+
+		if (isServer)
+			restartButt.SetActive(true);
+	}
+
+	public void restart()
+	{
+		RpcRestart();
+	}
+
+	[ClientRpc]
+	private void RpcRestart()
+	{
+		Time.timeScale = 1;
+
+		EventDispatcher.Dispatch(new GameRestartEvent());
+		LivesLeft = 3;
+		gameOver = false;
+		gameStarted = false;
+
+
+		gameOverText.SetActive(false);
+		restartButt.SetActive(false);
+	}
+
+	public void StartButtonClicked()
     {
         if (!gameStarted)
         {

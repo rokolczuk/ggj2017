@@ -483,6 +483,11 @@ Prefab:
       propertyPath: LivesLeft
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114771759606900398, guid: 3cb1a636293e5fb4986698e8b4bce5f7,
+        type: 2}
+      propertyPath: restartButt
+      value: 
+      objectReference: {fileID: 1758689578}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3cb1a636293e5fb4986698e8b4bce5f7, type: 2}
   m_IsPrefabParent: 0
@@ -682,6 +687,24 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 257096744}
+    - target: {fileID: 1730915407186994, guid: f1e97663fa62bbd4c91ac5aee4c09dde, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114818208300582230, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730915407186994, guid: f1e97663fa62bbd4c91ac5aee4c09dde, type: 2}
+      propertyPath: m_Name
+      value: Restart Butt
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631860587087952, guid: f1e97663fa62bbd4c91ac5aee4c09dde,
+        type: 2}
+      propertyPath: m_Text
+      value: Baghett
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1e97663fa62bbd4c91ac5aee4c09dde, type: 2}
   m_IsPrefabParent: 0
