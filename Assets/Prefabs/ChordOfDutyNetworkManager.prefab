@@ -337,7 +337,7 @@ MonoBehaviour:
   clientButt: {fileID: 1854239506998230}
   broadButt: {fileID: 1298565524048118}
   waitButt: {fileID: 1116899848340408}
-  minPlayerCount: 2
+  minPlayerCount: 1
 --- !u!114 &114038667130939600
 MonoBehaviour:
   m_ObjectHideFlags: 1

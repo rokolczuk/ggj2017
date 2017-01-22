@@ -6,8 +6,7 @@ public class GameManager : NetworkBehaviour
 {
 	[SerializeField]
 	private AudioManager audioManager;
-
-    public GameObject startButton;
+	
 	PrefabManager prefabManager;
 
     bool gameStarted = false;
@@ -28,9 +27,7 @@ public class GameManager : NetworkBehaviour
 
         TrackMouse mouse = prefabManager.Instantiate<TrackMouse>();
         NetworkServer.SpawnWithClientAuthority(mouse.gameObject, eventData.Player);
-
-        if (!gameStarted)
-            startButton.SetActive(true);
+		
 	}
 
     private void OnGameOver(GameOverEvent e)
@@ -54,7 +51,6 @@ public class GameManager : NetworkBehaviour
     {
         if (!gameStarted)
         {
-            startButton.SetActive(false);
             gameStarted = true;
 			//audioManager.StartMusic();
             EventDispatcher.Dispatch(new GameStartedEvent());
