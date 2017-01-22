@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114455740059769560}
   - component: {fileID: 114529553055694036}
   - component: {fileID: 114987513047386140}
+  - component: {fileID: 114564731795197010}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -115,6 +116,17 @@ MonoBehaviour:
     i15: 16
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114564731795197010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1708556413699632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece908600e0859445ad9505e0c165bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114987513047386140
 MonoBehaviour:
   m_ObjectHideFlags: 1
