@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 public class MouseTrackerSpriteRenderer : NetworkBehaviour
 {
@@ -16,16 +17,33 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 		spriteRenderer.color = color;
 	}
 
+	private void OnDestroy()
+	{
+		Cursor.visible = true;
+	}
+
+	private void OnGameStart(GameStartedEvent e)
+	{
+		Cursor.visible = false;
+	}
+
+	private void OnGameOver(GameOverEvent e)
+	{
+		Cursor.visible = true;
+	}
+
 	private void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 		EventDispatcher.AddEventListener<SelectedKeyChanged>(OnSelectedKeyChanged);
-
-		Cursor.visible = false;
+		EventDispatcher.AddEventListener<GameStartedEvent>(OnGameStart);
+		EventDispatcher.AddEventListener<GameOverEvent>(OnGameOver);
 
 		Color color = Color.white;
 		color.a = 0.3f;
+
+		Cursor.visible = false;
 
 		spriteRenderer.color = color;
 	}
@@ -40,8 +58,17 @@ public class MouseTrackerSpriteRenderer : NetworkBehaviour
 				{
 					spriteRenderer.color = Color.white;
 				}
+				else
 				{
+					try 
+					{
 					spriteRenderer.color = e.keyScript.getKeyData().activeColor;
+					}
+
+					catch (Exception r)
+					{
+						Debug.Log("oops");
+					}
 				}
 			}
 		}

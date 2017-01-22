@@ -5,14 +5,20 @@ using UnityEngine;
 public class LaserGun : MonoBehaviour
 {
     public Color baseColor;
-	public GameObject[] nodes;
+
     LaserMesh[] lasers;
 
+	List<GameObject> nodes = new List<GameObject>();
 	List<Transform> controlPoints = new List<Transform>();
 
     void Awake()
     {
         lasers = GetComponentsInChildren<LaserMesh>();
+
+		var nodeParent = transform.GetChild (3);
+		foreach (Transform t in nodeParent.transform) {
+			nodes.Add (t.gameObject);
+		}
 
         KeyScript script = GetComponentInParent<KeyScript>();
         if (script)
@@ -24,12 +30,10 @@ public class LaserGun : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-		
 		CreateControlPoints (target);
-		Debug.Log ("Setting Target...");
 		if (target != null) {
 			SpringJoint2D joint = target.GetComponent<SpringJoint2D> ();
-			var lastNode = nodes [nodes.Length-1];
+			var lastNode = nodes [nodes.Count-1];
 			joint.connectedBody = lastNode.GetComponent<Rigidbody2D> ();
 		}
 
@@ -42,7 +46,7 @@ public class LaserGun : MonoBehaviour
 	void CreateControlPoints(Transform target){
 		controlPoints.Clear ();
 		if (target != null) {				
-			for (int i = 0; i < nodes.Length; ++i) {
+			for (int i = 0; i < nodes.Count; ++i) {
 				controlPoints.Add (nodes [i].transform);
 			}
 			controlPoints.Add (target);

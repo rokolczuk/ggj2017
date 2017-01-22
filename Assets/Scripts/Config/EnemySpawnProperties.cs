@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class Chord 
@@ -57,6 +58,16 @@ public class Chord
 		}
 		return str;
 	}
+
+    public bool Contains(KeyNote keyNote)
+    {
+        return notesInChord.Contains(keyNote);
+    }
+
+    public bool Contains(Chord other)
+    {
+        return other.notesInChord.All(n => Contains(n));
+    }
 }
 
 [Serializable]
