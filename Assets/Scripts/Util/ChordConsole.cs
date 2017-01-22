@@ -10,9 +10,9 @@ namespace Assets.Scripts.Util
     {
         Dictionary<string, string> lines = new Dictionary<string, string>();
 
-        public void Add(string key, string value)
+        public void Set(string key, string value)
         {
-            lines.Add(key, value);
+            lines[key] = value;
         }
 
         public void Remove(string key)
