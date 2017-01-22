@@ -44,6 +44,7 @@ public class GameManager : NetworkBehaviour
 
     private void OnEnemyCrashed(EnemyCrashedEvent e)
     {
+        EventDispatcher.Dispatch(new CameraShakeEvent());
         if (isServer)
         {
             if (!gameOver)
