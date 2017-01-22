@@ -146,9 +146,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.15}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.7
 --- !u!111 &111246744889320192
 Animation:
   m_ObjectHideFlags: 1
@@ -224,14 +224,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd875f7d6200d4af9a8078a8354d200a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.025
-  timeToKill: 0.85
+  speed: -0.04
+  timeToKill: 0.45
   spriteRenderer: {fileID: 212412845514088208}
   particles: {fileID: 198336116348165062}
   dieSoundEffect: {fileID: 8300000, guid: f1843a72badbb421d83be78d101d671a, type: 3}
   deathAnimation: {fileID: 111246744889320192}
   enemyMaterialsSprites:
   - {fileID: 212412845514088208}
+  killerChord:
+    notesInChord: 
 --- !u!114 &114921404233281642
 MonoBehaviour:
   m_ObjectHideFlags: 1

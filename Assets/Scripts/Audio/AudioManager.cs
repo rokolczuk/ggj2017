@@ -72,7 +72,4 @@ public class AudioManager : MonoBehaviour {
 	{
 		pool.stopTrack(music);
 	}
-	
-
-	
 }
